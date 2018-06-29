@@ -19,12 +19,17 @@ export class ThirdPartiesListComponent implements OnInit {
   public body: any ;
   public thirds: any = [];
   public keyword:any;
+  public kanban:false;
   constructor(public http: HttpClient, public router: Router) { }
 
   ngOnInit() {
     AuthBanana(this.router);
     this.getThirds();
   	this.titleTable = 'Terceros';
+  }
+
+  viewKanban(type){
+    this.kanban = type;
   }
 
   getThirds(): void {

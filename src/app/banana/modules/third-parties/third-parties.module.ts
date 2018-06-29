@@ -7,7 +7,6 @@ import { ThirdPartiesComponent } from './third-parties.component';
 import { ThirdPartiesCrudComponent } from './third-parties-crud/third-parties-crud.component';
 import { ThirdPartiesListComponent } from './third-parties-list/third-parties-list.component';
 import { LocalizationComponent } from '../../components/localization/localization.component';
-import { CustomColumnsComponent } from '../../components/custom-columns/custom-columns.component';
 
 
 @NgModule({
@@ -21,7 +20,6 @@ import { CustomColumnsComponent } from '../../components/custom-columns/custom-c
     ThirdPartiesComponent,
     ThirdPartiesCrudComponent,
     ThirdPartiesListComponent,
-    CustomColumnsComponent,
     LocalizationComponent
     ]
 })

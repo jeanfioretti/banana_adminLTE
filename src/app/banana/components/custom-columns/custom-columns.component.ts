@@ -25,11 +25,11 @@ export class CustomColumnsComponent implements OnInit {
   constructor(public http: HttpClient, public router: Router) { }
 
   ngOnInit() {
-    this.table_id = sessionStorage.getItem('table_id');
-    this.getElements();
+
   }
 
   getElements(): void {
+    this.table_id = sessionStorage.getItem('table_id');
     let body: any={};
     this.btnloading = true;
     this.showNotification("Obteniendo elementos", 2);
@@ -44,8 +44,8 @@ export class CustomColumnsComponent implements OnInit {
             result => {
               console.log(result)
               body =  result;
-              this.column_type = body.elements
-              this.all_custom_columns = body.columns
+              this.column_type = body.elements;
+              this.all_custom_columns = body.columns;
               this.btnloading = false;
             },
             msg => {
@@ -173,16 +173,15 @@ cleanForm(){
   $('#CustomColumsCrud').modal('hide');
 }
 openCustomColumnsModal(){
-    console.log('LLEGO LOGINMODAL')
-    // this.showLoginForm();
+    this.getElements();
+
     setTimeout(function(){
         $('#CustomColums').modal('show');
     }, 230);
 
 }
 openCustomColumnsCrudModal(){
-  console.log('LLEGO LOGINMODAL')
-  // this.showLoginForm();
+
   setTimeout(function(){
       $('#CustomColumsCrud').modal('show');
   }, 230);

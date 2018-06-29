@@ -1,17 +1,20 @@
 
-<button mat-raised-button class="btn btn-info btn" (click)="openCustomColumnsModal()" ><ngx-loading [show]="btnloading"></ngx-loading>Configuration</button>
+<button mat-raised-button class="btn btn-info btn" (click)="openCustomColumnsModal()" >
+  <!-- <ngx-loading [show]="btnloading"></ngx-loading> -->
+  Configuration
+</button>
 
 <div  class="modal" id="CustomColums" >
-        <ngx-loading [show]="loading"></ngx-loading>
+        <!-- <ngx-loading [show]="loading"></ngx-loading> -->
   <div class="modal-dialog login animated">
       <div class="modal-content">
         <div class="modal-header">
           <h3>Custom Field</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                
+
             </div>
-            <div class="modal-body">  
-                
+            <div class="modal-body">
+
                 <div class="card ">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title mt-0"> Custom Fields</h4>
@@ -34,15 +37,15 @@
                                         <th>
                                             type
                                         </th>
-                                        
-                                        
+
+
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let column of all_custom_columns">
-                                            <td>           
+                                            <td>
                                                 <button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEdit(column)" ><i class="fa fa-pencil"></i></button>
                                                 <button  (click)="delete(column.id)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                                
+
                                               </td>
                                             <td>
                                                 {{column.id}}
@@ -54,20 +57,20 @@
                                                 {{column.name_type}}
                                             </td>
 
-      
+
                                         </tr>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-               
+
 
             </div>
             <div class="modal-footer">
-            </div>        
+            </div>
       </div>
   </div>
 </div>
@@ -79,10 +82,10 @@
         <div class="modal-header">
           <h3>{{titleCrud}}</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                
+
             </div>
-            <div class="modal-body">  
-                
+            <div class="modal-body">
+
 
                 <div class="col-md-12">
                     <input type="text" class="form-control" placeholder="Name" [(ngModel)]="custom_column.name" [ngModelOptions]="{standalone: true}">
@@ -92,7 +95,7 @@
                     <select class="form-control"  [(ngModel)]="custom_column.id_type" [ngModelOptions]="{standalone: true}" >
                         <!-- <option value="-1" [defaultSelected]="true" [disabled]="true" >Data Type</option> -->
                         <option  *ngFor="let type of column_type" [ngValue]="type.id">{{type.name}}</option>
-                       
+
                     </select>
                 </div>
 
@@ -100,9 +103,9 @@
             <div class="modal-footer">
                 <button mat-raised-button *ngIf="!editable" class="btn btn-info btn" (click)="create()" >Guardar</button>
                 <button mat-raised-button *ngIf="editable" class="btn btn-info btn" (click)="update()" >Actualizar</button>
-            </div>        
+            </div>
       </div>
   </div>
 </div>
-  
+
 
