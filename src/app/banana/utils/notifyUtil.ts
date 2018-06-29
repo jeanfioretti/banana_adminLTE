@@ -15,8 +15,10 @@ export function showNotification(mess, typeMess){
 
     const type = ['','info','success','warning','danger'];
 
+    const icons = ['',' fa fa-comment','fa fa-check','fa fa-exclamation-circle','fa fa-exclamation-triangle' ]
+
     $.notify({
-        icon: 'notifications',
+        icon: icons[typeMess],
         message: mess
 
     },{
@@ -26,9 +28,9 @@ export function showNotification(mess, typeMess){
             from: 'top',
             align: 'right'
         },
-        template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-          '<i class="material-icons" data-notify="icon">notifications</i> ' +
+        template: '<div data-notify="container" style="z-index:1099;" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="fa fa-close"></i></button>' +
+          '<i class="fa" data-notify="icon"></i> ' +
           '<span data-notify="title">{1}</span> ' +
           '<span data-notify="message">{2}</span>' +
           '<div class="progress" data-notify="progressbar">' +

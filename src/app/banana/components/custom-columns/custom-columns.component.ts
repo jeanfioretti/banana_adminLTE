@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
-import { notifyManage } from '../../utils/notifyUtil';
+import { notifyManage, showNotification } from '../../utils/notifyUtil';
 
 declare var $: any;
 @Component({
@@ -32,7 +32,7 @@ export class CustomColumnsComponent implements OnInit {
     this.table_id = sessionStorage.getItem('table_id');
     let body: any={};
     this.btnloading = true;
-    this.showNotification("Obteniendo elementos", 2);
+    showNotification("Obteniendo elementos", 2);
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
@@ -47,12 +47,14 @@ export class CustomColumnsComponent implements OnInit {
               this.column_type = body.elements;
               this.all_custom_columns = body.columns;
               this.btnloading = false;
+              $('.modal-backdrop').fadeOut();
             },
             msg => {
               if (msg.status == 406) {
                 tokenUtil(this.router);
               }
               this.btnloading = false;
+              $('.modal-backdrop').fadeOut();
               notifyManage(msg);
           }
       );
@@ -61,7 +63,7 @@ export class CustomColumnsComponent implements OnInit {
   create(): void {
 
     this.loadingCrud = true;
-    this.showNotification("Creando campo", 2);
+    showNotification("Creando campo", 2);
     let body : any;
     body = this.custom_column;
     body.table_id = this.table_id
@@ -74,7 +76,7 @@ export class CustomColumnsComponent implements OnInit {
     this.http.post('http://localhost:8000/api/CustomColumns/create', body).toPromise().then(
             result => {
                     console.log('result.status', result);
-                    this.showNotification('guardado con exito', 1);
+                    showNotification('guardado con exito', 1);
                     this.loadingCrud = false;
                     this.cleanForm();
 
@@ -106,7 +108,7 @@ export class CustomColumnsComponent implements OnInit {
   delete(id){
 
     this.loading = true;
-    this.showNotification("actualizando campo", 2);
+    showNotification("actualizando campo", 2);
     const body: any = {};
     body.id = id;
     body.table_id = this.table_id;
@@ -120,7 +122,7 @@ export class CustomColumnsComponent implements OnInit {
             result => {
                     console.log('result.status', result);
                     const respBody: any = result;
-                    this.showNotification('Eliminado con exito', 1);
+                    showNotification('Eliminado con exito', 1);
                     this.loading = false;
                     this.cleanForm();
                     this.all_custom_columns = respBody.columns
@@ -138,7 +140,7 @@ export class CustomColumnsComponent implements OnInit {
   update(){
 
     this.loadingCrud = true;
-    this.showNotification("actualizando campo", 2);
+    showNotification("actualizando campo", 2);
     let body : any;
     body = this.custom_column;
     body.table_id = this.table_id
@@ -152,7 +154,7 @@ export class CustomColumnsComponent implements OnInit {
             result => {
                     console.log('result.status', result);
                     const respBody :any=result;
-                    this.showNotification('guardado con exito', 1);
+                    showNotification('guardado con exito', 1);
                     this.loadingCrud = false;
                     this.cleanForm();
                     this.all_custom_columns = respBody.columns
@@ -188,31 +190,6 @@ openCustomColumnsCrudModal(){
 
 }
 
-showNotification(mess, typeMess){
-  const type = ['','info','success','warning','danger'];
 
-  $.notify({
-      icon: 'notifications',
-      message: mess
-
-  },{
-      type: type[typeMess],
-      timer: 4000,
-      placement: {
-          from: 'top',
-          align: 'right'
-      },
-      template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-        '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-        '<i class="material-icons" data-notify="icon">notifications</i> ' +
-        '<span data-notify="title">{1}</span> ' +
-        '<span data-notify="message">{2}</span>' +
-        '<div class="progress" data-notify="progressbar">' +
-          '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-        '</div>' +
-        '<a href="{3}" target="{4}" data-notify="url"></a>' +
-      '</div>'
-  });
-}
 
 }
