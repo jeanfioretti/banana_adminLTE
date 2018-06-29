@@ -15,7 +15,7 @@ export function showNotification(mess, typeMess){
 
     const type = ['','info','success','warning','danger'];
 
-    const icons = ['',' fa fa-comment','fa fa-check','fa fa-exclamation-circle','fa fa-exclamation-triangle' ]
+    const icons = ['',' fa fa-envelope-open','fa fa-check','fa fa-exclamation-circle','fa fa-exclamation-triangle' ]
 
     $.notify({
         icon: icons[typeMess],

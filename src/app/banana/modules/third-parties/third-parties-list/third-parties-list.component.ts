@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tokenUtil } from '../../../utils/tokenUtil';
-import { notifyManage } from '../../../utils/notifyUtil';
+import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { AuthBanana } from '../../../utils/auth';
 
 
@@ -104,7 +104,7 @@ export class ThirdPartiesListComponent implements OnInit {
         this.loading = false;
         console.log('result.status', result);
         this.getThirds();
-         this.showNotification('archivado con exito', 1);
+         showNotification('archivado con exito', 1);
       },
       msg => {
         if (msg.status == 406) {
@@ -117,40 +117,14 @@ export class ThirdPartiesListComponent implements OnInit {
   }
 
   goToCreateThird(){
-    this.showNotification('Redireccionando.. espere', 3);
+    showNotification('Redireccionando.. espere', 3);
     this.router.navigate(['app/third-parties/new'])
   }
 
   goToEditThird(id){
-    this.showNotification('Redireccionando.. espere', 3);
+    showNotification('Redireccionando.. espere', 3);
     this.router.navigate(['app/third-parties/edit/' + id])
   }
 
-  showNotification(mess, typeMess){
-    const type = ['','info','success','warning','danger'];
-
-	    $.notify({
-	        icon: 'notifications',
-	        message: mess
-
-	    },{
-	        type: type[typeMess],
-	        timer: 4000,
-	        placement: {
-	            from: 'top',
-	            align: 'right'
-	        },
-	        template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-	          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-	          '<i class="material-icons" data-notify="icon">notifications</i> ' +
-	          '<span data-notify="title">{1}</span> ' +
-	          '<span data-notify="message">{2}</span>' +
-	          '<div class="progress" data-notify="progressbar">' +
-	            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-	          '</div>' +
-	          '<a href="{3}" target="{4}" data-notify="url"></a>' +
-	        '</div>'
-	    });
-	}
 
 }
