@@ -1,0 +1,200 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">{{titleRol}}</h4>
+                        <p class="card-category">Datos</p>
+                    </div>
+                    <div class="card-body">
+                        <form method="post"  accept-charset="UTF-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Name " 
+                                      matTooltip="Name for the rol" 
+                                      [matTooltipPosition]="'above'" 
+                                      name="rol_name" 
+                                      [(ngModel)]="rol.rol_name" [ngModelOptions]="{standalone: true}">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" 
+                                            type="checkbox" 
+                                            matTooltip="Name for the rol" 
+                                            [matTooltipPosition]="'above'" 
+                                            [checked]="rol.all_access_column ==1? true:false" 
+                                            [(ngModel)]="rol.all_access_column" [ngModelOptions]="{standalone: true}"
+                                            value="">
+                                            All access columns
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                      </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" 
+                                            type="checkbox" 
+                                            matTooltip="Name for the rol" 
+                                            [matTooltipPosition]="'above'" 
+                                            [checked]="rol.all_access_organization ==1? true:false" 
+                                            [(ngModel)]="rol.all_access_organization" [ngModelOptions]="{standalone: true}"
+                                            value="">
+                                            All access organization
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                      </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    
+                                          <div class="form-group">
+                                              <label class="bmd-label-floating">Description</label>
+                                              <textarea class="form-control" rows="5"
+                                              [(ngModel)]="rol.description" [ngModelOptions]="{standalone: true}"></textarea>
+                                          </div>
+                                  </div>
+                            </div>
+                            
+                            <button *ngIf="typeView == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateRol()" >Update Rol</button>
+                            <button *ngIf="typeView == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createRol()" >Create Rol</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="../assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">Alec Thompson</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="#pablo" class="btn btn-danger btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="rol.all_access_column == 0" >
+            <div class="scrollableAcordeon">
+                    <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-body">
+                                        <div class="dropdown">
+                                                <button  class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+                                                    Options
+                                                    <b class="caret"></b>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a (click)="getPermissionAvaiable(1,id)">Assosiated</a></li>
+                                                    <li><a (click)="getPermissionAvaiable(0,id)">Not Assosiated</a></li>
+                                                    <li><a (click)="getPermissionAvaiable(2,id)">All</a></li>  
+                                                </ul>
+                                            </div>
+                                    <div id="accordion">
+                                        <div class="card" *ngFor="let table of permissions; let i index" >
+                                            <div class="card-header" id="heading_{{table.table_id}}">
+                                              <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"  [attr.data-target]="'#collapse_'+ table.table_id" aria-expanded="true" aria-controls="collapseOne">
+                                                  {{table.table_name}} 
+                                                </button>
+                                              </h5>
+                                            </div>
+                                        
+                                            <div id="collapse_{{table.table_id}}" 
+                                                class="collapse" 
+                                                [attr.aria-labelledby]="'heading_'+table.table_id "
+                                                 data-parent="#accordion">
+                                              <div class="card-body">
+                                                <div class="col-md-12">
+                                                    <div *ngFor="let column of table.columns">
+                                                        <div class="row" >
+                                                                <div class="col-md-4" >
+                                                                {{column.column_name}}
+                                                                </div>
+                                                                <div class="form-check col-md-2" >
+                                                                        <label class="form-check-label">
+                                                                            <input class="form-check-input" 
+                                                                            
+                                                                            type="checkbox" name="{{column.create}}" 
+                                                                            [checked]="column.create ==1? true:false"
+                                                                            (change)="selectColumn(column,$event.srcElement.checked,'create')"  >
+                                                                            create
+                                                                            <span class="form-check-sign">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                </div>
+                                                                <div class="form-check col-md-2" >
+                                                                        <label class="form-check-label">
+                                                                            <input class="form-check-input" 
+                                                                            type="checkbox" 
+                                                                            value="{{column.read==1? true:false}}"
+                                                                            [checked]="column.read==1? true:false"
+                                                                            (change)="selectColumn(column,$event.srcElement.checked,'read')" >
+                                                                            read
+                                                                            <span class="form-check-sign">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                </div>
+                                                                <div class="form-check col-md-2" >
+                                                                        <label class="form-check-label">
+                                                                            <input class="form-check-input" 
+                                                                            type="checkbox" 
+                                                                            value="{{column.update}}" 
+                                                                            [checked]="column.update==1? true:false"
+                                                                            (change)="selectColumn(column,$event.srcElement.checked,'update')" >
+                                                                            update
+                                                                            <span class="form-check-sign">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                </div>
+                                                                <div class="form-check col-md-2" >
+                                                                        <label class="form-check-label">
+                                                                            <input class="form-check-input" 
+                                                                            type="checkbox" 
+                                                                            value="{{column.delete}}" 
+                                                                            [checked]="column.delete==1? true:false"
+                                                                            (change)="selectColumn(column,$event.srcElement.checked,'delete')" >
+                                                                            delete
+                                                                            <span class="form-check-sign">
+                                                                                <span class="check"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                       
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+           
+        </div>
+    </div>
+  </div>
+  

@@ -1,16 +1,24 @@
-import { AdminDashboard2Component } from './../admin/admin-dashboard2/admin-dashboard2.component';
-import { AdminDashboard1Component } from './../admin/admin-dashboard1/admin-dashboard1.component';
 import { StarterComponent } from './../starter/starter.component';
-import { AdminComponent } from './../admin/admin.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { BananaComponent } from '../banana/banana.component';
+import { LandingComponent } from '../landing/landing.component';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '', redirectTo: 'starter', pathMatch: 'full' },
-      { path: 'starter', component: StarterComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: LandingComponent },
+      { path: 'app', component: BananaComponent },
+      {
+        path: '',
+        component: BananaComponent,
+        children: [
+            {
+          path: '',
+          loadChildren: '../banana/banana.module#BananaModule'
+
+      }]}
     ])
   ],
   declarations: [],
