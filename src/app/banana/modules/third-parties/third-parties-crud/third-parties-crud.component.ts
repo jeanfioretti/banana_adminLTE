@@ -72,8 +72,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
                     this.third = this.body.third;
                     this.branch_office = this.body.branch_office;
                     this.localization = this.body.location;
-                    this.getStates(this.localization.country_id)
-                    this.getCities(this.localization.state_id)
+                    this.getStates(this.localization.state_id)
+                    this.getCities(this.localization.city_id)
                     this.loading = false;
             },
             msg => {
@@ -176,7 +176,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
   }
 
   getStates(country_id) {
-    this.loading = true;
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
@@ -186,7 +185,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
         };
     this.http.get('http://localhost:8000/api/location/states?country_id='+country_id, options).toPromise().then(
             result => {
-              this.loading = false;
               this.body = result;
               this.states = this.body.states;
             },
@@ -194,14 +192,12 @@ export class ThirdPartiesCrudComponent implements OnInit {
               if (msg.status == 406) {
                 tokenUtil(this.router);
               }
-              this.loading = false;
               notifyManage(msg);
           }
       );
   }
 
   getCities(state_id) {
-    this.loading = true;
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
@@ -211,7 +207,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
         };
     this.http.get('http://localhost:8000/api/location/cities?state_id='+state_id, options).toPromise().then(
             result => {
-              this.loading = false;
               this.body = result;
               this.cities = this.body.cities;
             },
@@ -219,7 +214,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
               if (msg.status == 406) {
                 tokenUtil(this.router);
               }
-              this.loading = false;
               notifyManage(msg);
           }
       );
