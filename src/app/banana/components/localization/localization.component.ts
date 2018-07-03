@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Localization } from '../../models/localization';
 import { tokenUtil } from '../../utils/tokenUtil';
-import { notifyManage } from '../../utils/notifyUtil';
+import { notifyManage, showNotification } from '../../utils/notifyUtil';
+import { Localization } from '../../models/localization';
 
 
 declare var $: any;
@@ -107,9 +107,9 @@ export class LocalizationComponent implements OnInit {
   }
 
   openLocalizationModal(){
-      setTimeout(function(){
-          $('#localizationModal').modal('show');
-      }, 230);
+    setTimeout(function(){
+      $('#localizationModal').modal('show');
+    }, 230);
   }
 
 }

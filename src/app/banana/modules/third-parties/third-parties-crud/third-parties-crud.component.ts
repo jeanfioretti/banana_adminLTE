@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Third } from '../../../models/third';
-import { Localization } from '../../../models/localization';
 import { BranchOffice } from '../../../models/branch';
 import { AuthBanana } from '../../../utils/auth';
 import { tokenUtil } from '../../../utils/tokenUtil';
-import { notifyManage } from '../../../utils/notifyUtil';
+import { notifyManage, showNotification } from '../../../utils/notifyUtil';
+import { Third } from '../../../models/third';
+import { Localization } from '../../../models/localization';
 
 declare var $: any;
 
@@ -58,7 +58,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	getThird(id): void {
     this.loading = true;
-    this.showNotification("Obteniendo tercero", 2);
+    showNotification("Obteniendo tercero", 2);
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
@@ -72,8 +72,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
                     this.third = this.body.third;
                     this.branch_office = this.body.branch_office;
                     this.localization = this.body.location;
-                    this.getStates(this.localization.country_id)
-                    this.getCities(this.localization.state_id)
+                    this.getStates(this.localization.country_id);
+                    this.getCities(this.localization.state_id);
                     this.loading = false;
             },
             msg => {
@@ -116,7 +116,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
   createThird(): void {
 
     this.loading = true;
-    this.showNotification("Creando tercero", 2);
+    showNotification("Creando tercero", 2);
     let body : any;
     body = this.third;
     body.branch_office = this.branch_office;
@@ -130,7 +130,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
     this.http.post('http://localhost:8000/api/thirds/create', body).toPromise().then(
             result => {
                     console.log('result.status', result);
-                    this.showNotification('guardado con exito', 1);
+                    showNotification('guardado con exito', 1);
                     this.loading = false;
             },
             msg => {
@@ -145,7 +145,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
   updateThird(): void {
     this.loading = true;
-    this.showNotification("Actualizando tercero", 2);
+    showNotification("Actualizando tercero", 2);
     let body : any;
     body = this.third;
     body.branch_office = this.branch_office;
@@ -158,8 +158,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
     console.log(body);
     this.http.post('http://localhost:8000/api/thirds/update', body).toPromise().then(
             result => {
-                    this.showNotification('guardado con exito', 1);
-                    this.showNotification('Redireccionando.. espere', 3);
+                    showNotification('guardado con exito', 1);
+                    showNotification('Redireccionando.. espere', 3);
                     this.body = result;
                     this.third = this.body.third;
                     this.router.navigate(['app/third-parties/edit/' + this.third.id]);
@@ -223,32 +223,5 @@ export class ThirdPartiesCrudComponent implements OnInit {
               notifyManage(msg);
           }
       );
-  }
-
-  showNotification(mess, typeMess){
-    const type = ['','info','success','warning','danger'];
-
-    $.notify({
-        icon: 'notifications',
-        message: mess
-
-    },{
-        type: type[typeMess],
-        timer: 4000,
-        placement: {
-            from: 'top',
-            align: 'right'
-        },
-        template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-          '<i class="material-icons" data-notify="icon">notifications</i> ' +
-          '<span data-notify="title">{1}</span> ' +
-          '<span data-notify="message">{2}</span>' +
-          '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-          '</div>' +
-          '<a href="{3}" target="{4}" data-notify="url"></a>' +
-        '</div>'
-    });
   }
 }

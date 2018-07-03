@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 declare var $: any;
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -16,10 +18,10 @@ export class LandingComponent implements OnInit {
     console.log('LLEGO LOGINMODAL')
     // this.showLoginForm();
     setTimeout(function(){
-        $('#loginModal').modal('show');    
+      $('#loginModal').modal('show');
     }, 230);
+  }
 
-}
 showLoginForm(){
   $('#loginModal .registerBox').fadeOut('fast',function(){
       $('.loginBox').fadeIn('fast');

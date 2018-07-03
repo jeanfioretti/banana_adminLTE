@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
-import { notifyManage } from '../../utils/notifyUtil';
+import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { Contact } from '../../models/contact';
 
 declare var $: any;
@@ -29,7 +29,7 @@ export class ContactComponent implements OnInit {
 
 	      this.title_contact = 'Edit Third';
 	      this.type_view = 3;
-	      this.getContact(this.id);
+	      this.getContact(this.contact.id);
 
 	    } else {
 
@@ -39,6 +39,32 @@ export class ContactComponent implements OnInit {
 	    }
 	});
 
+  }
+
+  getContact(id): void {
+    this.loading = true;
+    showNotification("Obteniendo tercero", 2);
+    const headers = new HttpHeaders().set('Authorization', window.location.origin)
+    .append('user_id', sessionStorage.getItem('user_id'))
+    .append('token', sessionStorage.getItem('user_token'))
+    .append('app', 'bananaCli');
+    const options =  {
+            headers: headers,
+        };
+    this.http.get('http://localhost:8000/api/third/' + id, options).toPromise().then(
+            result => {
+                    this.body = result;
+                    this.contact = this.body.contact;
+                    this.loading = false;
+            },
+            msg => {
+              if (msg.status == 406) {
+                tokenUtil(this.router);
+              }
+              this.loading = false;
+              notifyManage(msg);
+          }
+      );
   }
 
 }
