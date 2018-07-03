@@ -14,6 +14,7 @@ declare var $: any;
   styleUrls: ['./localization.component.scss']
 })
 export class LocalizationComponent implements OnInit {
+  loading = false;
   localizationTitle : string ='Crear Localizacion';
   @Input() localization : Localization = new Localization();
   @Input() countries : any = [];
@@ -28,6 +29,7 @@ export class LocalizationComponent implements OnInit {
   }
 
   getCountries() {
+    this.loading = true;
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
@@ -37,6 +39,7 @@ export class LocalizationComponent implements OnInit {
         };
     this.http.get('http://localhost:8000/api/location/countries', options).toPromise().then(
             result => {
+              this.loading = false;
               this.body = result;
               this.countries = this.body.countries;
             },
@@ -44,12 +47,14 @@ export class LocalizationComponent implements OnInit {
               if (msg.status == 406) {
                 tokenUtil(this.router);
               }
+              this.loading = false
               notifyManage(msg);
           }
       );
   }
 
   getStates(country_id) {
+    this.loading = true;
     this.states = [];
     this.cities = [];
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
@@ -61,6 +66,7 @@ export class LocalizationComponent implements OnInit {
         };
     this.http.get('http://localhost:8000/api/location/states?country_id='+country_id, options).toPromise().then(
             result => {
+              this.loading = false;
               this.body = result;
               this.states = this.body.states;
             },
@@ -68,12 +74,14 @@ export class LocalizationComponent implements OnInit {
               if (msg.status == 406) {
                 tokenUtil(this.router);
               }
+              this.loading = false;
               notifyManage(msg);
           }
       );
   }
 
   getCities(state_id) {
+    this.loading = true;
     this.cities = [];
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
@@ -84,6 +92,7 @@ export class LocalizationComponent implements OnInit {
         };
     this.http.get('http://localhost:8000/api/location/cities?state_id='+state_id, options).toPromise().then(
             result => {
+              this.loading = false;
               this.body = result;
               this.cities = this.body.cities;
             },
@@ -91,6 +100,7 @@ export class LocalizationComponent implements OnInit {
               if (msg.status == 406) {
                 tokenUtil(this.router);
               }
+              this.loading = false;
               notifyManage(msg);
           }
       );
