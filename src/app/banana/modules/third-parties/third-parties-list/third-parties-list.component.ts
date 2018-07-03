@@ -9,122 +9,126 @@ import { AuthBanana } from '../../../utils/auth';
 declare var $: any;
 
 @Component({
-  selector: 'app-third-parties-list',
-  templateUrl: './third-parties-list.component.html',
-  styleUrls: ['./third-parties-list.component.scss']
+	selector: 'app-third-parties-list',
+	templateUrl: './third-parties-list.component.html',
+	styleUrls: ['./third-parties-list.component.scss']
 })
 export class ThirdPartiesListComponent implements OnInit {
-  public loading = false;
-  public titleTable: string;
-  public body: any ;
-  public thirds: any = [];
-  public keyword:any;
-  public kanban:false;
+
+	public loading = false;
+	public titleTable: string;
+	public body: any ;
+	public thirds: any = [];
+	public keyword:any;
+	public kanban:false;
+
   constructor(public http: HttpClient, public router: Router) { }
 
-  ngOnInit() {
-    AuthBanana(this.router);
-    this.getThirds();
-  	this.titleTable = 'Terceros';
-  }
+	ngOnInit() {
+		AuthBanana(this.router);
+		this.getThirds();
+		this.titleTable = 'Terceros';
+	}
 
-  viewKanban(type){
-    this.kanban = type;
-  }
+	viewKanban(type){
+		this.kanban = type;
+	}
 
-  getThirds(): void {
-    this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
-    .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
-    const options =  {
-            headers: headers,
-        };
-    //console.log(options);
-    this.http.get('http://localhost:8000/api/thirds', options).toPromise().then(
-            result => {
-                    //console.log('result.status', result);
-                    // const body = result;
-                    this.loading = false;
-                    this.body = result;
-                    this.thirds = this.body.thirds;
-            },
-            msg => {
+	getThirds(): void {
+		this.loading = true;
+		const headers = new HttpHeaders().set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
 
-              if (msg.status == 406) {
-                tokenUtil(this.router);
-              }
-              this.loading = false;
-              notifyManage(msg);
-          }
-      );
-  }
+		this.http.get('http://localhost:8000/api/thirds', options).toPromise()
+			.then(
+		    	result => {
+	                //console.log('result.status', result);
+	                // const body = result;
+	                this.loading = false;
+	                this.body = result;
+	                this.thirds = this.body.thirds;
+		        },
+		        msg => {
 
-  search() : void {
-    this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
-    .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
-    const options =  {
-            headers: headers,
-            params: { filter: this.keyword}
-        };
-    this.http.get('http://localhost:8000/api/thirds/filter', options).toPromise().then(
-            result => {
-                     //console.log('result', result);
-                     this.loading = false;
-                     this.body = result;
-                     this.thirds = this.body.filter_thirds;
-            },
-            msg => {
-              if (msg.status == 406) {
-                tokenUtil(this.router);
-              }
-              this.loading = false;
-              notifyManage(msg);
-          }
-      );
-  }
+		          if (msg.status == 406) {
+		            tokenUtil(this.router);
+		          }
+		          this.loading = false;
+		          notifyManage(msg);
+		      	}
+		    );
+	}
 
-  archivedThird(id, archived) : void {
-    this.loading = true;
-    const body = {
-      authorization: window.location.origin,
-      user_id: sessionStorage.getItem('user_id'),
-      token: sessionStorage.getItem('user_token'),
-      app:'bananaCli',
-      third_id : id,
-      archived: archived
-    };
-    //console.log(body);
-    this.http.post('http://localhost:8000/api/thirds/archived', body).toPromise().then(
-      result => {
-        this.loading = false;
-        console.log('result.status', result);
-        this.getThirds();
-         showNotification('archivado con exito', 1);
-      },
-      msg => {
-        if (msg.status == 406) {
-          tokenUtil(this.router);
-        }
-        this.loading = false;
-        notifyManage(msg);
-        }
-    );
-  }
+search() : void {
+	this.loading = true;
+	const headers = new HttpHeaders().set('Authorization', window.location.origin)
+		.append('user_id', sessionStorage.getItem('user_id'))
+		.append('token', sessionStorage.getItem('user_token'))
+		.append('app', 'bananaCli');
+	const options =  {
+	        headers: headers,
+	        params: { filter: this.keyword}
+	    };
+	this.http.get('http://localhost:8000/api/thirds/filter', options).toPromise()
+		.then(
+	        result => {
+	            //console.log('result', result);
+	            this.loading = false;
+	            this.body = result;
+	            this.thirds = this.body.filter_thirds;
+	        },
+	        msg => {
+	          if (msg.status == 406) {
+	            tokenUtil(this.router);
+	          }
+	          this.loading = false;
+	          notifyManage(msg);
+	      }
+	  	);
+}
 
-  goToCreateThird(){
-    showNotification('Redireccionando.. espere', 3);
-    this.router.navigate(['app/third-parties/new']);
-  }
+	archivedThird(id, archived) : void {
+		this.loading = true;
+		const body = {
+			authorization: window.location.origin,
+			user_id: sessionStorage.getItem('user_id'),
+			token: sessionStorage.getItem('user_token'),
+			app:'bananaCli',
+			third_id : id,
+			archived: archived
+		};
+		//console.log(body);
+		this.http.post('http://localhost:8000/api/thirds/archived', body).toPromise()
+			.then(
+				result => {
+					this.loading = false;
+					console.log('result.status', result);
+					this.getThirds();
+						showNotification('archivado con exito', 1);
+				},
+				msg => {
+					if (msg.status == 406) {
+					  tokenUtil(this.router);
+					}
+					this.loading = false;
+					notifyManage(msg);
+				}
+			);
+	}
 
-  goToEditThird(id){
-    showNotification('Redireccionando.. espere', 3);
-    this.router.navigate(['app/third-parties/edit/' + id]);
-  }
+	goToCreateThird(){
+		showNotification('Redireccionando.. espere', 3);
+		this.router.navigate(['app/third-parties/new']);
+	}
 
+	goToEditThird(id){
+		showNotification('Redireccionando.. espere', 3);
+		this.router.navigate(['app/third-parties/edit/' + id]);
+	}
 
 }
