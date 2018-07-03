@@ -158,8 +158,11 @@ export class ThirdPartiesCrudComponent implements OnInit {
     console.log(body);
     this.http.post('http://localhost:8000/api/thirds/update', body).toPromise().then(
             result => {
-                    console.log('result.status', result);
                     this.showNotification('guardado con exito', 1);
+                    this.showNotification('Redireccionando.. espere', 3);
+                    this.body = result;
+                    this.third = this.body.third;
+                    this.router.navigate(['app/third-parties/edit/' + this.third.id]);
                     this.loading = false;
             },
             msg => {
