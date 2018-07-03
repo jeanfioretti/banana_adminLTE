@@ -118,12 +118,12 @@ export class ThirdPartiesListComponent implements OnInit {
 
   goToCreateThird(){
     showNotification('Redireccionando.. espere', 3);
-    this.router.navigate(['app/third-parties/new'])
+    this.router.navigate(['app/third-parties/new']);
   }
 
   goToEditThird(id){
     showNotification('Redireccionando.. espere', 3);
-    this.router.navigate(['app/third-parties/edit/' + id])
+    this.router.navigate(['app/third-parties/edit/' + id]);
   }
 
 
