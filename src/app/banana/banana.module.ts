@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
 import { BananaRoutingModule } from './banana-routing.module';
 import { BananaComponent } from './banana.component';
@@ -19,7 +19,8 @@ import { ContactComponent } from './components/contact/contact.component';
     BananaRoutingModule,
     ThirdPartiesModule,
     LoadingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     BananaComponent,

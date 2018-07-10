@@ -7,16 +7,21 @@ import { tokenUtil } from '../../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { Third } from '../../../models/third';
 import { Localization } from '../../../models/localization';
+import { QuestionService } from './../../../form/question.service';
+import { GenerateView } from '../../../utils/generateView';
 
 declare var $: any;
 
 @Component({
   selector: 'app-third-parties-crud',
   templateUrl: './third-parties-crud.component.html',
-  styleUrls: ['./third-parties-crud.component.scss']
+  styleUrls: ['./third-parties-crud.component.scss'],
+  providers:  [QuestionService]
 })
 
 export class ThirdPartiesCrudComponent implements OnInit {
+  questions: any[] = null;
+  haveQuestions= false;
   id: string;
   title_third : string;
   type_view :number;
@@ -32,11 +37,20 @@ export class ThirdPartiesCrudComponent implements OnInit {
   body: any;
   loading = false;
 
-  constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
+  constructor(public http: HttpClient,
+    public router: Router,
+    private _activeRoute: ActivatedRoute,
+    service: QuestionService
+  ) {
+    // this.questions = service.getQuestions();
+    // this.haveQuestions = true;
+   }
 
   ngOnInit() {
+    // const _generateView = new GenerateView(this.http);
+    // _generateView.getCustomColum();
     AuthBanana(this.router);
-    sessionStorage.setItem('table_id', '1');
+    sessionStorage.setItem('table_id', '17');
     this.id = this._activeRoute.snapshot.params['id'];
     this._activeRoute.url.subscribe(url => {
 
@@ -95,7 +109,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
     const options =  {
             headers: headers,
         };
-    //console.log(headers);
+    // console.log(headers);
     this.http.get('http://localhost:8000/api/thirds/combo-select', options).toPromise().then(
             result => {
                     this.body = result;
@@ -224,4 +238,10 @@ export class ThirdPartiesCrudComponent implements OnInit {
           }
       );
   }
+
+  catchEvent(event:any){
+    console.log('llego', event);
+  }
+
+
 }

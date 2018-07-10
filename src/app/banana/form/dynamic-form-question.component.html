@@ -1,0 +1,37 @@
+
+<div [formGroup]="form">
+  <div [ngSwitch]="question.controlType">
+
+            <div class="col-md-6" style="height: 57.73px" *ngSwitchCase="'textbox'" >
+              <div class="">
+                 <label >{{question.label}}</label>
+                  <input type="text" class="form-control" [formControlName]="question.key" >
+              </div>
+            </div>
+
+            <div class="col-md-6" style="height: 57.73px" *ngSwitchCase="'dropdown'">
+                <label >{{question.label}}</label>
+                <select class="form-control" [id]="question.key"  [formControlName]="question.key" style="width:100%">
+                    <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+                  </select>
+            </div>
+
+            <div class="col-md-6" style="height: 57.73px;padding-top: 19.5px;padding-bottom: 12.5px;" *ngSwitchCase="'checkbox'">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" [formControlName]="question.key"
+                          [checked]="question.checked? true : false">
+                        {{question.label}}
+                        <span class="form-check-sign">
+                            <span class="check"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+
+
+  </div>
+
+  <!-- <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div> -->
+</div>
