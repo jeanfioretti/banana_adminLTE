@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BranchOffice } from '../../../models/branch';
@@ -20,7 +20,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
   id: string;
   title_third : string;
   type_view :number;
-  third : Third = new Third();
+  @Input() third : Third = new Third();
   localization : Localization = new Localization();
   countries : any = [];
   states : any = [];
@@ -131,6 +131,10 @@ export class ThirdPartiesCrudComponent implements OnInit {
             result => {
                     console.log('result.status', result);
                     showNotification('guardado con exito', 1);
+                    showNotification('Redireccionando.. espere', 3);
+                    this.body = result;
+                    this.third = this.body.third;
+                    this.router.navigate(['app/third-parties/edit/' + this.third.id]);
                     this.loading = false;
             },
             msg => {
@@ -159,10 +163,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
     this.http.post('http://localhost:8000/api/thirds/update', body).toPromise().then(
             result => {
                     showNotification('guardado con exito', 1);
-                    showNotification('Redireccionando.. espere', 3);
-                    this.body = result;
-                    this.third = this.body.third;
-                    this.router.navigate(['app/third-parties/edit/' + this.third.id]);
                     this.loading = false;
             },
             msg => {

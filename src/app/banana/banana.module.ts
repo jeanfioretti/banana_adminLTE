@@ -11,7 +11,6 @@ import { BananaContentComponent } from './banana-content/banana-content.componen
 import { BananaControlSidebarComponent } from './banana-control-sidebar/banana-control-sidebar.component';
 import { ThirdPartiesModule } from './modules/third-parties/third-parties.module';
 import { CustomColumnsComponent } from './components/custom-columns/custom-columns.component';
-import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   imports: [
@@ -28,8 +27,7 @@ import { ContactComponent } from './components/contact/contact.component';
     BananaLeftSideComponent,
     BananaContentComponent,
     BananaControlSidebarComponent,
-    CustomColumnsComponent,
-    ContactComponent
+    CustomColumnsComponent
   ]
 })
 export class BananaModule { }
