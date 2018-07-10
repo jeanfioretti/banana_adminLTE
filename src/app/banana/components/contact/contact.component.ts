@@ -43,7 +43,7 @@ export class ContactComponent implements OnInit {
 
   getContact(id): void {
     this.loading = true;
-    showNotification("Obteniendo tercero", 2);
+    showNotification("Obteniendo contacto", 2);
     const headers = new HttpHeaders().set('Authorization', window.location.origin)
     .append('user_id', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
@@ -51,7 +51,7 @@ export class ContactComponent implements OnInit {
     const options =  {
             headers: headers,
         };
-    this.http.get('http://localhost:8000/api/third/' + id, options).toPromise().then(
+    this.http.get('http://localhost:8000/api/contact/' + id, options).toPromise().then(
             result => {
                     this.body = result;
                     this.contact = this.body.contact;

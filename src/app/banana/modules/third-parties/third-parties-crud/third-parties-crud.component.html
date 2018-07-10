@@ -1,6 +1,6 @@
 
   <!-- Content Header (Page header) -->
-   <section class="content-header">
+<section class="content-header">
     <h1>
       Page Header
       <small>Optional description</small>
@@ -9,340 +9,403 @@
       <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
       <li class="active">Here</li>
     </ol>
-  </section>
-
+</section>
   <!-- Main content -->
-  <section class="content">
-
-    <div class="main-content">
-    	<div class="col-md-12" >
-        <!-- <app-custom-columns></app-custom-columns> -->
-        </div>
-        	<div class="container-fluid">
-            	<div class="row">
-	                <div class="col-md-12">
-		                <div class="box">
-			                <div class="box-header box-header-danger">
-			                	<h4 class="box-title">{{title_third}}</h4>
-			                	<p class="box-category">Datos</p>
-			                </div>
-			                <div class="box-body">
-                          <div id="custom_columns" >
-                              <app-dynamic-form [questions]="questions" [title]="'Third'" (entity)="catchEvent($event)" ></app-dynamic-form>
-                          </div>
-				                <!-- <form method="post"  accept-charset="UTF-8">
-				                	<div class="row">
-
-				                        <div class="col-md-4">
-				                        	<input type="text" readonly class="form-control" [(ngModel)]="client.client_name" [ngModelOptions]="{standalone: true}">
-				                        </div>
-
-				                        <div class="col-md-4">
-				                            <select class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
-				                                <option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">{{organization.organization_name}}</option>
-				                            </select>
-				                        </div>
-
-	                                <div class="col-md-4">
-	                                    <div *ngIf="type_view == 3">
-	                                        <button *ngIf="!third.archived" (click)="archivedThird(third.id, 1)" mat-raised-button class="btn btn-danger btn-sm">
-	                                        	<i class="fa fa-trash"></i>
-	                                        </button>
-	                                        <button *ngIf="third.archived" (click)="archivedThird(third.id, 0)" mat-raised-button class="btn btn-info btn-sm">
-	                                        	<i class="fa fa-check"></i>
-	                                        </button>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <div *ngIf="type_view == 3">
-	                                        <input type="text" readonly class="form-control" [(ngModel)]="third.id" [ngModelOptions]="{standalone: true}">
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <input type="text" class="form-control" placeholder="Reference No" [(ngModel)]="third.reference_no" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-4">
-	                                    <select class="form-control">
-	                                        <option value="0">Group of thirds</option>
-	                                    </select>
-	                                </div>
-
-	                                <div class="col-md-1">
-	                                    <div class="form-check">
-	                                        <label class="form-check-label">
-	                                            <input class="form-check-input" type="checkbox" value=""
-	                                            	[checked]="third.is_prospect == 1 ? true : false"
-	                                            	[(ngModel)]="third.is_prospect"
-	                                            	[ngModelOptions]="{standalone: true}"
-	                                            >
-	                                            Prospect
-	                                            <span class="form-check-sign">
-	                                                <span class="check"></span>
-	                                            </span>
-	                                        </label>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                </div>
-
-	                                <div class="col-md-8">
-	                                    <input type="text" class="form-control" placeholder="Name" [(ngModel)]="third.name" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-1">
-	                                	<div class="form-check">
-	                                        <label class="form-check-label">
-	                                            <input class="form-check-input" type="checkbox" value=""
-	                                            	[checked]="third.is_customer == 1 ? true : false"
-	                                            	[(ngModel)]="third.is_customer"
-	                                            	[ngModelOptions]="{standalone: true}"
-	                                            >
-	                                            Customer
-	                                            <span class="form-check-sign">
-	                                                <span class="check"></span>
-	                                            </span>
-	                                       </label>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                </div>
-
-                                	<div class="col-md-8">
-                                    	<input type="text" class="form-control" placeholder="Name Two"
-                                    		[(ngModel)]="third.name_2" [ngModelOptions]="{standalone: true}"
-                                    	>
-                                  	</div>
-
-	                                <div class="col-md-1">
-	                                    <div class="form-check">
-	                                        <label class="form-check-label">
-	                                            <input class="form-check-input" type="checkbox" value=""
-	                                            	[checked]="third.is_vendor == 1 ? true : false"
-	                                            	[(ngModel)]="third.is_vendor" [ngModelOptions]="{standalone: true}"
-	                                            >
-	                                            Vendor
-	                                            <span class="form-check-sign">
-	                                                <span class="check"></span>
-	                                            </span>
-	                                        </label>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <div class="form-check">
-	                                        <label class="form-check-label">
-	                                            <input class="form-check-input" type="checkbox" value=""
-	                                            	[checked]="third.is_tax_exempt == 1 ? true : false"
-	                                             	[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
-	                                            >
-	                                            Exempt from sales
-	                                            <span class="form-check-sign">
-	                                                <span class="check"></span>
-	                                            </span>
-	                                          </label>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-3">
-	                                    <div class="form-check">
-	                                        <label class="form-check-label">
-		                                        	<input class="form-check-input" type="checkbox" value=""
-		                                        		[checked]="third.is_po_tax_exempt == 1 ? true : false"
-		                                        		[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
-		                                        	>
-			                                        Exempt from purchase
-			                                        <span class="form-check-sign">
-			                                            <span class="check"></span>
-			                                        </span>
-	                                        </label>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-3">
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <div class="form-check">
-	                                        <label class="form-check-label">
-	                                            <input class="form-check-input" type="checkbox" value=""
-	                                            	[checked]="third.is_sales_rep == 1 ? true : false"
-	                                            	[(ngModel)]="third.is_sales_rep"
-	                                            	[ngModelOptions]="{standalone: true}"
-	                                            >
-	                                            Sales representative
-	                                            <span class="form-check-sign">
-	                                                <span class="check"></span>
-	                                            </span>
-	                                        </label>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                </div>
-
-	                                <div class="col-md-8">
-	                                    <input type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-4">
-	                                    <input type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-7">
-	                                    <input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-	                                </div>
-
-	                                <div class="col-md-1">
-	                                    <app-localization
-	                                        [localization]="localization"
-	                                        [countries]="countries"
-	                                        [states]="states"
-	                                        [cities]="cities" >
-	                                    </app-localization>
-	                                </div>
-
-	                                <div class="col-md-4">
-	                                    <input type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-7">
-	                                      <!-- <input type="text" readonly class="form-control" [(ngModel)]="third.id" [ngModelOptions]="{standalone: true}"> -->
-	                                <!-- </div>
-
-	                                <div class="col-md-1">
-	                                </div>
-
-	                                <div class="col-md-12">
-	                                    <div class="form-group">
-	                                        <label class="bmd-label-floating">Description</label>
-	                                        <textarea class="form-control" rows="3" [(ngModel)]="third.description" [ngModelOptions]="{standalone: true}">
-	                                        </textarea>
-	                                    </div>
-	                                </div>
-
-	                                <div class="col-md-12">
-	                                    <h3 class="box-title">Client data</h3>
-	                                </div>
-
-	                                <div class="col-md-4">
-	                                    <select class="form-control" [(ngModel)]="third.sales_rep_id" [ngModelOptions]="{standalone: true}">
-	                                        <option *ngFor="let represent of combo_select.sales_representatives" [ngValue]="represent.id">
-	                                        	{{represent.name}}
-	                                        </option>
-	                                    </select>
-	                                  </div>
-
-	                                <div class="col-md-8">
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <select class="form-control" [(ngModel)]="third.credit_status" [ngModelOptions]="{standalone: true}">
-	                                        <option value="A">Credit Status A</option>
-	                                        <option value="B">Credit Status B</option>
-	                                        <option value="C">Credit Status C</option>
-	                                    </select>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <input type="text" class="form-control" placeholder="Flat Discount" [(ngModel)]="third.flat_discount" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <input type="number" readonly class="form-control" placeholder="Total Open Balance" [(ngModel)]="third.total_open_balance" [ngModelOptions]="{standalone: true}">
-	                                </div>
-
-	                                <div class="col-md-4">
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <select class="form-control" [(ngModel)]="third.language_id" [ngModelOptions]="{standalone: true}">
-	                                        <option *ngFor="let language of combo_select.languages" [ngValue]="language.id">
-	                                        	{{ language.languagescol }}
-	                                        </option>
-	                                    </select>
-	                                </div>
-
-	                                <div class="col-md-2">
-	                                    <select class="form-control" [(ngModel)]="third.greeting_id" [ngModelOptions]="{standalone: true}">
-	                                        <option value="0">greeting id</option>
-	                                    </select>
-                                  </div> -->
-                                  <!-- <div class="col-md-2"> -->
-
-                                  <!-- </div> -->
-                              <!--
-
-                                  <div class="col-md-3">
-                                      <select class="form-control" [(ngModel)]="third.tax_id" [ngModelOptions]="{standalone: true}">
-                                        <option>Tax id</option>
-                                      </select>
-                                  </div>
-
-                                  <div class="col-md-3">
-                                      <div class="form-check">
-                                          <label class="form-check-label">
-                                              <input class="form-check-input"
-                                              type="checkbox" value="" [checked]="third.is_summary == 1 ? true : false"
-                                              [(ngModel)]="third.is_summary" [ngModelOptions]="{standalone: true}">
-                                              Summary
-                                              <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                              </span>
-                                          </label>
-                                        </div>
-                                  </div>
-
-                                  <div class="col-md-3">
-                                      <select class="form-control" [(ngModel)]="third.price_list_id" [ngModelOptions]="{standalone: true}">
-                                        <option>price list id</option>
-                                      </select>
-                                  </div>
-
-                                  <div class="col-md-3">
-                                      <select class="form-control" [(ngModel)]="third.po_price_list_id" [ngModelOptions]="{standalone: true}">
-                                          <option>po price list id</option>
-                                      </select>
-                                  </div>
-
-                                  <div class="col-md-3">
-                                      <select class="form-control" [(ngModel)]="third.delivery_rule" [ngModelOptions]="{standalone: true}">
-                                          <option>delivery rule char</option>
-                                      </select>
-                                  </div>
-
-                                  <div class="col-md-3">
-                                      <select class="form-control" [(ngModel)]="third.delivery_via_rule" [ngModelOptions]="{standalone: true}">
-                                          <option>delivery via rule char</option>
-                                      </select>
-                                  </div>
-
-                              -->
-				                    <!-- </div> -->
-				                                      <!-- <div class="clearfix"></div> -->
-				                                      <button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
-				                                      <button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
-				                                      <div class="clearfix"></div>
-				                <!-- </form>  -->
-			                </div>
-			            </div>
-	                </div>
-            	</div>
-        	</div>
-    </div>
-  </section>
-  <!-- /.content -->
-
-
+<section class="content">
+	<div class="main-content">
+		<div class="col-md-12" ><!-- <app-custom-columns></app-custom-columns> --></div>
+		<div class="container-fluid">
+	    	<div class="row">
+	            <div class="col-md-12">
+	                <div class="box">
+		                <div class="box-header box-header-danger">
+		                	<h4 class="box-title">{{title_third}}</h4>
+		                	<p class="box-category">Datos</p>
+		                </div>
+		            </div>
+	            </div>
+	    	</div>
+	    	<div class="box">
+	            <div class="box-body">
+	            	<!-- <div class="row"> -->
+	                	<div class="col-md-6">
+	                		<div class="row">
+	                			<div class="col-sm-4">
+	                				<label><span></span></label>
+	                				<input type="text" readonly class="form-control" [(ngModel)]="client.client_name" [ngModelOptions]="{standalone: true}">
+	                			</div>
+	                			<div class="col-sm-4">
+	                				<label for="organization"><span>Organization</span></label>
+	                				<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">			                                
+                						<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
+                							{{organization.organization_name}}
+                						</option>
+			                        </select>
+	                			</div>
+	                			<div class="col-sm-4">
+	                				<label for="group_third"><span>Group of thirds</span></label>
+	                				<select name="group_third" class="form-control">
+	                                    <option value="0"></option>
+	                                </select>
+	                			</div>
+	                		</div>
+	                		<div class="row">
+	                			<div class="col-sm-2">
+	                				<label><span></span></label>
+	                				<input type="text" readonly class="form-control" [(ngModel)]="third.id" [ngModelOptions]="{standalone: true}">
+	                			</div>
+	                			<div class="col-sm-2">
+	                			</div>
+	                			<div class="col-sm-8">
+	                				<label for="name"><span>Company name</span></label>
+	                				<input name="name" type="text" class="form-control" [(ngModel)]="third.name" [ngModelOptions]="{standalone: true}">
+	                			</div>
+	                		</div>
+	                	</div>
+	                	<div class="col-md-6">
+	                		<div class="row">
+	                			<div class="col-sm-4">
+	                				***<!-- <label for="logo"><span>¿Logo?</span></label> -->
+	                			</div>
+	                			<div class="col-sm-5">
+	                				<span>***</span>
+	                			</div>
+	                			<div class="col-sm-3">
+	                				***
+	                				<div *ngIf="type_view == 3">
+                                        <button *ngIf="!third.archived" (click)="archivedThird(third.id, 1)" mat-raised-button class="btn btn-danger btn-sm">
+                                        	<i class="fa fa-trash"></i>
+                                        </button>
+                                        <button *ngIf="third.archived" (click)="archivedThird(third.id, 0)" mat-raised-button class="btn btn-info btn-sm">
+                                        	<i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+	                			</div>
+	                		</div>
+	                		<div class="row">
+	                			<div class="col-sm-8">
+	                				<label for="name_2"><span>Company name</span></label>
+		                			<input name="name_2" type="text" class="form-control"
+	                                	[(ngModel)]="third.name_2" [ngModelOptions]="{standalone: true}"
+	                                >
+	                			</div>
+	                			<div class="col-sm-2">
+	                				<label for="prospect">
+	                                    <input name="prospect" class="form-check-input" type="checkbox" value=""
+	                                       	[checked]="third.is_prospect == 1 ? true : false"
+	                                       	[(ngModel)]="third.is_prospect"
+	                                       	[ngModelOptions]="{standalone: true}"
+	                                    >
+		                				<span>Vendor</span>
+	                				</label>
+	                			</div>
+	                			<!-- <div class="col-sm-1">
+	                				<div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                            	[checked]="third.is_customer == 1 ? true : false"
+                                            	[(ngModel)]="third.is_customer"
+                                            	[ngModelOptions]="{standalone: true}"
+                                            >
+                                            Customer
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                       </label>
+                                    </div>
+	                			</div>
+	                			<div class="col-sm-1">
+	                				<div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                            	[checked]="third.is_vendor == 1 ? true : false"
+                                            	[(ngModel)]="third.is_vendor" [ngModelOptions]="{standalone: true}"
+                                            >
+                                            Vendor
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+	                			</div>
+	                			<div class="col-sm-1">
+	                				<div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                            	[checked]="third.is_sales_rep == 1 ? true : false"
+                                            	[(ngModel)]="third.is_sales_rep"
+                                            	[ngModelOptions]="{standalone: true}"
+                                            >
+                                            Sales representative
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+	                			</div> -->
+	                		</div>
+	                	</div>
+	            	<!-- </div> -->
+	            </div>
+	        </div>
+	        <!-- <button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
+	        <button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
+	        <div class="clearfix"></div> -->
+	    </div>
+	</div>
+</section>
+<!-- /.content -->
 <ngx-loading [show]="loading"></ngx-loading>
+
+
+		                	<!-- <div class="row"> -->
+		                		<!-- <div class="col-md-12">
+		                				<input type="text" name="" value="" placeholder=""> -->
+		                			<!-- <div class="col-5">
+		                			</div> -->
+			                        <!-- style="
+										width:  100%;
+										<div class="col-sm-2">
+			                        	
+			                        </div>
+			                        <div class="col-sm-2">
+			                        </div>
+	                                <div class="col-sm-2">
+	                                    
+	                                </div>
+	                                <div class="col-sm-2">
+	                                    <div *ngIf="type_view == 3">
+	                                        
+	                                    </div>
+	                                </div>
+	                                <div class="col-sm">
+	                                	<input type="text" name="" value="" placeholder="">
+	                                </div> -->
+		                		<!-- </div>
+		                		<div class="col-12">
+		                				<input type="text" name="" value="" placeholder=""> -->
+		                			<!-- <div class="col-5">
+		                			</div> -->
+		                            <!-- <div class="col-sm">
+		                                <input type="text" class="form-control" placeholder="Reference No" [(ngModel)]="third.reference_no" [ngModelOptions]="{standalone: true}">
+		                            </div> -->				                    	
+		                    <!-- </div> -->
+<!-- 
+		                			<div class="col-sm-2">
+	                                    
+	                                </div>
+		                    <div class="row">
+		                    </div> -->
+
+		                    <!--
+		                    <div class="row">
+
+                                <div class="col-md-1">
+                                    
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                                <div class="col-md-8">
+                                    
+                                </div>
+
+                                <div class="col-md-1">
+                                	
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                            	<div class="col-md-8">
+                                	
+                              	</div>
+
+                                <div class="col-md-1">
+                                    
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                            	[checked]="third.is_tax_exempt == 1 ? true : false"
+                                             	[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
+                                            >
+                                            Exempt from sales
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                          </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+	                                        	<input class="form-check-input" type="checkbox" value=""
+	                                        		[checked]="third.is_po_tax_exempt == 1 ? true : false"
+	                                        		[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
+	                                        	>
+		                                        Exempt from purchase
+		                                        <span class="form-check-sign">
+		                                            <span class="check"></span>
+		                                        </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                </div>
+
+                                <div class="col-md-2">
+                                    
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <app-localization
+                                        [localization]="localization"
+                                        [countries]="countries"
+                                        [states]="states"
+                                        [cities]="cities" >
+                                    </app-localization>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-7">
+                                       <input type="text" readonly class="form-control" [(ngModel)]="third.id" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-1">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Description</label>
+                                        <textarea class="form-control" rows="3" [(ngModel)]="third.description" [ngModelOptions]="{standalone: true}">
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h3 class="box-title">Client data</h3>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select class="form-control" [(ngModel)]="third.sales_rep_id" [ngModelOptions]="{standalone: true}">
+                                        <option *ngFor="let represent of combo_select.sales_representatives" [ngValue]="represent.id">
+                                        	{{represent.name}}
+                                        </option>
+                                    </select>
+                                  </div>
+
+                                <div class="col-md-8">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select class="form-control" [(ngModel)]="third.credit_status" [ngModelOptions]="{standalone: true}">
+                                        <option value="A">Credit Status A</option>
+                                        <option value="B">Credit Status B</option>
+                                        <option value="C">Credit Status C</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="Flat Discount" [(ngModel)]="third.flat_discount" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="number" readonly class="form-control" placeholder="Total Open Balance" [(ngModel)]="third.total_open_balance" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select class="form-control" [(ngModel)]="third.language_id" [ngModelOptions]="{standalone: true}">
+                                        <option *ngFor="let language of combo_select.languages" [ngValue]="language.id">
+                                        	{{ language.languagescol }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select class="form-control" [(ngModel)]="third.greeting_id" [ngModelOptions]="{standalone: true}">
+                                        <option value="0">greeting id</option>
+                                    </select>
+                                </div>
+                          
+
+                              <div class="col-md-3">
+                                  <select class="form-control" [(ngModel)]="third.tax_id" [ngModelOptions]="{standalone: true}">
+                                    <option>Tax id</option>
+                                  </select>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <div class="form-check">
+                                      <label class="form-check-label">
+                                          <input class="form-check-input"
+                                          type="checkbox" value="" [checked]="third.is_summary == 1 ? true : false"
+                                          [(ngModel)]="third.is_summary" [ngModelOptions]="{standalone: true}">
+                                          Summary
+                                          <span class="form-check-sign">
+                                              <span class="check"></span>
+                                          </span>
+                                      </label>
+                                    </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <select class="form-control" [(ngModel)]="third.price_list_id" [ngModelOptions]="{standalone: true}">
+                                    <option>price list id</option>
+                                  </select>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <select class="form-control" [(ngModel)]="third.po_price_list_id" [ngModelOptions]="{standalone: true}">
+                                      <option>po price list id</option>
+                                  </select>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <select class="form-control" [(ngModel)]="third.delivery_rule" [ngModelOptions]="{standalone: true}">
+                                      <option>delivery rule char</option>
+                                  </select>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <select class="form-control" [(ngModel)]="third.delivery_via_rule" [ngModelOptions]="{standalone: true}">
+                                      <option>delivery via rule char</option>
+                                  </select>
+                              </div>
+
+		                    </div>
+                           -->
+                            <!-- <div class="clearfix"></div> -->   
