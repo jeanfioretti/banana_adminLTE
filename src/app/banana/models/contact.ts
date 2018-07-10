@@ -1,5 +1,4 @@
 export class Contact {
-
   public id : number = 0;
   public name : string = '';
   public description : string = '';
@@ -13,5 +12,4 @@ export class Contact {
   public birthday : string = '';
   public last_contact : string = '';
   public last_result : string = '';
-  
 }
