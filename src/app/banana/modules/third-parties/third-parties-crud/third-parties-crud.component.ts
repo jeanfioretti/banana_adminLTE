@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BranchOffice } from '../../../models/branch';
@@ -20,7 +20,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
   id: string;
   title_third : string;
   type_view :number;
-  @Input() third : Third = new Third();
+  third : Third = new Third();
   localization : Localization = new Localization();
   countries : any = [];
   states : any = [];

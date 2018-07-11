@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { Contact } from '../../models/contact';
-import { Third } from '../../models/third';
 
 declare var $: any;
 
@@ -18,7 +17,6 @@ export class ContactComponent implements OnInit {
 	title_contact : string;
 	type_view : number;
 	contact : Contact = new Contact();
-	third : Third = new Third();
 	body : any;
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
