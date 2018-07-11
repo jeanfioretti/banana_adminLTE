@@ -1,0 +1,119 @@
+
+<button mat-raised-button class="btn btn-info btn" (click)="openEditFormModal()" >
+    <!-- <ngx-loading [show]="btnloading"></ngx-loading> -->
+    Configuration
+  </button>
+
+  <div  class="modal" id="editForm" >
+          <!-- <ngx-loading [show]="loading"></ngx-loading> -->
+    <div class="modal-dialog login animated">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Custom Field</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+              </div>
+              <div class="modal-body">
+
+                  <div class="card ">
+                          <div class="card-header card-header-primary">
+                              <h4 class="card-title mt-0">Edit Form</h4>
+                              <p class="card-category"> Here is a subtitle for this table</p>
+                          </div>
+                          <div class="card-body">
+                                  <!-- <button mat-raised-button class="btn btn-info btn" (click)="goToCreate()" >Agregar</button> -->
+                              <div class="table-responsive modalScroll" >
+                                  <table class="table table-hover">
+                                      <thead class="">
+                                          <th>
+                                              Options
+                                          </th>
+                                          <th>
+                                              ID
+                                          </th>
+                                          <th>
+                                              Name
+                                          </th>
+                                          <th>
+                                              type
+                                          </th>
+
+
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let column of all_columns">
+                                              <td>
+                                                  <button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEdit(column)" ><i class="fa fa-pencil"></i></button>
+                                                  <!-- <button  (click)="delete(column.id)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button> -->
+
+                                                </td>
+                                              <td>
+                                                  {{column.id}}
+                                              </td>
+                                              <td>
+                                                  {{column.name}}
+                                              </td>
+                                              <td>
+                                                  {{column.control_type}}
+                                              </td>
+
+
+                                          </tr>
+
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+
+
+
+              </div>
+              <div class="modal-footer">
+              </div>
+        </div>
+    </div>
+  </div>
+
+  <div  class="modal" id="editFormCrud" >
+          <ngx-loading [show]="loadingCrud"></ngx-loading>
+    <div class="modal-dialog login animated">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>{{titleCrud}}</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+              </div>
+              <div class="modal-body">
+
+
+                  <div class="col-md-12">
+                      <label >Name</label>
+                      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="column.name" [disabled]="true" [ngModelOptions]="{standalone: true}">
+                  </div>
+
+
+                  <div class="col-md-12">
+                      <label >Type</label>
+                      <select class="form-control"  [(ngModel)]="column.id_type" [disabled]="true" [ngModelOptions]="{standalone: true}" >
+                          <!-- <option value="-1" [defaultSelected]="true" [disabled]="true" >Data Type</option> -->
+                          <option  *ngFor="let type of column_type" [ngValue]="type.id">{{type.name}}</option>
+
+                      </select>
+                  </div>
+
+                  <div class="col-md-12">
+                      <label >Position</label>
+                      <input type="number" min="0" class="form-control" [(ngModel)]="column.position" [ngModelOptions]="{standalone: true}">
+                  </div>
+
+              </div>
+              <div class="modal-footer">
+
+                  <button mat-raised-button *ngIf="editable" class="btn btn-info btn" (click)="update()" >Actualizar</button>
+              </div>
+        </div>
+    </div>
+  </div>
+
+

@@ -36,6 +36,10 @@
 			<div class="box">
 				<div class="box-body">
 
+            <div id="custom_columns" >
+                <app-dynamic-form [questions]="questions" [title]="'Third'" [entity]="third" (entity)="catchEvent($event)" ></app-dynamic-form>
+            </div>
+
 					<div class="row">
 						<div class="col-md-6">
 							<label><span>Client</span></label>
@@ -56,7 +60,7 @@
 						</div> -->
 						<div class="col-md-6">
 							<label for="organization"><span>Organization</span></label>
-							<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">			                                
+							<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
 								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
 									{{organization.organization_name}}
 								</option>
@@ -181,7 +185,7 @@
 						</div>
 						<div class="col-sm-6">
 						</div>
-					</div>								
+					</div>
 
 					<div class="row">
 						<div class="col-sm-6">
@@ -202,7 +206,7 @@
 						<div class="col-md-12">
 							<label for="description">Description</label>
 							<textarea name="description" class="form-control" rows="3" [(ngModel)]="third.description" [ngModelOptions]="{standalone: true}">
-							</textarea>					
+							</textarea>
 						</div>
 					</div>
 
@@ -239,9 +243,9 @@
 <!-- /.content -->
 <ngx-loading [show]="loading"></ngx-loading>
 
-<!-- 
+<!--
 
-								
+
 
 								<div class="col-md-2">
 									<select class="form-control" [(ngModel)]="third.credit_status" [ngModelOptions]="{standalone: true}">
@@ -260,7 +264,7 @@
 										<option value="0">greeting id</option>
 									</select>
 								</div>
-						  
+
 
 							  <div class="col-md-3">
 								  <select class="form-control" [(ngModel)]="third.tax_id" [ngModelOptions]="{standalone: true}">
@@ -308,4 +312,4 @@
 
 							</div>
 						   -->
-							<!-- <div class="clearfix"></div> -->   
+							<!-- <div class="clearfix"></div> -->

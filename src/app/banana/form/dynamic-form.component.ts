@@ -8,6 +8,7 @@ import { notifyManage } from '../utils/notifyUtil';
 import { TextboxQuestion } from './question-textbox';
 import { DropdownQuestion } from './question-dropdown';
 import { CheckboxQuestion } from './question-checkbox';
+import { isNullOrUndefined } from 'util';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() questions: QuestionBase<any>[] = null;
   @Input() title: FormGroup;
-  @Output() public entity = new EventEmitter<any>();
+  @Input() entity:any;
+
+  @Output() public myEvent = new EventEmitter<any>();
   formDynamic: FormGroup;
   payLoad = '';
   loading = false;
@@ -34,7 +37,7 @@ export class DynamicFormComponent implements OnInit {
 
   onSubmit() {
 
-    this.entity.emit({
+    this.myEvent.emit({
       entity: this.formDynamic.value
     });
     this.payLoad = JSON.stringify(this.formDynamic.value);
@@ -109,9 +112,13 @@ export class DynamicFormComponent implements OnInit {
 
   buildFormObj(columns) {
     let quest: any;
+
     for (let i = 0; i < columns.length; i++) {
       if(columns.order == null){
         columns.order = i+1;
+      }
+      if( !isNullOrUndefined(this.entity[columns[i].key]) ){
+        columns[i].value = this.entity[columns[i].key]
       }
 
       switch (columns[i].control_type) {
@@ -121,7 +128,6 @@ export class DynamicFormComponent implements OnInit {
           break;
         case 'dropdown':
           columns[i].options = columns[i].REFERENCED_TABLE_NAME;
-          console.log('es drop', columns[i]);
           quest = new DropdownQuestion(columns[i]);
           this.questions.push(quest);
         break;
