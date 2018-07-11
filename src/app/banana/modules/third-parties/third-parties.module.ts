@@ -10,6 +10,7 @@ import { LocalizationComponent } from '../../components/localization/localizatio
 import { DynamicFormComponent } from '../../form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from '../../form/dynamic-form-question.component';
 import { ContactComponent } from '../../components/contact/contact.component';
+import { ContactListComponent } from '../../components/contact-list/contact-list.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ContactComponent } from '../../components/contact/contact.component';
     LocalizationComponent,
     DynamicFormComponent,
     DynamicFormQuestionComponent,
-    ContactComponent
+    ContactComponent,
+    ContactListComponent
     ]
 })
 export class ThirdPartiesModule { }
