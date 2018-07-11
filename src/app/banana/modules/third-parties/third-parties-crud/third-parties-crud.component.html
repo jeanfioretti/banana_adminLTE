@@ -17,7 +17,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="box">
+					<div class="box box-info">
 						<div class="box-header">
 							<div class="row">
 								<div class="col-md-6">
@@ -25,7 +25,7 @@
 								</div>
 								<div class="col-md-6">
 									<div *ngIf="type_view == 3">
-										<app-contact></app-contact>
+										<app-contact (createEvent)="getContactEvent($event)"></app-contact>
 									</div>
 								</div>
 							</div>
@@ -33,9 +33,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="box">
+			<div class="box box-info">
 				<div class="box-body">
-
 					<div class="row">
 						<div class="col-md-6">
 							<label><span>Client</span></label>
@@ -229,9 +228,14 @@
 					</div>
 
 				</div>
-				<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
-				<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
+				<div class="box-footer">
+					<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
+					<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
+				</div>
 				<div class="clearfix"></div>
+			</div>
+			<div *ngIf="type_view == 3">
+				<app-contact-list [contacts]="third_contacts"></app-contact-list>
 			</div>
 		</div>
 	</div>

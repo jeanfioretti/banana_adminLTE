@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BranchOffice } from '../../../models/branch';
@@ -26,6 +26,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
   states : any = [];
   cities : any = [];
   branch_office : BranchOffice = new BranchOffice();
+  third_contacts : any = [];
   full_address : string = '';
   client : any = {};
   combo_select: any = [];
@@ -56,6 +57,10 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	  });
 	}
 
+  getContactEvent (contact) {
+    console.log(contact);
+  }
+
 	getThird(id): void {
     this.loading = true;
     showNotification("Obteniendo tercero", 2);
@@ -72,6 +77,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
                     this.third = this.body.third;
                     this.branch_office = this.body.branch_office;
                     this.localization = this.body.location;
+                    this.third_contacts = this.body.third_contacts;
                     this.getStates(this.localization.country_id);
                     this.getCities(this.localization.state_id);
                     this.loading = false;
@@ -129,7 +135,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
     console.log(body);
     this.http.post('http://localhost:8000/api/thirds/create', body).toPromise().then(
             result => {
-                    console.log('result.status', result);
                     showNotification('guardado con exito', 1);
                     showNotification('Redireccionando.. espere', 3);
                     this.body = result;
@@ -224,4 +229,5 @@ export class ThirdPartiesCrudComponent implements OnInit {
           }
       );
   }
+
 }

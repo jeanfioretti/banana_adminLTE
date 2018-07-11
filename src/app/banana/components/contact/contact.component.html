@@ -1,6 +1,6 @@
-<button class="btn btn-warning btn-sm" (click)="openNewContactModal()" ><i class="fa fa-pencil"></i></button>
+<button class="btn btn-success btn-sm" (click)="openContactModal()" ><i class="fa fa-plus"></i></button>
 
-<div  class="modal" id="newContactModal" >
+<div  class="modal" id="contactModal" >
 	<div class="modal-dialog  animated">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -41,10 +41,10 @@
 					</div>
 				</div> 
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-warning pull-right" data-dismiss="modal" aria-hidden="true">
-					{{title_contact}}
-				</button>
+			<div class="box-footer">
+				<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateContact()" >Update Contact</button>
+				<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThirdContact()" >Create Contact</button>
+				<div class="clearfix"></div>
 			</div>        
 		</div>
 	</div>

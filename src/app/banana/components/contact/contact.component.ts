@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -17,15 +17,18 @@ export class ContactComponent implements OnInit {
 	title_contact : string;
 	type_view : number;
 	contact : Contact = new Contact();
+	third_id : number;
 	body : any;
+	@Output() createEvent = new EventEmitter<any>();
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
 
-		/*this._activeRoute.url.subscribe(url => {
+		this.third_id = this._activeRoute.snapshot.params['id'];
+		this._activeRoute.url.subscribe(url => {
 
-			if(url[2].path === 'edit'){
+			/*if(url[2].path === 'edit'){
 
 				this.title_contact = 'Edit third contact';
 				this.type_view = 3;
@@ -36,8 +39,8 @@ export class ContactComponent implements OnInit {
 				this.title_contact = 'Create third contact';
 				this.type_view = 1;
 
-			}
-		});*/
+			}*/
+		});
 
 	}
 
@@ -72,7 +75,8 @@ export class ContactComponent implements OnInit {
 		this.loading = true;
 		showNotification("Creando contacto", 2);
 		let body : any;
-		body.third_contact = this.contact;
+		body = this.contact;
+		body.third_id = this.third_id;
 		body.authorization = window.location.origin;
 		body.user_id = sessionStorage.getItem('user_id');
 		body.token = sessionStorage.getItem('user_token');
@@ -81,13 +85,12 @@ export class ContactComponent implements OnInit {
 		console.log(body);
 		this.http.post('http://localhost:8000/api/thirds/contact/create', body).toPromise().then(
 			result => {
-				/*console.log('result.status', result);
+				console.log('result.status', result);
 				showNotification('guardado con exito', 1);
-				showNotification('Redireccionando.. espere', 3);
-				this.body = result;
-				this.third = this.body.third;
-				this.router.navigate(['app/third-parties/edit/' + this.third.id]);
-				this.loading = false;*/
+				this.createEvent.emit({ contact:this.contact });
+				this.contact = new Contact();
+				this.loading = false;
+
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -99,10 +102,19 @@ export class ContactComponent implements OnInit {
 		);
 	}
 
-	openNewContactModal(){
-		this.title_contact = 'Create third contact';
+	openContactModal(action = null){
+
+		if (action == 'edit') {
+			this.getContact(this.contact.id);
+			this.type_view = 3;
+			this.title_contact = 'Edit third contact';
+		} else {
+			this.title_contact = 'Create third contact';
+			this.type_view = 1;
+		}
+
 		setTimeout( function(){
-			$('#newContactModal').modal('show');
+			$('#contactModal').modal('show');
 		},
 		230);
 	}

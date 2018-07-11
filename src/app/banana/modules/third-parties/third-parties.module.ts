@@ -8,6 +8,7 @@ import { ThirdPartiesCrudComponent } from './third-parties-crud/third-parties-cr
 import { ThirdPartiesListComponent } from './third-parties-list/third-parties-list.component';
 import { LocalizationComponent } from '../../components/localization/localization.component';
 import { ContactComponent } from '../../components/contact/contact.component';
+import { ContactListComponent } from '../../components/contact-list/contact-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ContactComponent } from '../../components/contact/contact.component';
     ThirdPartiesCrudComponent,
     ThirdPartiesListComponent,
     LocalizationComponent,
-    ContactComponent
+    ContactComponent,
+    ContactListComponent
     ]
 })
 export class ThirdPartiesModule { }
