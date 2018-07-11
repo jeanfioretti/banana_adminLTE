@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'app/third-parties',     component: ThirdPartiesListComponent },
   { path: 'app/third-parties/new',   component: ThirdPartiesCrudComponent },
   { path: 'app/third-parties/edit/:id',   component: ThirdPartiesCrudComponent },
+
 ];
 
 @NgModule({

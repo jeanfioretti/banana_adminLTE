@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
 import { BananaRoutingModule } from './banana-routing.module';
 import { BananaComponent } from './banana.component';
@@ -11,6 +11,7 @@ import { BananaContentComponent } from './banana-content/banana-content.componen
 import { BananaControlSidebarComponent } from './banana-control-sidebar/banana-control-sidebar.component';
 import { ThirdPartiesModule } from './modules/third-parties/third-parties.module';
 import { CustomColumnsComponent } from './components/custom-columns/custom-columns.component';
+import { EditFormComponent } from './components/edit-form/edit-form.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { CustomColumnsComponent } from './components/custom-columns/custom-colum
     BananaRoutingModule,
     ThirdPartiesModule,
     LoadingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     BananaComponent,
@@ -27,7 +29,8 @@ import { CustomColumnsComponent } from './components/custom-columns/custom-colum
     BananaLeftSideComponent,
     BananaContentComponent,
     BananaControlSidebarComponent,
-    CustomColumnsComponent
+    CustomColumnsComponent,
+    EditFormComponent
   ]
 })
 export class BananaModule { }
