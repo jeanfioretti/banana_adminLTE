@@ -9,7 +9,7 @@
 			</div>
 			<div class="modal-body">  
 				<div class="box">
-					<div class="content">
+					<div class="box-body">
 						<div class="col-md-12">
 							<label><span>Name</span></label>
 							<input [(ngModel)]="contact.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact name" >
@@ -39,13 +39,13 @@
 							<input [(ngModel)]="contact.birthday" [ngModelOptions]="{standalone: true}" type="date" class="form-control" placeholder="Contact birthday" >
 						</div>
 					</div>
+					<div class="box-footer">
+						<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateContact()" >Update Contact</button>
+						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThirdContact()" >Create Contact</button>
+						<div class="clearfix"></div>
+					</div>
 				</div> 
 			</div>
-			<div class="box-footer">
-				<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateContact()" >Update Contact</button>
-				<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThirdContact()" >Create Contact</button>
-				<div class="clearfix"></div>
-			</div>        
 		</div>
 	</div>
 </div>
