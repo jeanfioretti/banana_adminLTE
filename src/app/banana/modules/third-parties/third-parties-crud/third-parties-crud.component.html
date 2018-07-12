@@ -23,11 +23,11 @@
 								<div class="col-md-6">
 									<h4>{{title_third}}</h4>
 								</div>
-								<div class="col-md-6">
+								<!-- <div class="col-md-6">
 									<div *ngIf="type_view == 3">
-										<app-contact (createEvent)="getContactEvent($event)"></app-contact>
+										<app-contact (createEvent)="getContactInsert($event)"></app-contact>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -235,7 +235,11 @@
 				<div class="clearfix"></div>
 			</div>
 			<div *ngIf="type_view == 3">
-				<app-contact-list [contacts]="third_contacts"></app-contact-list>
+				<app-contact-list
+					[contacts]="third_contacts"
+					(contactInsert)="getContactInsert($event)"
+				>
+				</app-contact-list>
 			</div>
 		</div>
 	</div>

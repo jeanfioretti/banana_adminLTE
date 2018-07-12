@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h3>{{title_contact}}</h3>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" (click)="cleanContact()" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">  
 				<div class="box">
@@ -41,7 +41,7 @@
 					</div>
 					<div class="box-footer">
 						<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateContact()" >Update Contact</button>
-						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThirdContact()" >Create Contact</button>
+						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createContact()" >Create Contact</button>
 						<div class="clearfix"></div>
 					</div>
 				</div> 

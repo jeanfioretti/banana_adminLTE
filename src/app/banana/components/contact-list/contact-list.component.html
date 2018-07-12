@@ -10,13 +10,18 @@
 						</div>
 						<div class="col-md-6">
 							<div class="btn-group pull-right">
+								<app-contact
+									[contact]="contact"
+									(contactInsert)="getContactInsert($event)"
+								>
+								</app-contact> &nbsp;
 								<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
 									<i *ngIf="!collapsed" class="fa fa-minus"></i>
 									<i *ngIf="collapsed" class="fa fa-plus"></i>
-								</button>
+								</button> &nbsp;
 								<button type="button" class="btn btn-default btn-flat" (click)="viewKanban(true)" >
 									<i class="fa fa-lg fa-th-large"></i>
-								</button>
+								</button> &nbsp;
 								<button type="button" class="btn  btn-default btn-flat" (click)="viewKanban(false)" >
 									<i class="fa fa-list"></i>
 								</button>
@@ -70,7 +75,7 @@
 							<tbody>
 								<tr *ngFor="let contact of contacts">
 									<td>
-										<button mat-raised-button class="btn btn-warning btn-sm" (click)="editContact(contact.id)"><i class="fa fa-pencil"></i></button>
+										<button mat-raised-button class="btn btn-warning btn-sm" (click)="gotToEditContact(contact)"><i class="fa fa-pencil"></i></button>
 										<button *ngIf="!contact.archived" (click)="archivedContact(contact.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
 										<button *ngIf="contact.archived" (click)="archivedContact(contact.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
 									</td>
@@ -82,8 +87,8 @@
 									<td>{{contact.phone}}</td>
 									<td>{{contact.phone_2}}</td>
 									<td>{{contact.fax}}</td>
-									<td></td>
-									<td></td>
+									<td>{{contact.created_at}}</td>
+									<td>{{contact.updated_at}}</td>
 								</tr>
 							</tbody>
 						</table>
