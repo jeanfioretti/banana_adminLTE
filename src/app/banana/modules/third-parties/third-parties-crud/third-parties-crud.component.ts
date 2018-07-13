@@ -228,7 +228,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	getContactInsert (contact) {
 		this.third_contacts.splice(0, 0, contact);
-		console.log(this.third_contacts);
 	}
 
 }

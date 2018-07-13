@@ -14,13 +14,14 @@ declare var $: any;
 })
 export class ContactComponent implements OnInit {
 	loading = false;
-	title_contact : string;
-	@Input() type_view : number;
+	title_contact : string = 'Edit third contact';
+	@Input() type_view : number = 0;
 	@Input() contact : Contact = new Contact();
 	id : number;
 	url_contact : string = '';
 	body : any;
 	@Output() contactInsert = new EventEmitter<any>();
+	@Output() cleanContact = new EventEmitter<any>();
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
@@ -118,15 +119,37 @@ export class ContactComponent implements OnInit {
 		);
 	}
 
-	openContactModal(type_view = null){
+	updateContact(): void {
 
-		if (type_view == 3) {
-			this.type_view = 3;
-			this.title_contact = 'Edit third contact';
-		} else {
-			this.title_contact = 'Create third contact';
-			this.type_view = 1;
-		}
+		this.loading = true;
+		showNotification("Actualizando contacto", 2);
+		let body : any;
+		body = this.contact;
+		body.authorization = window.location.origin;
+		body.user_id = sessionStorage.getItem('user_id');
+		body.token = sessionStorage.getItem('user_token');
+		body.app = "BananaCli";
+
+		console.log(body);
+		this.http.post('http://localhost:8000/api/contacts/update', body).toPromise().then(
+			result => {
+				console.log('result.status', result);
+				showNotification('Actualizado con exito', 1);
+				this.loading = false;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
+	openContactModal () {
+		this.type_view = 1;
+		this.title_contact = 'Create third contact';
 
 		setTimeout( function(){
 			$('#contactModal').modal('show');
@@ -134,9 +157,9 @@ export class ContactComponent implements OnInit {
 		230);
 	}
 
-	cleanContact () {
-		console.log(this.contact);
-		this.contact = new Contact();
-		console.log(this.contact);
+	closeModalEdit () {
+		var clean_contact = new Contact();
+		this.type_view = 0;
+		this.cleanContact.emit(clean_contact);
 	}
 }
