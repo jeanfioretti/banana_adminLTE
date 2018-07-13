@@ -6,6 +6,6 @@ export class CheckboxQuestion extends QuestionBase<string> {
 
   constructor(options: {} = {}) {
     super(options);
-    this.checked = options['checked'] || false;
+    this.checked = options['value'] == 1? true : false;
   }
 }

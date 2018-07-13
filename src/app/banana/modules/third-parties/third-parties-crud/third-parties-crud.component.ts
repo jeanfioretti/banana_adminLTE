@@ -37,7 +37,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	ngOnInit() {
 		AuthBanana(this.router);
-		sessionStorage.setItem('table_id', '1');
+		sessionStorage.setItem('table_id', '17');
 		this.id = this._activeRoute.snapshot.params['id'];
 
 		this._activeRoute.url.subscribe(url => {
@@ -57,7 +57,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 			}
 		});
-	}	
+	}
 
 	getThird(id): void {
 		this.loading = true;
@@ -229,6 +229,9 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	getContactInsert (contact) {
 		this.third_contacts.splice(0, 0, contact);
 		console.log(this.third_contacts);
-	}
+  }
+  getEventform(event){
+    console.log(event);
+  }
 
 }

@@ -8,9 +8,10 @@
     </div>
 
 
-    <div class="form-row">
-      <button type="button" (click)="onSubmit()" >Save</button>
-    </div>
+    <!-- <div class="form-row"> -->
+      <!-- <button type="button" (click)="onSubmit()" >Save</button> -->
+      <button  mat-raised-button class="btn btn-danger pull-right" (click)="onSubmit()" >Save</button>
+    <!-- </div> -->
   </form>
 
   <div *ngIf="payLoad" class="form-row">

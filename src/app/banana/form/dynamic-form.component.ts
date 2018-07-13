@@ -140,6 +140,8 @@ export class DynamicFormComponent implements OnInit {
 
 
     }
+
+    this.questions.sort((a, b) => a.order - b.order);
   }
 
 }
