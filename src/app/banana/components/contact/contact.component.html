@@ -4,7 +4,8 @@
 	<div class="modal-dialog  animated">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3>{{title_contact}}</h3>
+				<h3 *ngIf="type_view == 3">Edit Contact</h3>
+				<h3 *ngIf="type_view == 1">Create Contact</h3>
 				<button type="button" class="close" data-dismiss="modal" (click)="closeModalEdit()" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">  

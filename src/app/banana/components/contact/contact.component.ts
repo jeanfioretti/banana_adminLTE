@@ -14,8 +14,7 @@ declare var $: any;
 })
 export class ContactComponent implements OnInit {
 	loading = false;
-	title_contact : string = 'Edit third contact';
-	@Input() type_view : number = 0;
+	@Input() type_view : number;
 	@Input() contact : Contact = new Contact();
 	id : number;
 	url_contact : string = '';
@@ -30,50 +29,10 @@ export class ContactComponent implements OnInit {
 		this.id = this._activeRoute.snapshot.params['id'];
 
 		this._activeRoute.url.subscribe(url => {
-
 			this.getRouteContact(url[1].path);
-
-			/*if(url[2].path === 'edit'){
-
-				this.title_contact = 'Edit third contact';
-				this.type_view = 3;
-				this.getContact(this.contact.id);
-
-			} else {
-
-				this.title_contact = 'Create third contact';
-				this.type_view = 1;
-
-			}*/
 		});
 
 	}
-
-	/*getContact(id): void {
-		this.loading = true;
-		showNotification("Obteniendo contacto", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
-		const options =  {
-			headers: headers,
-		};
-		this.http.get('http://localhost:8000/api/contact/' + id, options).toPromise().then(
-			result => {
-				this.body = result;
-				this.contact = this.body.contact;
-				this.loading = false;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false;
-				notifyManage(msg);
-			}
-		);
-	}*/
 
 	getRouteContact (url) : void {
 
@@ -133,7 +92,7 @@ export class ContactComponent implements OnInit {
 		console.log(body);
 		this.http.post('http://localhost:8000/api/contacts/update', body).toPromise().then(
 			result => {
-				console.log('result.status', result);
+				//console.log('result.status', result);
 				showNotification('Actualizado con exito', 1);
 				this.loading = false;
 			},
@@ -149,7 +108,7 @@ export class ContactComponent implements OnInit {
 
 	openContactModal () {
 		this.type_view = 1;
-		this.title_contact = 'Create third contact';
+		this.contact = new Contact();
 
 		setTimeout( function(){
 			$('#contactModal').modal('show');
@@ -159,7 +118,7 @@ export class ContactComponent implements OnInit {
 
 	closeModalEdit () {
 		var clean_contact = new Contact();
-		this.type_view = 0;
+		this.type_view = 3;
 		this.cleanContact.emit(clean_contact);
 	}
 }
