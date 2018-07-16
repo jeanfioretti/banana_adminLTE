@@ -240,6 +240,7 @@
 			<div *ngIf="type_view == 3">
 				<app-contact-list
 					[contacts]="third_contacts"
+					(contactArchived)="getContactArchived($event)"
 				>
 				</app-contact-list>
 			</div>
