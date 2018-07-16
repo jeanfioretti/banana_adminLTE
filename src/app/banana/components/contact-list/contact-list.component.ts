@@ -8,10 +8,9 @@ declare var $: any;
 })
 export class ContactListComponent implements OnInit {
 	collapsed : boolean = false;
-	@Input() contacts : any = [];
+	@Input() contacts : Array<any> = [];
 	contact_list : Contact = new Contact();
-	type_view : number = 0;
-	@Output() contactInsert = new EventEmitter<any>();
+	type_view : number;	
 
 	constructor() { }
 
@@ -23,7 +22,7 @@ export class ContactListComponent implements OnInit {
 	}
 
 	getContactInsert (contact) {
-		this.contactInsert.emit( contact );
+		this.contacts.splice(0, 0, contact);
 	}
 
 	gotToEditContact(contact) {
@@ -38,7 +37,7 @@ export class ContactListComponent implements OnInit {
 	}
 
 	cleanContact(clean_contact) {
-		this.type_view = 0;
+		this.type_view = 3;
 		this.contact_list = clean_contact;
 	}
 
