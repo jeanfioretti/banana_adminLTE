@@ -1,27 +1,22 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Contact } from '../../models/contact';
-
+declare var $: any;
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-	kanban : boolean = false;
 	collapsed : boolean = false;
 	@Input() contacts : any = [];
-	contact : Contact = new Contact();
-	type_view : number;
+	contact_list : Contact = new Contact();
+	type_view : number = 0;
 	@Output() contactInsert = new EventEmitter<any>();
 
 	constructor() { }
 
 	ngOnInit() {
   	}
-
-	viewKanban(type){
-		this.kanban = type;
-	}
 
 	collapsedCard(){
 		this.collapsed = !this.collapsed;
@@ -32,9 +27,19 @@ export class ContactListComponent implements OnInit {
 	}
 
 	gotToEditContact(contact) {
-		this.contact = contact;
+		this.contact_list = contact;
 		this.type_view = 3;
-		console.log(this.contact);
+		setTimeout(
+			function(){
+				$('#contactModal').modal('show');
+			},
+			230
+		);
+	}
+
+	cleanContact(clean_contact) {
+		this.type_view = 0;
+		this.contact_list = clean_contact;
 	}
 
 }
