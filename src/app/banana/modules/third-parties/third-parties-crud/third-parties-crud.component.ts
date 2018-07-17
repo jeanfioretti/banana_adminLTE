@@ -176,14 +176,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		);
 	}
 
-	getContactArchived (contact_archived) {
-		this.third_contacts.map(function(contact) {
-		   
-			if (contact.id == contact_archived.id) contact = contact_archived;
-
-		});
-	}
-
 	getStates(country_id) {
 		this.loading = true;
 		const headers = new HttpHeaders().set('Authorization', window.location.origin)

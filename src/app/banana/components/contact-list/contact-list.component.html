@@ -8,9 +8,9 @@
 							<div class="row">
 								<div class="col">
 									<h4 class="box-title mt-0"> Contacts</h4>
-									<p class="box-category"> Here is a subtitle for this table</p>
+									<!-- <p class="box-category"> Here is a subtitle for this table</p> -->
 								</div>
-								<div class="col">
+								<div *ngIf="!collapsed" class="col">
 									<app-contact
 										[contact]="contact_list"
 										[type_view]="type_view"

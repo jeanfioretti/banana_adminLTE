@@ -14,9 +14,8 @@ declare var $: any;
 export class ContactListComponent implements OnInit {
 	loading = false;
 	body : any;
-	collapsed : boolean = false;
+	collapsed : boolean = true;
 	@Input() contacts : Array<any> = [];
-	@Output() contactArchived = new EventEmitter<any>();
 	contact_list : Contact = new Contact();
 	type_view : number;	
 
@@ -66,7 +65,6 @@ export class ContactListComponent implements OnInit {
 				//this.body = result;
 				showNotification('archivado con exito', 1);
 				contact.archived = archived;
-				this.contactArchived.emit(contact);
 				this.loading = false;
 			},
 			msg => {
