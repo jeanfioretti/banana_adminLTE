@@ -6,38 +6,80 @@
 			<div class="modal-header">
 				<h3 *ngIf="type_view == 3">Edit Contact</h3>
 				<h3 *ngIf="type_view == 1">Create Contact</h3>
-				<button type="button" class="close" data-dismiss="modal" (click)="closeModalEdit()" aria-hidden="true">&times;</button>
+				<div class="btn-group pull-right">
+					<button *ngIf="type_view == 3" (click)="deleteContact(contact)" class="btn btn-danger btn-sm">
+						<i class="fa fa-trash"></i>
+					</button>
+					<button type="button" class="close" data-dismiss="modal"
+						(click)="closeModalEdit()" aria-hidden="true"
+					>
+						&times;
+					</button>
+				</div>
 			</div>
 			<div class="modal-body">  
 				<div class="box">
 					<div class="box-body">
-						<div class="col-md-12">
-							<label><span>Name</span></label>
-							<input [(ngModel)]="contact.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact name" >
-						</div>
-						<div class="col-md-12">
-							<label><span>Title</span></label>
-							<input [(ngModel)]="contact.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact title" >
-						</div>
-						<div class="col-md-12">
-							<label><span>Email</span></label>
-							<input [(ngModel)]="contact.email" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact email" >
-						</div>
-						<div class="col-md-6">
-							<label><span>Phone</span></label>
-							<input [(ngModel)]="contact.phone" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone" >
-						</div>
-						<div class="col-md-6">
-							<label><span>Phone 2</span></label>
-							<input [(ngModel)]="contact.phone_2" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone 2" >
-						</div>
-						<div class="col-md-6">
-							<label><span>Fax</span></label>
-							<input [(ngModel)]="contact.fax" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact fax" >
-						</div>
-						<div class="col-md-6">
-							<label><span>Birthday or Anniversary day</span></label>
-							<input [(ngModel)]="contact.birthday" [ngModelOptions]="{standalone: true}" type="date" class="form-control" placeholder="Contact birthday" >
+						<div class="scroll-chevere">
+							<div *ngIf="type_view == 1" class="col-md-12">
+								<label><span>Search</span></label>
+								<input [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
+									type="search" class="form-control" placeholder="Search..."
+									(keyup.enter)="searchingContact($event)"
+								>
+								<div *ngIf="searching === true">
+									<ul (click)="selectContact(item)" *ngFor="let item of contacts_search">
+										<li>
+											<p>{{item.name}}</p>
+											<p>{{item.title}}</p>
+										</li>
+									</ul>
+								</div>
+								<!-- <div *ngIf="searching === true">
+									<table>
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Title</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr (click)="selectContact(item)" *ngFor="let item of contacts_search">
+												<td>{{item.name}}</td>
+												<td>{{item.title}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div> -->
+							</div>
+							<div class="col-md-12">
+								<label><span>Name</span></label>
+								<input [(ngModel)]="contact.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact name" >
+							</div>
+							<div class="col-md-12">
+								<label><span>Title</span></label>
+								<input [(ngModel)]="contact.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact title" >
+							</div>
+							<div class="col-md-12">
+								<label><span>Email</span></label>
+								<input [(ngModel)]="contact.email" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact email" >
+							</div>
+							<div class="col-md-6">
+								<label><span>Phone</span></label>
+								<input [(ngModel)]="contact.phone" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone" >
+							</div>
+							<div class="col-md-6">
+								<label><span>Phone 2</span></label>
+								<input [(ngModel)]="contact.phone_2" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone 2" >
+							</div>
+							<div class="col-md-6">
+								<label><span>Fax</span></label>
+								<input [(ngModel)]="contact.fax" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact fax" >
+							</div>
+							<div class="col-md-6">
+								<label><span>Birthday or Anniversary day</span></label>
+								<input [(ngModel)]="contact.birthday" [ngModelOptions]="{standalone: true}" type="date" class="form-control" placeholder="Contact birthday" >
+							</div>
 						</div>
 					</div>
 					<div class="box-footer">

@@ -15,6 +15,7 @@
 										[contact]="contact_list"
 										[type_view]="type_view"
 										(contactInsert)="getContactInsert($event)"
+										(contactDelete)="getContactDelete($event)"
 										(cleanContact)="cleanContact($event)"
 									>
 									</app-contact>
@@ -63,9 +64,9 @@
 									<button *ngIf="contact.archived" (click)="archivedContact(contact, 0)" class="btn btn-info btn-sm">
 										<i class="fa fa-folder-open"></i>
 									</button>
-									<button (click)="deleteContact(contact)" class="btn btn-danger btn-sm">
+									<!-- <button (click)="deleteContact(contact)" class="btn btn-danger btn-sm">
 										<i class="fa fa-trash"></i>
-									</button>
+									</button> -->
 								</td>
 								<td>{{contact.id}}</td>
 								<td>{{contact.title}}</td>

@@ -50,20 +50,25 @@ export class ContactListComponent implements OnInit {
 
 	archivedContact(contact, archived): void {
 		this.loading = true;
-		showNotification("Archivando contacto", 2);
-		const body = {
-			authorization: window.location.origin,
-			user_id: sessionStorage.getItem('user_id'),
-			token: sessionStorage.getItem('user_token'),
-			app:'bananaCli',
-			contact_id : contact.id,
-			archived: archived
-		};
+		var msg_info = 'Desarchivando contacto';
+		var msg_success = 'Desarchivado con exito';
+		if ( archived ) {
+			msg_info = 'Archivando contacto';
+			msg_success = 'Archivado con exito';
+		}
+		showNotification(msg_info, 2);
+		let body : any = {};
+		body.contact_id = contact.id;
+		body.archived = archived;
+		body.authorization = window.location.origin;
+		body.user_id = sessionStorage.getItem('user_id');
+		body.token = sessionStorage.getItem('user_token');
+		body.app = "BananaCli";
 
 		this.http.post('http://localhost:8000/api/contacts/archived', body).toPromise().then(
 			result => {
 				//this.body = result;
-				showNotification('archivado con exito', 1);
+				showNotification(msg_success, 1);
 				contact.archived = archived;
 				this.loading = false;
 			},
@@ -77,33 +82,13 @@ export class ContactListComponent implements OnInit {
 		);
 	}
 
-	deleteContact (contact) {
-		this.loading = true;
-		showNotification("Eliminando contacto", 2);
-		const body = {
-			authorization: window.location.origin,
-			user_id: sessionStorage.getItem('user_id'),
-			token: sessionStorage.getItem('user_token'),
-			app:'bananaCli',
-			contact_id : contact.id
-		};
-
-		/*this.http.post('http://localhost:8000/api/contacts/archived', body).toPromise().then(
-			result => {
-				//this.body = result;
-				showNotification('archivado con exito', 1);
-				contact.archived = archived;
-				this.contactArchived.emit(contact);
-				this.loading = false;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false;
-				notifyManage(msg);
+	getContactDelete (contact_delete) {
+		for (var i = 0; i < this.contacts.length; ++i) {
+			if ( this.contacts[i].id == contact_delete.id ) {
+				this.contacts.splice(i,1);
+				break;
 			}
-		);*/
+		}
 	}
 
 }
