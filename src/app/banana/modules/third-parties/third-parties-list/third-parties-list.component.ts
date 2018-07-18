@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { tokenUtil } from '../../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { AuthBanana } from '../../../utils/auth';
+import { BananaConstants } from '../../../utils/constants';
 
 
 declare var $: any;
@@ -44,7 +45,7 @@ export class ThirdPartiesListComponent implements OnInit {
 			headers: headers,
 		};
 
-		this.http.get('http://localhost:8000/api/thirds', options).toPromise()
+		this.http.get(BananaConstants.urlServer+'api/thirds', options).toPromise()
 			.then(
 		    	result => {
 	                //console.log('result.status', result);
@@ -74,7 +75,7 @@ search() : void {
 	        headers: headers,
 	        params: { filter: this.keyword}
 	    };
-	this.http.get('http://localhost:8000/api/thirds/filter', options).toPromise()
+	this.http.get(BananaConstants.urlServer+'api/thirds/filter', options).toPromise()
 		.then(
 	        result => {
 	            //console.log('result', result);
@@ -103,7 +104,7 @@ search() : void {
 			archived: archived
 		};
 		//console.log(body);
-		this.http.post('http://localhost:8000/api/thirds/archived', body).toPromise()
+		this.http.post(BananaConstants.urlServer+'api/thirds/archived', body).toPromise()
 			.then(
 				result => {
 					this.loading = false;

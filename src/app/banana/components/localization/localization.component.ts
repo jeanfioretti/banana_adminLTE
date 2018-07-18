@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { Localization } from '../../models/localization';
+import { BananaConstants } from '../../utils/constants';
 
 
 declare var $: any;
@@ -37,7 +38,7 @@ export class LocalizationComponent implements OnInit {
 		const options =  {
 			headers: headers,
 		};
-		this.http.get('http://localhost:8000/api/location/countries', options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/location/countries', options).toPromise().then(
 			result => {
 				this.loading = false;
 				this.body = result;
@@ -64,7 +65,7 @@ export class LocalizationComponent implements OnInit {
 		const options =  {
 			headers: headers,
 		};
-		this.http.get('http://localhost:8000/api/location/states?country_id='+country_id, options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/location/states?country_id='+country_id, options).toPromise().then(
 			result => {
 				this.loading = false;
 				this.body = result;
@@ -90,7 +91,7 @@ export class LocalizationComponent implements OnInit {
 		const options =  {
 			headers: headers,
 		};
-		this.http.get('http://localhost:8000/api/location/cities?state_id='+state_id, options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/location/cities?state_id='+state_id, options).toPromise().then(
 			result => {
 				this.loading = false;
 				this.body = result;

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
+import { BananaConstants } from '../../utils/constants';
 
 declare var $: any;
 @Component({
@@ -40,7 +41,7 @@ export class CustomColumnsComponent implements OnInit {
     const options =  {
             headers: headers,
         };
-    this.http.get('http://localhost:8000/api/CustomColumns/getElementsView/' + this.table_id, options).toPromise().then(
+    this.http.get(BananaConstants.urlServer+'api/CustomColumns/getElementsView/' + this.table_id, options).toPromise().then(
             result => {
               console.log(result)
               body =  result;
@@ -73,7 +74,7 @@ export class CustomColumnsComponent implements OnInit {
     body.app = "BananaCli";
 
     console.log(body);
-    this.http.post('http://localhost:8000/api/CustomColumns/create', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/CustomColumns/create', body).toPromise().then(
             result => {
                     console.log('result.status', result);
                     showNotification('guardado con exito', 1);
@@ -118,7 +119,7 @@ export class CustomColumnsComponent implements OnInit {
     body.app = "BananaCli";
 
     // console.log( JSON.stringify( body));
-    this.http.post('http://localhost:8000/api/CustomColumns/deleteColumn', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/CustomColumns/deleteColumn', body).toPromise().then(
             result => {
                     console.log('result.status', result);
                     const respBody: any = result;
@@ -150,7 +151,7 @@ export class CustomColumnsComponent implements OnInit {
     body.app = "BananaCli";
 
     // console.log( JSON.stringify( body));
-    this.http.post('http://localhost:8000/api/CustomColumns/UpdateColumn', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/CustomColumns/UpdateColumn', body).toPromise().then(
             result => {
                     console.log('result.status', result);
                     const respBody :any=result;

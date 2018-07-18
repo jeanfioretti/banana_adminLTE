@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { Contact } from '../../models/contact';
+import { BananaConstants } from '../../utils/constants';
 declare var $: any;
 
 @Component({
@@ -65,7 +66,7 @@ export class ContactListComponent implements OnInit {
 		body.token = sessionStorage.getItem('user_token');
 		body.app = "BananaCli";
 
-		this.http.post('http://localhost:8000/api/contacts/archived', body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/contacts/archived', body).toPromise().then(
 			result => {
 				//this.body = result;
 				showNotification(msg_success, 1);

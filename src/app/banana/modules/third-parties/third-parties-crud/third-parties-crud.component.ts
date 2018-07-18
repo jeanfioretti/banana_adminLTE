@@ -7,6 +7,7 @@ import { tokenUtil } from '../../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { Third } from '../../../models/third';
 import { Localization } from '../../../models/localization';
+import { BananaConstants } from '../../../utils/constants';
 
 declare var $: any;
 
@@ -69,7 +70,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		const options =  {
 			headers: headers,
 		};
-		this.http.get('http://localhost:8000/api/third/' + id, options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/third/' + id, options).toPromise().then(
 			result => {
 				this.body = result;
 				this.third = this.body.third;
@@ -100,7 +101,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			headers: headers,
 		};
 		//console.log(headers);
-		this.http.get('http://localhost:8000/api/thirds/combo-select', options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/thirds/combo-select', options).toPromise().then(
 			result => {
 				this.body = result;
 				this.combo_select = this.body;
@@ -130,7 +131,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		body.token = sessionStorage.getItem('user_token');
 		body.app = "BananaCli";
 		//console.log(body);
-		this.http.post('http://localhost:8000/api/thirds/create', body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/thirds/create', body).toPromise().then(
 			result => {
 				showNotification('guardado con exito', 1);
 				showNotification('Redireccionando.. espere', 3);
@@ -161,7 +162,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		body.token = sessionStorage.getItem('user_token');
 		body.app = "BananaCli";
 		//console.log(body);
-		this.http.post('http://localhost:8000/api/thirds/update', body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/thirds/update', body).toPromise().then(
 			result => {
 				showNotification('guardado con exito', 1);
 				this.loading = false;
@@ -185,7 +186,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		const options = {
 			headers: headers,
 		};
-		this.http.get('http://localhost:8000/api/location/states?country_id='+country_id, options).toPromise().then(
+		this.http.get(BananaConstants.urlServer +'api/location/states?country_id='+country_id, options).toPromise().then(
 			result => {
 				this.loading = false;
 				this.body = result;
@@ -210,7 +211,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		const options = {
 			headers: headers,
 		};
-		this.http.get('http://localhost:8000/api/location/cities?state_id='+state_id, options).toPromise().then(
+		this.http.get(BananaConstants.urlServer +'api/location/cities?state_id='+state_id, options).toPromise().then(
 			result => {
 				this.loading = false;
 				this.body = result;

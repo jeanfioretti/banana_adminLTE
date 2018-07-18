@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { Contact } from '../../models/contact';
+import { BananaConstants } from '../../utils/constants';
 
 declare var $: any;
 
@@ -60,7 +61,7 @@ export class ContactComponent implements OnInit {
 		body.app = "BananaCli";
 
 		//console.log(body);
-		this.http.post('http://localhost:8000/api/' + this.url_create, body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/' + this.url_create, body).toPromise().then(
 			result => {
 				//console.log('result.status', result);
 				this.body = result;
@@ -99,7 +100,7 @@ export class ContactComponent implements OnInit {
 			params: { search: this.search}
 		};
 
-		this.http.get('http://localhost:8000/api/contacts/search', options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/contacts/search', options).toPromise().then(
 			result => {
 				this.body = result;
 				this.contacts_search = this.body.search_contacts;
@@ -130,7 +131,7 @@ export class ContactComponent implements OnInit {
 		body.app = "BananaCli";
 
 		console.log(body);
-		this.http.post('http://localhost:8000/api/contacts/update', body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/contacts/update', body).toPromise().then(
 			result => {
 				//console.log('result.status', result);
 				showNotification('Actualizado con exito', 1);
@@ -157,7 +158,7 @@ export class ContactComponent implements OnInit {
 		body.token = sessionStorage.getItem('user_token');
 		body.app = "BananaCli";
 
-		this.http.post('http://localhost:8000/api/' + this.url_delete, body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/' + this.url_delete, body).toPromise().then(
 			result => {
 				showNotification('Eliminado con exito', 1);
 				this.contactDelete.emit( contact );

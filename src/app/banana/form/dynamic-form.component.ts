@@ -9,6 +9,7 @@ import { TextboxQuestion } from './question-textbox';
 import { DropdownQuestion } from './question-dropdown';
 import { CheckboxQuestion } from './question-checkbox';
 import { isNullOrUndefined } from 'util';
+import { BananaConstants } from '../utils/constants';
 
 
 @Component({
@@ -58,7 +59,7 @@ export class DynamicFormComponent implements OnInit {
     const options =  {
             headers: headers,
         };
-    this.http.get('http://localhost:8000/api/CustomColumns/getByTable/' + id, options).toPromise().then(
+    this.http.get(BananaConstants.urlServer+'api/CustomColumns/getByTable/' + id, options).toPromise().then(
             result => {
 
                    console.log('GenerateView', result);
@@ -91,7 +92,7 @@ export class DynamicFormComponent implements OnInit {
               table_id: id
             }
         };
-    this.http.get('http://localhost:8000/api/access/tables/columns', options).toPromise().then(
+    this.http.get(BananaConstants.urlServer+'api/access/tables/columns', options).toPromise().then(
             result => {
 
                   // console.log('getColumsAlpapa', result);

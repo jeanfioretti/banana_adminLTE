@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { showNotification, notifyManage } from '../../utils/notifyUtil';
 import { tokenUtil } from '../../utils/tokenUtil';
+import { BananaConstants } from '../../utils/constants';
 declare var $: any;
 @Component({
   selector: 'app-edit-form',
@@ -39,7 +40,7 @@ export class EditFormComponent implements OnInit {
     const options =  {
             headers: headers
         };
-    this.http.get('http://localhost:8000/api/fieldConfig/getfieldList/'+this.table_id , options).toPromise().then(
+    this.http.get(BananaConstants.urlServer+'api/fieldConfig/getfieldList/'+this.table_id , options).toPromise().then(
             result => {
               console.log(result)
               body =  result;
@@ -74,7 +75,7 @@ export class EditFormComponent implements OnInit {
     body.app = "BananaCli";
 
     console.log(body);
-    this.http.post('http://localhost:8000/api/CustomColumns/create', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/CustomColumns/create', body).toPromise().then(
             result => {
                     console.log('result.status', result);
                     showNotification('guardado con exito', 1);
@@ -120,7 +121,7 @@ export class EditFormComponent implements OnInit {
     body.app = "BananaCli";
 
     // console.log( JSON.stringify( body));
-    this.http.post('http://localhost:8000/api/CustomColumns/deleteColumn', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/CustomColumns/deleteColumn', body).toPromise().then(
             result => {
                     console.log('result.status', result);
                     const respBody: any = result;
@@ -157,7 +158,7 @@ export class EditFormComponent implements OnInit {
     body.app = "BananaCli";
 
     console.log( JSON.stringify( body));
-    this.http.post('http://localhost:8000/api/fieldConfig/UpdateConfiguration', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/fieldConfig/UpdateConfiguration', body).toPromise().then(
             result => {
                     console.log('result.status', result);
                     const respBody :any=result;
