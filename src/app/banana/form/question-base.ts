@@ -1,4 +1,5 @@
 export class QuestionBase<T> {
+  id:number;
   value: T;
   key: string;
   label: string;
@@ -7,6 +8,7 @@ export class QuestionBase<T> {
   controlType: string;
 
   constructor(options: {
+      id?:number,
       value?: T,
       key?: string,
       label?: string,
@@ -14,6 +16,7 @@ export class QuestionBase<T> {
       order?: number,
       controlType?: string
     } = {}) {
+    this.id = options.id;
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';

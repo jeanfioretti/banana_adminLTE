@@ -5,7 +5,15 @@
             <div class="col-md-6" style="height: 57.73px" *ngSwitchCase="'textbox'" >
               <div class="">
                  <label >{{question.label}}</label>
-                  <input type="text" class="form-control" [formControlName]="question.key" >
+
+                 <div *ngIf="type == 0" >
+                    <input type="text" class="form-control" [formControlName]="question.key" >
+                 </div>
+
+                 <div *ngIf="type == 1" >
+                    <input type="text" class="form-control" (change)="launchEvent(question.id,question.value)" [formControlName]="question.id" >
+                 </div>
+
               </div>
             </div>
 

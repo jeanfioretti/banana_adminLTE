@@ -21,6 +21,7 @@ export class DynamicFormComponent implements OnInit {
   @Input() questions: QuestionBase<any>[] = null;
   @Input() title: FormGroup;
   @Input() entity:any;
+  @Input() type:number = 0;
 
   @Output() public myEvent = new EventEmitter<any>();
   formDynamic: FormGroup;
@@ -31,7 +32,12 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     // this.formDynamic = this.qcs.toFormGroup(this.questions);
     // this.getCustomColum();
-     this.getColumns();
+    if(this.type == 0){
+      this.getColumns();
+    }else if(this.type == 1){
+      this.getCustomColum();
+    }
+
   }
 
 
@@ -55,11 +61,11 @@ export class DynamicFormComponent implements OnInit {
     this.http.get('http://localhost:8000/api/CustomColumns/getByTable/' + id, options).toPromise().then(
             result => {
 
-                  console.log('GenerateView', result);
+                   console.log('GenerateView', result);
                   const body:any = result;
                    this.questions=[];
                    this.buildFormObj(body.columns);
-                  console.log('esto es questions',this.questions)
+                  // console.log('esto es questions',this.questions)
 
                   this.formDynamic = this.qcs.toFormGroup(this.questions);
 
@@ -88,7 +94,7 @@ export class DynamicFormComponent implements OnInit {
     this.http.get('http://localhost:8000/api/access/tables/columns', options).toPromise().then(
             result => {
 
-                  console.log('getColumsAlpapa', result);
+                  // console.log('getColumsAlpapa', result);
                   const body:any = result;
                     this.questions=[];
                     this.buildFormObj(body.columns);
@@ -142,6 +148,10 @@ export class DynamicFormComponent implements OnInit {
     }
 
     this.questions.sort((a, b) => a.order - b.order);
+  }
+
+  launchChanges(childEvent){
+    this.myEvent.emit({childEvent:childEvent,values:this.formDynamic.value});
   }
 
 }

@@ -3,7 +3,7 @@
 
     <div class="col-md-12">
         <div *ngFor="let question of questions" class="form-row">
-            <app-question [question]="question" [form]="formDynamic"></app-question>
+            <app-question [question]="question" [type]="type" [form]="formDynamic" (myChangeEvent)="launchChanges($event)" ></app-question>
           </div>
     </div>
 

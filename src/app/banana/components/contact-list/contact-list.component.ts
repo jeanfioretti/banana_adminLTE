@@ -10,7 +10,7 @@ export class ContactListComponent implements OnInit {
 	collapsed : boolean = false;
 	@Input() contacts : Array<any> = [];
 	contact_list : Contact = new Contact();
-	type_view : number;	
+	type_view : number;
 
 	constructor() { }
 
