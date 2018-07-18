@@ -17,21 +17,23 @@ export class ContactComponent implements OnInit {
 	@Input() type_view : number;
 	@Input() contact : Contact = new Contact();
 	id : number;
-	url_contact : string = '';
+	url_create : string = '';
+	url_delete : string = '';
+	searching : boolean = false;
+	search : string = '';
+	contacts_search : Array<any> = [];
 	body : any;
 	@Output() contactInsert = new EventEmitter<any>();
+	@Output() contactDelete = new EventEmitter<any>();
 	@Output() cleanContact = new EventEmitter<any>();
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
-
 		this.id = this._activeRoute.snapshot.params['id'];
-
 		this._activeRoute.url.subscribe(url => {
 			this.getRouteContact(url[1].path);
 		});
-
 	}
 
 	getRouteContact (url) : void {
@@ -39,10 +41,10 @@ export class ContactComponent implements OnInit {
 		switch (url) {
 
 			case 'third-parties':
-				this.url_contact = 'thirds/contact/create';
+				this.url_create = 'thirds/contact/create';
+				this.url_delete = 'thirds/contact/delete';
 			break;
 		}
-
 	}
 
 	createContact(): void {
@@ -58,7 +60,7 @@ export class ContactComponent implements OnInit {
 		body.app = "BananaCli";
 
 		//console.log(body);
-		this.http.post('http://localhost:8000/api/' + this.url_contact, body).toPromise().then(
+		this.http.post('http://localhost:8000/api/' + this.url_create, body).toPromise().then(
 			result => {
 				//console.log('result.status', result);
 				this.body = result;
@@ -76,6 +78,44 @@ export class ContactComponent implements OnInit {
 				notifyManage(msg);
 			}
 		);
+	}
+
+	searchingContact (event: any): void {
+		if (event.target.value.length >= 3) {
+		  this.searching = true;
+		  this.searchContact();
+		} else {
+		  this.searching = false;
+		}
+	}
+
+	searchContact () {
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+			params: { search: this.search}
+		};
+
+		this.http.get('http://localhost:8000/api/contacts/search', options).toPromise().then(
+			result => {
+				this.body = result;
+				this.contacts_search = this.body.search_contacts;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
+	selectContact (item) {
+		console.log(item);
 	}
 
 	updateContact(): void {
@@ -106,6 +146,33 @@ export class ContactComponent implements OnInit {
 		);
 	}
 
+	deleteContact (contact) {
+		this.loading = true;
+		showNotification("Eliminando contacto de tercero", 2);
+		let body : any = {};
+		body.contact_id = contact.id;
+		body.third_id = this.id;
+		body.authorization = window.location.origin;
+		body.user_id = sessionStorage.getItem('user_id');
+		body.token = sessionStorage.getItem('user_token');
+		body.app = "BananaCli";
+
+		this.http.post('http://localhost:8000/api/' + this.url_delete, body).toPromise().then(
+			result => {
+				showNotification('Eliminado con exito', 1);
+				this.contactDelete.emit( contact );
+				this.loading = false;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
 	openContactModal () {
 		this.type_view = 1;
 		this.contact = new Contact();
@@ -118,6 +185,9 @@ export class ContactComponent implements OnInit {
 
 	closeModalEdit () {
 		var clean_contact = new Contact();
+		this.contacts_search = [];
+		this.search = '';
+		this.searching = false;
 		this.type_view = 3;
 		this.cleanContact.emit(clean_contact);
 	}

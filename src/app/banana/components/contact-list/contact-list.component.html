@@ -1,100 +1,88 @@
 <div class="row">
 	<div class="col-md-12">
-		<div id="card_contact" class="box box-info" [ngClass]="{'collapsed-box': collapsed, '': !collapsed }">
+		<div class="box box-info" [ngClass]="{'collapsed-box': collapsed, '': !collapsed}" >
 			<div class="box-header">
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-6">
-							<h4 class="box-title mt-0"> Contacts</h4>
-							<p class="box-category"> Here is a subtitle for this table</p>
+							<div class="row">
+								<div class="col">
+									<h4 class="box-title mt-0"> Contacts</h4>
+									<!-- <p class="box-category"> Here is a subtitle for this table</p> -->
+								</div>
+								<div *ngIf="!collapsed" class="col">
+									<app-contact
+										[contact]="contact_list"
+										[type_view]="type_view"
+										(contactInsert)="getContactInsert($event)"
+										(contactDelete)="getContactDelete($event)"
+										(cleanContact)="cleanContact($event)"
+									>
+									</app-contact>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="btn-group pull-right">
-								<app-contact
-									[contact]="contact"
-									(contactInsert)="getContactInsert($event)"
-								>
-								</app-contact> &nbsp;
-								<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
-									<i *ngIf="!collapsed" class="fa fa-minus"></i>
-									<i *ngIf="collapsed" class="fa fa-plus"></i>
-								</button> &nbsp;
-								<button type="button" class="btn btn-default btn-flat" (click)="viewKanban(true)" >
-									<i class="fa fa-lg fa-th-large"></i>
-								</button> &nbsp;
-								<button type="button" class="btn  btn-default btn-flat" (click)="viewKanban(false)" >
-									<i class="fa fa-list"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row" *ngIf="kanban" >
-				<div *ngFor="let contact of contacts">
-					<div class="col-md-3">
-						<!-- Widget: user widget style 1 -->
-						<div class="box-widget widget-user-2" >
-							<!-- Add the bg color to the header using any of the bg-* classes -->
-							<div class="widget-user-header bg-aqua" style="height: 100px;">
-								<div class="widget-user-image">
-									<img class="img-circle" src="assets\img\user1-128x128.jpg" alt="User Avatar">
-								</div>
-								<!-- /.widget-user-image -->
-								<h6 class="widget-user-username truncate">{{contact.name}}</h6>
-								<h6 class="widget-user-desc"> {{contact.email}}</h6>
-							</div>
-							<div class="box-footer">
-								<div class="pull-right" >
-									<button mat-raised-button class="btn btn-warning btn-sm" (click)="editContact(contact.id)"><i class="fa fa-pencil"></i></button>
-									<button *ngIf="!contact.archived" (click)="archivedContact(contact.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-									<button *ngIf="contact.archived" (click)="archivedContact(contact.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
+							<div class="row">
+								<div class="col">
+									<div class="btn-group pull-right">
+										<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
+											<i *ngIf="!collapsed" class="fa fa-minus"></i>
+											<i *ngIf="collapsed" class="fa fa-plus"></i>
+										</button> &nbsp;
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div *ngIf="!kanban" >
-				<div class="box-body">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead class="">
-								<th>Options</th>
-								<th>ID</th>
-								<th>Title</th>
-								<th>Name</th>
-								<th>Description</th>
-								<th>email</th>
-								<th>phone 1</th>
-								<th>phone 2</th>
-								<th>fax</th>
-								<th>Create at</th>
-								<th>Update at</th>
-							</thead>
-							<tbody>
-								<tr *ngFor="let contact of contacts">
-									<td>
-										<button mat-raised-button class="btn btn-warning btn-sm" (click)="gotToEditContact(contact)"><i class="fa fa-pencil"></i></button>
-										<button *ngIf="!contact.archived" (click)="archivedContact(contact.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-										<button *ngIf="contact.archived" (click)="archivedContact(contact.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
-									</td>
-									<td>{{contact.id}}</td>
-									<td>{{contact.title}}</td>
-									<td>{{contact.name}}</td>
-									<td>{{contact.description}}</td>
-									<td>{{contact.email}}</td>
-									<td>{{contact.phone}}</td>
-									<td>{{contact.phone_2}}</td>
-									<td>{{contact.fax}}</td>
-									<td>{{contact.created_at}}</td>
-									<td>{{contact.updated_at}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+			<div class="box-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead class="">
+							<th>Options</th>
+							<th>ID</th>
+							<th>Title</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Email</th>
+							<th>Phone 1</th>
+							<th>Phone 2</th>
+							<th>Fax</th>
+							<th>Birthday</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let contact of contacts">
+								<td>
+									<button class="btn btn-success btn-sm" (click)="gotToEditContact(contact)">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button *ngIf="!contact.archived" (click)="archivedContact(contact, 1)" class="btn btn-warning btn-sm">
+										<i class="fa fa-folder"></i>
+									</button>
+									<button *ngIf="contact.archived" (click)="archivedContact(contact, 0)" class="btn btn-info btn-sm">
+										<i class="fa fa-folder-open"></i>
+									</button>
+									<!-- <button (click)="deleteContact(contact)" class="btn btn-danger btn-sm">
+										<i class="fa fa-trash"></i>
+									</button> -->
+								</td>
+								<td>{{contact.id}}</td>
+								<td>{{contact.title}}</td>
+								<td>{{contact.name}}</td>
+								<td>{{contact.description}}</td>
+								<td>{{contact.email}}</td>
+								<td>{{contact.phone}}</td>
+								<td>{{contact.phone_2}}</td>
+								<td>{{contact.fax}}</td> 
+								<td>{{contact.birthday}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<ngx-loading [show]="loading"></ngx-loading>
