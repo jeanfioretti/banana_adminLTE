@@ -12,12 +12,16 @@ import { BananaControlSidebarComponent } from './banana-control-sidebar/banana-c
 import { ThirdPartiesModule } from './modules/third-parties/third-parties.module';
 import { CustomColumnsComponent } from './components/custom-columns/custom-columns.component';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
+import { RolesModule } from './modules/roles/roles.module';
+import { UsersModule } from './modules/users/users.module';
 
 @NgModule({
   imports: [
     CommonModule,
     BananaRoutingModule,
     ThirdPartiesModule,
+    RolesModule,
+    UsersModule,
     LoadingModule,
     FormsModule,
     ReactiveFormsModule
