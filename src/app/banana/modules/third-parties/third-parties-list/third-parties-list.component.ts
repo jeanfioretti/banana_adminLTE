@@ -29,6 +29,7 @@ export class ThirdPartiesListComponent implements OnInit {
 		AuthBanana(this.router);
 		this.getThirds();
 		this.titleTable = 'Terceros';
+		sessionStorage.setItem('table_id', '17');
 	}
 
 	viewKanban(type){

@@ -18,6 +18,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { ComponentsModule } from './components/components.module';
 import { LocalizationComponent } from './components/localization/localization.component';
+import { OrganizationsModule } from './modules/organizations/organizations.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { LocalizationComponent } from './components/localization/localization.co
     ThirdPartiesModule,
     RolesModule,
     UsersModule,
+    OrganizationsModule,
     LoadingModule,
     FormsModule,
     ReactiveFormsModule,
