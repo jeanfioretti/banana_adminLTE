@@ -5,6 +5,7 @@ import { AuthBanana } from '../../../utils/auth';
 import { tokenUtil } from '../../../utils/tokenUtil';
 import { notifyManage } from '../../../utils/notifyUtil';
 import { BananaConstants } from '../../../utils/constants';
+import { Contact } from '../../../models/contact';
 
 @Component({
   selector: 'app-users-crud',
@@ -16,6 +17,7 @@ export class UsersCrudComponent implements OnInit {
   email: string;
   titleUser = 'Editar Usuario';
   user: any = {};
+  contact :Contact = new Contact();
   loading = false;
   constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
@@ -41,10 +43,13 @@ export class UsersCrudComponent implements OnInit {
                      const body :any = result;
                      this.user = body[0];
                      console.log(this.user);
+                     this.contact = this.user.contact_id;
                      this.loading = false;
             },
             msg => {
-              tokenUtil(this.router);
+              if (msg.status == 406) {
+                tokenUtil(this.router);
+              }
               this.loading = false;
               notifyManage(msg);
           }

@@ -14,6 +14,11 @@ import { CustomColumnsComponent } from './components/custom-columns/custom-colum
 import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { RolesModule } from './modules/roles/roles.module';
 import { UsersModule } from './modules/users/users.module';
+import { ContactComponent } from './components/contact/contact.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { ComponentsModule } from './components/components.module';
+import { LocalizationComponent } from './components/localization/localization.component';
+
 
 @NgModule({
   imports: [
@@ -24,7 +29,8 @@ import { UsersModule } from './modules/users/users.module';
     UsersModule,
     LoadingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   declarations: [
     BananaComponent,
@@ -33,8 +39,10 @@ import { UsersModule } from './modules/users/users.module';
     BananaLeftSideComponent,
     BananaContentComponent,
     BananaControlSidebarComponent,
-    CustomColumnsComponent,
-    EditFormComponent
+ //   CustomColumnsComponent,
+   // ContactComponent,
+   // EditFormComponent,
+
   ]
 })
 export class BananaModule { }

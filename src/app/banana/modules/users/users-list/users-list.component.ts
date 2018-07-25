@@ -42,7 +42,9 @@ export class UsersListComponent implements OnInit {
                     this.loading = false;
             },
             msg => {
-              tokenUtil(this.router);
+              if (msg.status == 406) {
+                tokenUtil(this.router);
+              }
               this.loading = false;
               notifyManage(msg);
           }
