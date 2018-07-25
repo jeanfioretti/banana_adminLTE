@@ -11,6 +11,7 @@ import { DynamicFormComponent } from '../../form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from '../../form/dynamic-form-question.component';
 import { ContactComponent } from '../../components/contact/contact.component';
 import { ContactListComponent } from '../../components/contact-list/contact-list.component';
+import { ComponentsModule } from '../../components/components.module';
 
 
 @NgModule({
@@ -19,17 +20,18 @@ import { ContactListComponent } from '../../components/contact-list/contact-list
     FormsModule,
     HttpClientModule,
     LoadingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   declarations: [
     ThirdPartiesComponent,
     ThirdPartiesCrudComponent,
     ThirdPartiesListComponent,
-    LocalizationComponent,
+    //LocalizationComponent,
     DynamicFormComponent,
     DynamicFormQuestionComponent,
-    ContactComponent,
-    ContactListComponent
+    //ContactComponent,
+    //ContactListComponent
     ]
 })
 export class ThirdPartiesModule { }
