@@ -85,6 +85,10 @@ export class OrganizationCrudComponent implements OnInit {
 		);
 	}
 
+	getFullAddress (full_address) {
+		this.full_address = full_address;
+	}
+
 	createOrganization () {
 		this.loading = true;
 		showNotification("Creando organizacion", 2);

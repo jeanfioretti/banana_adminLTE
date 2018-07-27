@@ -33,9 +33,10 @@ export class LocalizationComponent implements OnInit {
 	fullAddress () {
 		var full_address = '';
 		Object.keys(this.localization).forEach(element => {
-			full_address += this.localization[element];
+			full_address += ( this.localization[element] != null ) ? ' ' + this.localization[element]  : '';
 		});
 		console.log(full_address);
+		this.address.emit( full_address );
 	}
 
 	getCountries() {
