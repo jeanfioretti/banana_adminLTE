@@ -6,6 +6,8 @@ import { RolesListComponent } from './modules/roles/roles-list/roles-list.compon
 import { RolesCrudComponent } from './modules/roles/roles-crud/roles-crud.component';
 import { UsersListComponent } from './modules/users/users-list/users-list.component';
 import { UsersCrudComponent } from './modules/users/users-crud/users-crud.component';
+import { OrganizationListComponent } from './modules/organizations/organization-list/organization-list.component';
+import { OrganizationCrudComponent } from './modules/organizations/organization-crud/organization-crud.component';
 
 const routes: Routes = [
   { path: 'app/third-parties',     component: ThirdPartiesListComponent },
@@ -17,6 +19,9 @@ const routes: Routes = [
   { path: 'app/users',   component: UsersListComponent },
   { path: 'app/users/new',   component: UsersCrudComponent },
   { path: 'app/users/edit/:email',   component: UsersCrudComponent },
+  { path: 'app/organizations',   component: OrganizationListComponent },
+  { path: 'app/organizations/new',   component: OrganizationCrudComponent },
+  { path: 'app/organizations/edit/:email',   component: OrganizationCrudComponent },
 
 ];
 
