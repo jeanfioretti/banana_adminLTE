@@ -4,11 +4,16 @@ import { OrganizationsComponent } from './organizations.component';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
 import { OrganizationCrudComponent } from './organization-crud/organization-crud.component';
 import { ComponentsModule } from '../../components/components.module';
+import { LoadingModule } from '../../../../../node_modules/ngx-loading';
+import { FormsModule, ReactiveFormsModule } from '../../../../../node_modules/@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    LoadingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [OrganizationsComponent, OrganizationListComponent, OrganizationCrudComponent]
 })

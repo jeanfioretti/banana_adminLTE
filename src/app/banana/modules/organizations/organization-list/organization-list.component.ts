@@ -20,7 +20,8 @@ export class OrganizationListComponent implements OnInit {
 	public body: any ;
 	public organizations: any = [];
 	public keyword:any;
-	public kanban:false;
+	public kanban : boolean;
+	collapsed : boolean = false;
 
 	constructor(public http: HttpClient, public router: Router) { }
 
@@ -31,8 +32,12 @@ export class OrganizationListComponent implements OnInit {
 		sessionStorage.setItem('table_id', '2');
 	  }
 	  
-	viewKanban(type){
-		this.kanban = type;
+	viewKanban(){
+		this.kanban = !this.kanban;
+	}
+
+	collapsedCard(){
+		this.collapsed = !this.collapsed;
 	}
 
 	getOrganizations(): void {
@@ -48,8 +53,6 @@ export class OrganizationListComponent implements OnInit {
 		this.http.get(BananaConstants.urlServer+'api/organizations', options).toPromise()
 			.then(
 		    	result => {
-	                //console.log('result.status', result);
-	                // const body = result;
 	                this.loading = false;
 	                this.body = result;
 	                this.organizations = this.body.organizations;
@@ -63,6 +66,48 @@ export class OrganizationListComponent implements OnInit {
 		          notifyManage(msg);
 		      	}
 		    );
+	}
+
+	archivedOrganization(organization, archived) : void {
+		this.loading = true;
+		showNotification("Archivando organizacion", 2);
+		const headers = new HttpHeaders().set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers
+		};
+		const body = {
+			id : organization.id,
+			archived: archived
+		};
+
+		this.http.put(BananaConstants.urlServer + 'api/organizations/archived', body, options).toPromise()
+			.then(
+				result => {
+					this.loading = false;
+					organization.archived = archived;
+					showNotification('archivado con exito', 1);
+				},
+				msg => {
+					if (msg.status == 406) {
+					  tokenUtil(this.router);
+					}
+					this.loading = false;
+					notifyManage(msg);
+				}
+			);
+	}
+
+	goToCreateOrganization(){
+		showNotification('Redireccionando.. espere', 3);
+		this.router.navigate(['app/organizations/new']);
+	}
+
+	goToEditOrganization(id){
+		showNotification('Redireccionando.. espere', 3);
+		this.router.navigate(['app/organizations/edit/' + id]);
 	}
 
 }

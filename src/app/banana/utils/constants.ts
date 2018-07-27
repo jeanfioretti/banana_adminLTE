@@ -1,3 +1,3 @@
 export enum BananaConstants{
-  urlServer = 'http://192.168.1.67:8000/'
+  urlServer = 'http://127.0.0.1:8000/'
 }

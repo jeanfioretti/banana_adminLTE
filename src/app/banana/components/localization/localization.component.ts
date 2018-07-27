@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -21,12 +21,21 @@ export class LocalizationComponent implements OnInit {
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
+	@Output() address = new EventEmitter<any>();
 	body: any;
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
 		this.getCountries();
+	}
+
+	fullAddress () {
+		var full_address = '';
+		Object.keys(this.localization).forEach(element => {
+			full_address += this.localization[element];
+		});
+		console.log(full_address);
 	}
 
 	getCountries() {
