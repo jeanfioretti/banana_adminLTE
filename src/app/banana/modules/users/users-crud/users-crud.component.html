@@ -37,57 +37,7 @@
             <div class="box-body">
                 <form method="post"  accept-charset="UTF-8">
                     <div class="row">
-                        <!-- <div class="col-md-6">
 
-                              <input matInput placeholder="Name "
-                              matTooltip="Name for the rol"
-                              name="rol_name"
-                              [(ngModel)]="rol.rol_name" [ngModelOptions]="{standalone: true}">
-
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input"
-                                    type="checkbox"
-                                    matTooltip="Name for the rol"
-                                    [checked]="rol.all_access_column ==1? true:false"
-                                    [(ngModel)]="rol.all_access_column" [ngModelOptions]="{standalone: true}"
-                                    value="">
-                                    All access columns
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                </label>
-                              </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input"
-                                    type="checkbox"
-                                    matTooltip="Name for the rol"
-                                    [checked]="rol.all_access_organization ==1? true:false"
-                                    [(ngModel)]="rol.all_access_organization" [ngModelOptions]="{standalone: true}"
-                                    value="">
-                                    All access organization
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                </label>
-                              </div>
-                        </div>
-
-                        <div class="col-md-6">
-
-                                  <div class="form-group">
-                                      <label class="bmd-label-floating">Description</label>
-                                      <textarea class="form-control" rows="5"
-                                      [(ngModel)]="rol.description" [ngModelOptions]="{standalone: true}"></textarea>
-                                  </div>
-                          </div> -->
                           <div class="col-md-6">
                               <label for="name"><span>Username</span></label>
                               <input matInput placeholder="Username" class="form-control" name="Username" [(ngModel)]="user.user_name" [ngModelOptions]="{standalone: true}" >
@@ -99,6 +49,18 @@
                               <input matInput placeholder="Email address" class="form-control" type="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" >
 
                           </div>
+                        <div class="col-md-6">
+                            <label for="name"><span>password</span></label>
+
+                            <input matInput placeholder="password" class="form-control" type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" >
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="name"><span>Comfirm password</span></label>
+
+                          <input matInput placeholder="password" class="form-control" type="password" [(ngModel)]="ConfirmPassword" [ngModelOptions]="{standalone: true}" >
+
+                      </div>
                           <div class="col-md-6">
                               <div class="form-check">
                                   <label class="form-check-label">
@@ -133,7 +95,11 @@
                                 </div>
                           </div>
                           <div class="col-md-6">
-                            <app-contact [contact]="contact" [type_view]="1" ></app-contact>
+                            <!-- <app-contact-list
+                            [contacts]="contact"
+                          >
+                          </app-contact-list> -->
+                          <app-contact [contact]="contact" [type_view]="3" [type]="1" ></app-contact>
                         </div>
 
                     </div>
@@ -143,8 +109,8 @@
 
             </div>
             <div class="box-footer">
-                <!-- <button *ngIf="typeView == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateRol()" >Update Rol</button>
-                <button *ngIf="typeView == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createRol()" >Create Rol</button> -->
+                <button *ngIf="typeView == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateUser()" >Update User</button>
+                <button *ngIf="typeView == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createRol()" >Create Rol</button>
             </div>
             <div class="clearfix"></div>
           </div>

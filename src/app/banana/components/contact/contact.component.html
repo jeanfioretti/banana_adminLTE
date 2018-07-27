@@ -1,4 +1,6 @@
-<button class="btn btn-success btn-sm" (click)="openContactModal()" ><i class="fa fa-plus"></i> New Contact</button>
+<button class="btn btn-success btn-sm" (click)="openContactModalEmpty()"  *ngIf="type != 1" ><i class="fa fa-plus"></i> New Contact</button>
+
+<button class="btn btn-success btn-sm" (click)="openContactModal()" *ngIf="type == 1" ><i class="fa fa-plus"></i> View Contact</button>
 
 <div  class="modal" id="contactModal" >
 	<div class="modal-dialog  animated">
@@ -17,7 +19,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="modal-body">  
+			<div class="modal-body">
 				<div class="box">
 					<div class="box-body">
 						<div class="scroll-chevere">
@@ -87,7 +89,7 @@
 						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createContact()" >Create Contact</button>
 						<div class="clearfix"></div>
 					</div>
-				</div> 
+				</div>
 			</div>
 		</div>
 	</div>

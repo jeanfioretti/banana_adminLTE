@@ -32,7 +32,9 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	client : any = {};
 	combo_select: any = [];
 	body: any;
-	loading = false;
+  loading = false;
+  imageSrc: string = '';
+
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
@@ -78,7 +80,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 				this.localization = this.body.location;
 				this.third_contacts = this.body.third_contacts;
 				this.getStates(this.localization.country_id);
-				this.getCities(this.localization.state_id);
+        this.getCities(this.localization.state_id);
+        this.imageSrc = sessionStorage.getItem('clientStorageUrl')+'thirds/'+this.third.logo;
 				this.loading = false;
 			},
 			msg => {
@@ -228,6 +231,23 @@ export class ThirdPartiesCrudComponent implements OnInit {
   }
   getEventform(event){
     console.log('controladolr de tercero',event);
+  }
+
+  handleInputChange(e) {
+    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    var pattern = /image-*/;
+    var reader = new FileReader();
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file);
+  }
+  _handleReaderLoaded(e) {
+    let reader = e.target;
+    this.imageSrc = reader.result;
+    console.log(this.imageSrc)
   }
 
 }
