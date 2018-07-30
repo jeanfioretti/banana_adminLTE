@@ -69,8 +69,7 @@ export class OrganizationCrudComponent implements OnInit {
 			result => {
 				this.body = result;
 				this.organization = this.body.organization;
-				if (this.body.localization != null)
-					this.localization = this.body.localization;
+				this.localization = this.body.localization;					
 				this.getStates(this.localization.country_id);
 				this.getCities(this.localization.state_id);
 				this.loading = false;

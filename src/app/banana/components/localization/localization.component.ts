@@ -31,11 +31,44 @@ export class LocalizationComponent implements OnInit {
 	}
 
 	fullAddress () {
+		let me = this;
 		var full_address = '';
-		Object.keys(this.localization).forEach(element => {
-			full_address += ( this.localization[element] != null ) ? ' ' + this.localization[element]  : '';
+		var address = '';
+
+		Object.keys(me.localization).forEach(element => {
+			
+			if (element == 'id' || element == 'created_at' || element == 'updated_at')
+				return;
+			
+			switch (element) {
+
+				case 'country_id':
+					me.countries.map(function (obj) {
+						if (obj.id == me.localization[element])
+							address = obj.country;
+					});
+					break;
+				
+				case 'state_id':
+					me.states.map(function (obj) {
+						if (obj.id == me.localization[element])
+							address = obj.state;
+					});
+					break;
+				
+				case 'city_id':
+					me.cities.map(function (obj) {
+						if (obj.id == me.localization[element])
+							address = obj.city;
+					});
+					break;
+
+				default:
+					address = me.localization[element];
+					break;
+			}
+			full_address += ( address != null && address != '' ) ? address + ' '  : '';
 		});
-		console.log(full_address);
 		this.address.emit( full_address );
 	}
 
