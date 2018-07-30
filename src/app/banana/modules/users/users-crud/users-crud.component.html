@@ -38,16 +38,24 @@
                 <form method="post"  accept-charset="UTF-8">
                     <div class="row">
 
-                          <div class="col-md-6">
+                          <!-- <div class="col-md-6">
                               <label for="name"><span>Username</span></label>
                               <input matInput placeholder="Username" class="form-control" name="Username" [(ngModel)]="user.user_name" [ngModelOptions]="{standalone: true}" >
-                            </div>
+                            </div> -->
 
                           <div class="col-md-6">
                               <label for="name"><span>Email</span></label>
 
                               <input matInput placeholder="Email address" class="form-control" type="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" >
 
+                          </div>
+                          <div class="col-md-6">
+                            <label for="organization"><span>Rol</span></label>
+                            <select name="organization" class="form-control" [(ngModel)]="user.rol_id" [ngModelOptions]="{standalone: true}">
+                              <option *ngFor="let rol of combo_select" [ngValue]="rol.id">
+                                {{rol.name}}
+                              </option>
+                            </select>
                           </div>
                         <div class="col-md-6">
                             <label for="name"><span>password</span></label>
@@ -99,7 +107,7 @@
                             [contacts]="contact"
                           >
                           </app-contact-list> -->
-                          <app-contact [contact]="contact" [type_view]="3" [type]="1" ></app-contact>
+                          <app-contact [contact]="contact" [type_view]="typeView" [type]="1" ></app-contact>
                         </div>
 
                     </div>
@@ -110,7 +118,7 @@
             </div>
             <div class="box-footer">
                 <button *ngIf="typeView == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateUser()" >Update User</button>
-                <button *ngIf="typeView == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createRol()" >Create Rol</button>
+                <button *ngIf="typeView == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createUser()" >Create Rol</button>
             </div>
             <div class="clearfix"></div>
           </div>

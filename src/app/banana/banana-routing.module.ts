@@ -8,8 +8,10 @@ import { UsersListComponent } from './modules/users/users-list/users-list.compon
 import { UsersCrudComponent } from './modules/users/users-crud/users-crud.component';
 import { OrganizationListComponent } from './modules/organizations/organization-list/organization-list.component';
 import { OrganizationCrudComponent } from './modules/organizations/organization-crud/organization-crud.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 const routes: Routes = [
+  { path: 'app/dashboard',     component: DashboardComponent },
   { path: 'app/third-parties',     component: ThirdPartiesListComponent },
   { path: 'app/third-parties/new',   component: ThirdPartiesCrudComponent },
   { path: 'app/third-parties/edit/:id',   component: ThirdPartiesCrudComponent },
