@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       email : userEmail,
       password: md5.appendStr(userPass).end(),
     };
+    console.log(body);
     const options =  {
             headers: headers,
             observe: 'response',
@@ -64,7 +65,7 @@ export class LoginComponent implements OnInit {
                     $('.modal-backdrop').fadeOut();
                     $('#loginModal').modal('hide');
                     showNotification('Redireccionando.. Bienvenido',2);
-                    this.router.navigate(['app'])
+                    this.router.navigate(['app/dashboard'])
                     this.loading = false;
             },
             msg => {
