@@ -35,22 +35,21 @@ export class LoginComponent implements OnInit {
 
   getCredential(userEmail, userPass): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin);
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+      .set('app', 'BananaCli');
      const md5 = new Md5();
     // console.log(md5.appendStr(userPass).end());
     const body = {
-      authorization: window.location.origin,
-      app:"BananaCli",
+      // authorization: window.location.origin,
+      // app:"BananaCli",
       email : userEmail,
       password: md5.appendStr(userPass).end(),
     };
     console.log(body);
     const options =  {
-            headers: headers,
-            observe: 'response',
-            params: body
+            headers: headers
         };
-    this.http.post(BananaConstants.urlServer+'api/login', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/login', body, options).toPromise().then(
             result => {
                     console.log('result', result);
                     const responseComplete :any = result;

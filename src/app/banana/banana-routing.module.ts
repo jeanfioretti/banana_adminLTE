@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'app/users/edit/:email',   component: UsersCrudComponent },
   { path: 'app/organizations',   component: OrganizationListComponent },
   { path: 'app/organizations/new',   component: OrganizationCrudComponent },
-  { path: 'app/organizations/edit/:email',   component: OrganizationCrudComponent },
+  { path: 'app/organizations/edit/:id',   component: OrganizationCrudComponent },
 
 ];
 
