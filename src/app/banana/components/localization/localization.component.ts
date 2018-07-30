@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -14,7 +14,7 @@ declare var $: any;
 	templateUrl: './localization.component.html',
 	styleUrls: ['./localization.component.scss']
 })
-export class LocalizationComponent implements OnInit {
+export class LocalizationComponent implements OnInit, OnChanges {
 	loading = false;
 	localizationTitle : string ='Crear Localizacion';
 	@Input() localization : Localization = new Localization();
@@ -28,6 +28,16 @@ export class LocalizationComponent implements OnInit {
 
 	ngOnInit() {
 		this.getCountries();
+	}
+
+	ngOnChanges (changes : SimpleChanges) {
+		// for (let propName in changes) {
+		// 	let chng = changes[propName];
+		// 	let cur  = JSON.stringify(chng.currentValue);
+		// 	let prev = JSON.stringify(chng.previousValue);
+		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+		// }
+		this.fullAddress();
 	}
 
 	fullAddress () {
@@ -98,6 +108,7 @@ export class LocalizationComponent implements OnInit {
 	}
 
 	getStates(country_id) {
+		if (country_id == null) return;
 		this.loading = true;
 		this.states = [];
 		this.cities = [];
@@ -125,6 +136,7 @@ export class LocalizationComponent implements OnInit {
 	}
 
 	getCities(state_id) {
+		if (state_id == null) return;
 		this.loading = true;
 		this.cities = [];
 		const headers = new HttpHeaders().set('Authorization', window.location.origin)
