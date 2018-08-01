@@ -16,10 +16,13 @@
 				<div class="col-md-12">
 					<div class="box box-info">
 						<div class="box-header">
-							<div class="row">
-								<div class="col-md-6">
-									<h4>{{title_organization}}</h4>
-								</div>
+							<h3 class="box-title">{{title_organization}}</h3>
+							<div class="pull-right box-tools">
+								<button *ngIf="type_view == 3" class="btn btn-danger btn-sm" data-toggle="tooltip" title=""
+									type="button" data-original-title="Delete organization"
+									(click)="deleteOrganization()">
+									<i class="fa fa-trash"></i>
+								</button>
 							</div>
 						</div>
 					</div>

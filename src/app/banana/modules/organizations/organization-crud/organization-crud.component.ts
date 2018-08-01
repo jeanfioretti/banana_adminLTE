@@ -96,7 +96,7 @@ export class OrganizationCrudComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		let body : any;
 		body = this.organization;
@@ -148,6 +148,39 @@ export class OrganizationCrudComponent implements OnInit {
 				notifyManage(msg);
 			}
 		);
+	}
+
+	deleteOrganization () : void {
+		this.loading = true;
+		showNotification("Eliminando organizacion", 2);
+		const headers = new HttpHeaders().set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers
+		};
+
+		this.http.delete(BananaConstants.urlServer + 'api/organizations/delete/' + this.id, options).toPromise()
+			.then(
+				result => {
+					this.loading = false;
+					this.body = result;
+					if (this.body.organization_delete) {
+						showNotification('Eliminado con exito', 1);
+						this.router.navigate(['app/organizations/']);
+					} else {
+						showNotification('Error al eliminar', 2);
+					}
+				},
+				msg => {
+					if (msg.status == 406) {
+					tokenUtil(this.router);
+					}
+					this.loading = false;
+					notifyManage(msg);
+				}
+			);
 	}
 
 	getStates(country_id) {
