@@ -15,7 +15,8 @@ declare var $: any;
 })
 export class ContactComponent implements OnInit {
 	loading = false;
-	@Input() type_view : number;
+  @Input() type_view : number;
+  @Input() type : number = 0;
 	@Input() contact : Contact = new Contact();
 	id : number;
 	url_create : string = '';
@@ -175,6 +176,13 @@ export class ContactComponent implements OnInit {
 	}
 
 	openContactModal () {
+
+		setTimeout( function(){
+			$('#contactModal').modal('show');
+		},
+		230);
+  }
+  openContactModalEmpty () {
 		this.type_view = 1;
 		this.contact = new Contact();
 

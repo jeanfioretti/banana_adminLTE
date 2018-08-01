@@ -10,17 +10,26 @@ import { BananaLeftSideComponent } from './banana-left-side/banana-left-side.com
 import { BananaContentComponent } from './banana-content/banana-content.component';
 import { BananaControlSidebarComponent } from './banana-control-sidebar/banana-control-sidebar.component';
 import { ThirdPartiesModule } from './modules/third-parties/third-parties.module';
-import { CustomColumnsComponent } from './components/custom-columns/custom-columns.component';
-import { EditFormComponent } from './components/edit-form/edit-form.component';
+import { RolesModule } from './modules/roles/roles.module';
+import { UsersModule } from './modules/users/users.module';
+import { ComponentsModule } from './components/components.module';
+import { OrganizationsModule } from './modules/organizations/organizations.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     BananaRoutingModule,
+    DashboardModule,
     ThirdPartiesModule,
+    RolesModule,
+    UsersModule,
+    OrganizationsModule,
     LoadingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   declarations: [
     BananaComponent,
@@ -29,8 +38,10 @@ import { EditFormComponent } from './components/edit-form/edit-form.component';
     BananaLeftSideComponent,
     BananaContentComponent,
     BananaControlSidebarComponent,
-    CustomColumnsComponent,
-    EditFormComponent
+ //   CustomColumnsComponent,
+   // ContactComponent,
+   // EditFormComponent,
+
   ]
 })
 export class BananaModule { }

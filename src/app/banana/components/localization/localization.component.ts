@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -14,19 +14,72 @@ declare var $: any;
 	templateUrl: './localization.component.html',
 	styleUrls: ['./localization.component.scss']
 })
-export class LocalizationComponent implements OnInit {
+export class LocalizationComponent implements OnInit, OnChanges {
 	loading = false;
 	localizationTitle : string ='Crear Localizacion';
 	@Input() localization : Localization = new Localization();
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
+	@Output() address = new EventEmitter<any>();
 	body: any;
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
 		this.getCountries();
+	}
+
+	ngOnChanges (changes : SimpleChanges) {
+		// for (let propName in changes) {
+		// 	let chng = changes[propName];
+		// 	let cur  = JSON.stringify(chng.currentValue);
+		// 	let prev = JSON.stringify(chng.previousValue);
+		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+		// }
+		this.fullAddress();
+	}
+
+	fullAddress () {
+		let me = this;
+		var full_address = '';
+		var address = '';
+
+		Object.keys(me.localization).forEach(element => {
+			
+			if (element == 'id' || element == 'created_at' || element == 'updated_at')
+				return;
+			
+			switch (element) {
+
+				case 'country_id':
+					me.countries.map(function (obj) {
+						if (obj.id == me.localization[element])
+							address = obj.country;
+					});
+					break;
+				
+				case 'state_id':
+					me.states.map(function (obj) {
+						if (obj.id == me.localization[element])
+							address = obj.state;
+					});
+					break;
+				
+				case 'city_id':
+					me.cities.map(function (obj) {
+						if (obj.id == me.localization[element])
+							address = obj.city;
+					});
+					break;
+
+				default:
+					address = me.localization[element];
+					break;
+			}
+			full_address += ( address != null && address != '' ) ? address + ' '  : '';
+		});
+		this.address.emit( full_address );
 	}
 
 	getCountries() {
@@ -55,6 +108,7 @@ export class LocalizationComponent implements OnInit {
 	}
 
 	getStates(country_id) {
+		if (country_id == null) return;
 		this.loading = true;
 		this.states = [];
 		this.cities = [];
@@ -82,6 +136,7 @@ export class LocalizationComponent implements OnInit {
 	}
 
 	getCities(state_id) {
+		if (state_id == null) return;
 		this.loading = true;
 		this.cities = [];
 		const headers = new HttpHeaders().set('Authorization', window.location.origin)

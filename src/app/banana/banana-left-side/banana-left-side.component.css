@@ -1,0 +1,5 @@
+.sidebar-scroll{
+  overflow: scroll;
+    overflow-x: hidden;
+    max-height: 600px;
+}

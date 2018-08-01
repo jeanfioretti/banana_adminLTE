@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {  Router  } from '@angular/router';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { notifyManage } from '../banana/utils/notifyUtil';
+import { notifyManage, showNotification } from '../banana/utils/notifyUtil';
+import { BananaConstants } from '../banana/utils/constants';
+import { Md5 } from '../../../node_modules/ts-md5';
 
 
 
@@ -33,24 +35,27 @@ export class LoginComponent implements OnInit {
 
   getCredential(userEmail, userPass): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin);
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+      .set('app', 'BananaCli');
+     const md5 = new Md5();
+    // console.log(md5.appendStr(userPass).end());
     const body = {
-      authorization: window.location.origin,
-      app:"BananaCli",
+      // authorization: window.location.origin,
+      // app:"BananaCli",
       email : userEmail,
-      password: userPass,
+      password: md5.appendStr(userPass).end(),
     };
+    console.log(body);
     const options =  {
-            headers: headers,
-            observe: 'response',
-            params: body
+            headers: headers
         };
-    this.http.post('http://localhost:8000/api/login', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/login', body, options).toPromise().then(
             result => {
                     console.log('result', result);
-
-                    const Mybody: any = result;
-
+                    const responseComplete :any = result;
+                    const Mybody: any = responseComplete.user;
+                    this.saveInLocal('clientStorageUrl', responseComplete.storage);
+                    this.saveInLocal('clientStorageName', responseComplete.storageName);
                     this.saveInLocal('isLogged', true);
                     this.saveInLocal('user_id', Mybody.user[0].id);
                     this.saveInLocal('user_rol_id', Mybody.user[0].rol_id);
@@ -58,8 +63,8 @@ export class LoginComponent implements OnInit {
                     this.saveInLocal('user_token', Mybody.user[0].remember_token);
                     $('.modal-backdrop').fadeOut();
                     $('#loginModal').modal('hide');
-                    this.showNotification('Redireccionando.. Bienvenido');
-                    this.router.navigate(['app'])
+                    showNotification('Redireccionando.. Bienvenido',2);
+                    this.router.navigate(['app/dashboard'])
                     this.loading = false;
             },
             msg => {
@@ -105,33 +110,6 @@ export class LoginComponent implements OnInit {
     }
 
 
-  showNotification(mess){
-    const type = ['','info','success','warning','danger'];
-
-    const color = Math.floor((Math.random() * 4) + 1);
-
-    $.notify({
-        icon: 'notifications',
-        message: mess
-
-    },{
-        type: type[color],
-        timer: 4000,
-        placement: {
-            from: 'top',
-            align: 'right'
-        },
-        template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-          '<i class="material-icons" data-notify="icon">notifications</i> ' +
-          '<span data-notify="title">{1}</span> ' +
-          '<span data-notify="message">{2}</span>' +
-          '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-          '</div>' +
-          '<a href="{3}" target="{4}" data-notify="url"></a>' +
-        '</div>'
-    });
 }
 
-}
+
