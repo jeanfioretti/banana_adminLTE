@@ -66,7 +66,7 @@
 							<label for="organization"><span>Organization</span></label>
 							<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
 								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
-									{{organization.organization_name}}
+									{{organization.name}}
 								</option>
 							</select>
 						</div>
@@ -184,6 +184,7 @@
 								[countries]="countries"
 								[states]="states"
 								[cities]="cities"
+								(address)="getFullAddress($event)"
 							>
 							</app-localization>
 						</div>
@@ -242,6 +243,12 @@
 					<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
 				</div>
 				<div class="clearfix"></div>
+			</div>
+			<div *ngIf="type_view == 3">
+				<app-branch-list
+					[branch_offices]="branch_offices"
+				>
+				</app-branch-list>
 			</div>
 			<div *ngIf="type_view == 3">
 				<app-contact-list

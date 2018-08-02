@@ -7,6 +7,7 @@ import { LocalizationComponent } from './localization/localization.component';
 import { ContactComponent } from './contact/contact.component';
 import { ReactiveFormsModule, FormsModule } from '../../../../node_modules/@angular/forms';
 import { LoadingModule } from '../../../../node_modules/ngx-loading';
+import { BranchListComponent } from './branch-list/branch-list.component';
 
 @NgModule({
   imports: [
@@ -20,13 +21,15 @@ import { LoadingModule } from '../../../../node_modules/ngx-loading';
     ContactListComponent,
     CustomColumnsComponent,
     EditFormComponent,
-    LocalizationComponent
+    LocalizationComponent,
+    BranchListComponent
   ],
   exports: [
     ContactComponent,
     ContactListComponent,
     CustomColumnsComponent,
     EditFormComponent,
-    LocalizationComponent]
+    LocalizationComponent,
+    BranchListComponent]
 })
 export class ComponentsModule { }

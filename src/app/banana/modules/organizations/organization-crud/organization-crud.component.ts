@@ -22,6 +22,7 @@ export class OrganizationCrudComponent implements OnInit {
 	type_view :number;
 	organization : Organization = new Organization();
 	localization : Localization = new Localization();
+	countries : any = [];
 	states : any = [];
 	cities : any = [];
 	organization_contacts : any = [];
