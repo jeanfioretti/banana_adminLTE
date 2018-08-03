@@ -29,13 +29,13 @@ export class ThirdPartiesCrudComponent implements OnInit {
     cities : any = [];
     branch_office : BranchOffice = new BranchOffice();
     third_contacts : any = [];
+    branch_offices: any = [];
     full_address : string = '';
     client : any = {};
     combo_select: any = [];
     body: any;
     loading = false;
     imageSrc: string = '';
-
 
   constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
@@ -78,6 +78,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
         this.body = result;
         this.third = this.body.third;
         this.branch_office = this.body.branch_office;
+        this.branch_offices = this.body.branch_offices;
         this.localization = this.body.location;
         this.third_contacts = this.body.third_contacts;
         this.getStates(this.localization.country_id);
@@ -94,6 +95,10 @@ export class ThirdPartiesCrudComponent implements OnInit {
       }
     );
   }
+
+  getFullAddress (full_address) {
+		this.full_address = full_address;
+	}
 
   getComboSelect(): void {
     this.loading= true;
@@ -126,22 +131,24 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
       this.loading = true;
       showNotification("Creando tercero", 2);
+      const headers = new HttpHeaders().set('Authorization', window.location.origin)
+        .append('user_id', sessionStorage.getItem('user_id'))
+        .append('token', sessionStorage.getItem('user_token'))
+        .append('app', 'bananaCli');
+      const options =  {
+        headers: headers
+      };
       let body : any;
       body = this.third;
       body.branch_office = this.branch_office;
       body.third_location = this.localization;
-      body.authorization = window.location.origin;
-      body.user_id = sessionStorage.getItem('user_id');
-      body.token = sessionStorage.getItem('user_token');
-      body.app = "BananaCli";
-      //console.log(body);
-      this.http.post(BananaConstants.urlServer+'api/thirds/create', body).toPromise().then(
+      this.http.post(BananaConstants.urlServer+'api/thirds/create', body, options).toPromise().then(
         result => {
           showNotification('guardado con exito', 1);
           showNotification('Redireccionando.. espere', 3);
           this.body = result;
           this.third = this.body.third;
-          this.router.navigate(['app/third-parties/edit/' + this.third.id]);
+          this.router.navigate(['app/third-parties/edit/' + this.third]);
           this.loading = false;
         },
         msg => {

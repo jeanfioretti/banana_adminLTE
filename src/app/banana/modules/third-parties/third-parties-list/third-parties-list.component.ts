@@ -94,24 +94,25 @@ search() : void {
 	  	);
 }
 
-	archivedThird(id, archived) : void {
+	archivedThird(third, archived) : void {
 		this.loading = true;
+		const headers = new HttpHeaders().set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers
+		};
 		const body = {
-			authorization: window.location.origin,
-			user_id: sessionStorage.getItem('user_id'),
-			token: sessionStorage.getItem('user_token'),
-			app:'bananaCli',
-			third_id : id,
+			third_id : third.id,
 			archived: archived
 		};
-		//console.log(body);
-		this.http.post(BananaConstants.urlServer+'api/thirds/archived', body).toPromise()
+		this.http.post(BananaConstants.urlServer+'api/thirds/archived', body, options).toPromise()
 			.then(
 				result => {
 					this.loading = false;
-					console.log('result.status', result);
-					this.getThirds();
-						showNotification('archivado con exito', 1);
+					third.archived = archived;
+					showNotification('archivado con exito', 1);
 				},
 				msg => {
 					if (msg.status == 406) {
