@@ -37,45 +37,45 @@
 					</div>
 				</div>
 			</div>
-		<div class="box-body">
-			<div class="table-responsive">
-				<table class="table table-hover">
-					<thead class="">
-						<th>Options</th>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Phone 1</th>
-						<th>Phone 2</th>
-						<th>Created</th>
-						<th>Updated</th>
-					</thead>
-					<tbody>
-						<tr *ngFor="let branch of branch_offices">
-							<td>
-								<button class="btn btn-success btn-sm" (click)="gotToEditBranch(branch)">
-									<i class="fa fa-pencil"></i>
-								</button>
-								<button *ngIf="!branch.archived" (click)="archivedBranch(branch, 1)" class="btn btn-warning btn-sm">
-									<i class="fa fa-folder"></i>
-								</button>
-								<button *ngIf="branch.archived" (click)="archivedBranch(branch, 0)" class="btn btn-info btn-sm">
-									<i class="fa fa-folder-open"></i>
-								</button>
-								<!-- <button (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
-									<i class="fa fa-trash"></i>
-								</button> -->
-							</td>
-							<td>{{branch.id}}</td>
-							<td>{{branch.name}}</td>
-							<td>{{branch.phone}}</td>
-							<td>{{branch.phone_2}}</td>
-							<td>{{branch.created_at}}</td> 
-							<td>{{branch.updated_at}}</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="box-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead class="">
+							<th>Options</th>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Phone 1</th>
+							<th>Phone 2</th>
+							<th>Created</th>
+							<th>Updated</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let branch of branch_offices">
+								<td>
+									<button class="btn btn-success btn-sm" (click)="gotToEditBranch(branch)">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button *ngIf="!branch.archived" (click)="archivedBranch(branch, 1)" class="btn btn-warning btn-sm">
+										<i class="fa fa-folder"></i>
+									</button>
+									<button *ngIf="branch.archived" (click)="archivedBranch(branch, 0)" class="btn btn-info btn-sm">
+										<i class="fa fa-folder-open"></i>
+									</button>
+									<!-- <button (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
+										<i class="fa fa-trash"></i>
+									</button> -->
+								</td>
+								<td>{{branch.id}}</td>
+								<td>{{branch.name}}</td>
+								<td>{{branch.phone}}</td>
+								<td>{{branch.phone_2}}</td>
+								<td>{{branch.created_at}}</td> 
+								<td>{{branch.updated_at}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
 		</div>
     </div>
   </div>

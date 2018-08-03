@@ -25,50 +25,44 @@
 								</button>
 							</div>
 						</div>
+						<div class="box-body">
+							<div class="col-md-6">
+								<label for="name"><span>Organization name</span></label>
+								<input name="name" type="text" class="form-control" [(ngModel)]="organization.name" [ngModelOptions]="{standalone: true}">
+							</div>
+							<div class="col-md-6">
+								<label for="reference_no"><span>Reference number</span></label>
+								<input name="reference_no" type="text" class="form-control"
+									[(ngModel)]="organization.reference_no" [ngModelOptions]="{standalone: true}"
+								>
+							</div>
+							<div class="col-md-6">
+								<label><span>Address</span></label>
+								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+								<app-localization
+									[localization]="localization"
+									[countries]="countries"
+									[states]="states"
+									[cities]="cities"
+									(address)="getFullAddress($event)"
+								>
+								</app-localization>
+							</div>
+							<div class="col-md-6">
+								<label for="description"><span>Description</span></label>
+								<textarea name="description" class="form-control" rows="3"
+									[(ngModel)]="organization.description" [ngModelOptions]="{standalone: true}"
+								>
+								</textarea>
+							</div>
+						</div>
+						<div class="box-footer">
+							<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateOrganization()" >Update Organization</button>
+							<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createOrganization()" >Create Organization</button>
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-			</div>
-			<div class="box box-info">
-				<div class="box-body">
-					<div class="row">
-						<div class="col-md-6">
-							<label for="name"><span>Organization name</span></label>
-							<input name="name" type="text" class="form-control" [(ngModel)]="organization.name" [ngModelOptions]="{standalone: true}">
-						</div>
-						<div class="col-md-6">
-							<label for="reference_no"><span>Reference number</span></label>
-							<input name="reference_no" type="text" class="form-control"
-								[(ngModel)]="organization.reference_no" [ngModelOptions]="{standalone: true}"
-							>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<label><span>Address</span></label>
-							<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-							<app-localization
-								[localization]="localization"
-								[countries]="countries"
-								[states]="states"
-								[cities]="cities"
-								(address)="getFullAddress($event)"
-							>
-							</app-localization>
-						</div>
-						<div class="col-md-6">
-							<label for="description"><span>Description</span></label>
-							<textarea name="description" class="form-control" rows="3"
-								[(ngModel)]="organization.description" [ngModelOptions]="{standalone: true}"
-							>
-							</textarea>
-						</div>
-					</div>
-				</div>
-				<div class="box-footer">
-					<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateOrganization()" >Update Organization</button>
-					<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createOrganization()" >Create Organization</button>
-				</div>
-				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
