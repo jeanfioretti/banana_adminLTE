@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
       <h1>
-        {{titleRol}}
+        {{titleUser}}
         <small>Optional description</small>
       </h1>
       <ol class="breadcrumb">
@@ -21,7 +21,7 @@
                 <div class="box-header">
                   <div class="row">
                     <div class="col-md-6">
-                      <h4>{{titleRol}}</h4>
+                      <h4>{{titleUser}}</h4>
                     </div>
                     <!-- <div class="col-md-6">
                       <div *ngIf="type_view == 3">
@@ -123,7 +123,107 @@
             <div class="clearfix"></div>
           </div>
 
+          <div class="scrollableAcordeon">
 
+                    <div class="box box-info">
+                        <div class="box-body">
+                                <div class="dropdown">
+                                        <button  class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+                                            Options
+                                            <b class="caret"></b>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a (click)="getPermits(1,user.id)">Assosiated</a></li>
+                                            <li><a (click)="getPermits(0,user.id)">Not Assosiated</a></li>
+                                            <li><a (click)="getPermits(2,user.id)">All</a></li>
+                                        </ul>
+                                    </div>
+                            <div id="accordion">
+                                <div class="box" *ngFor="let table of permissions; let i index" >
+                                    <div class="box-header" id="heading_{{table.table_id}}">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse"  [attr.data-target]="'#collapse_'+ table.table_id" aria-expanded="true" aria-controls="collapseOne">
+                                          {{table.table_name}}
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="collapse_{{table.table_id}}"
+                                        class="collapse"
+                                        [attr.aria-labelledby]="'heading_'+table.table_id "
+                                         data-parent="#accordion">
+                                      <div class="box-body">
+                                        <div class="col-md-12">
+                                            <div *ngFor="let column of table.columns">
+                                                <div class="row" >
+                                                        <div class="col-md-4" >
+                                                        {{column.column_name}}
+                                                        </div>
+                                                        <div class="form-check col-md-2" >
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input"
+
+                                                                    type="checkbox" name="{{column.create}}"
+                                                                    [checked]="column.create ==1? true:false"
+                                                                    (change)="selectColumn(column,$event.srcElement.checked,'create')"  >
+                                                                    create
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                        </div>
+                                                        <div class="form-check col-md-2" >
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    value="{{column.read==1? true:false}}"
+                                                                    [checked]="column.read==1? true:false"
+                                                                    (change)="selectColumn(column,$event.srcElement.checked,'read')" >
+                                                                    read
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                        </div>
+                                                        <div class="form-check col-md-2" >
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    value="{{column.update}}"
+                                                                    [checked]="column.update==1? true:false"
+                                                                    (change)="selectColumn(column,$event.srcElement.checked,'update')" >
+                                                                    update
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                        </div>
+                                                        <div class="form-check col-md-2" >
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    value="{{column.delete}}"
+                                                                    [checked]="column.delete==1? true:false"
+                                                                    (change)="selectColumn(column,$event.srcElement.checked,'delete')" >
+                                                                    delete
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                        </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                              </div>
+                        </div>
+                    </div>
+
+    </div>
 
         </div>
       </div>

@@ -8,6 +8,7 @@ import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { Third } from '../../../models/third';
 import { Localization } from '../../../models/localization';
 import { BananaConstants } from '../../../utils/constants';
+import { convertDataURIToBinary } from '../../../utils/filesUtils';
 
 declare var $: any;
 
@@ -154,18 +155,25 @@ export class ThirdPartiesCrudComponent implements OnInit {
     }
 
     updateThird(): void {
+      const headers = new HttpHeaders()
+      .set('Authorization', window.location.origin)
+      .append('user_id', sessionStorage.getItem('user_id'))
+      .append('token', sessionStorage.getItem('user_token'))
+      .append('app', 'bananaCli');
+      const options =  {
+              headers: headers,
+          };
+
       this.loading = true;
       showNotification("Actualizando tercero", 2);
       let body : any;
       body = this.third;
       body.branch_office = this.branch_office;
       body.third_location = this.localization;
-      body.authorization = window.location.origin;
-      body.user_id = sessionStorage.getItem('user_id');
-      body.token = sessionStorage.getItem('user_token');
-      body.app = "BananaCli";
-      //console.log(body);
-      this.http.post(BananaConstants.urlServer+'api/thirds/update', body).toPromise().then(
+      body.storageNameClient = sessionStorage.getItem('clientStorageName');
+      body.image = this.imageSrc;
+      console.log(body);
+      this.http.post(BananaConstants.urlServer+'api/thirds/update', body, options).toPromise().then(
         result => {
           showNotification('guardado con exito', 1);
           this.loading = false;
@@ -180,55 +188,55 @@ export class ThirdPartiesCrudComponent implements OnInit {
       );
     }
 
-	getStates(country_id) {
-		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
-		const options = {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer +'api/location/states?country_id='+country_id, options).toPromise().then(
-			result => {
-				this.loading = false;
-				this.body = result;
-				this.states = this.body.states;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false;
-				notifyManage(msg);
-			}
-	  	);
-	}
+    getStates(country_id) {
+      this.loading = true;
+      const headers = new HttpHeaders().set('Authorization', window.location.origin)
+        .append('user_id', sessionStorage.getItem('user_id'))
+        .append('token', sessionStorage.getItem('user_token'))
+        .append('app', 'bananaCli');
+      const options = {
+        headers: headers,
+      };
+      this.http.get(BananaConstants.urlServer +'api/location/states?country_id='+country_id, options).toPromise().then(
+        result => {
+          this.loading = false;
+          this.body = result;
+          this.states = this.body.states;
+        },
+        msg => {
+          if (msg.status == 406) {
+            tokenUtil(this.router);
+          }
+          this.loading = false;
+          notifyManage(msg);
+        }
+        );
+    }
 
-	getCities(state_id) {
-		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
-		const options = {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer +'api/location/cities?state_id='+state_id, options).toPromise().then(
-			result => {
-				this.loading = false;
-				this.body = result;
-				this.cities = this.body.cities;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false;
-			  	notifyManage(msg);
-			}
-	  	);
-  }
+    getCities(state_id) {
+      this.loading = true;
+      const headers = new HttpHeaders().set('Authorization', window.location.origin)
+        .append('user_id', sessionStorage.getItem('user_id'))
+        .append('token', sessionStorage.getItem('user_token'))
+        .append('app', 'bananaCli');
+      const options = {
+        headers: headers,
+      };
+      this.http.get(BananaConstants.urlServer +'api/location/cities?state_id='+state_id, options).toPromise().then(
+        result => {
+          this.loading = false;
+          this.body = result;
+          this.cities = this.body.cities;
+        },
+        msg => {
+          if (msg.status == 406) {
+            tokenUtil(this.router);
+          }
+          this.loading = false;
+            notifyManage(msg);
+        }
+        );
+    }
   getEventform(event){
     console.log('controladolr de tercero',event);
   }
@@ -247,7 +255,9 @@ export class ThirdPartiesCrudComponent implements OnInit {
   _handleReaderLoaded(e) {
     let reader = e.target;
     this.imageSrc = reader.result;
-    console.log(this.imageSrc)
+
+    console.log('byteArray',convertDataURIToBinary(this.imageSrc))
+    console.log('base64',this.imageSrc);
   }
 
 }
