@@ -1,31 +1,32 @@
 <section class="content-header">
-	<div class="col-md-12" >
-		<div class="col-md-6">
+	<div class="row" >
+		<div class="col-md-4">
 			<h1>
 				Organization
-				<small>Optional description</small>
+				<!-- <small>Optional description</small> -->
 			</h1>
 		</div>
-		<!-- <div class="col-md-5" >
+		<div class="col-md-6" >
 			<div class="input-group no-border" width="80%">
 				<input type="text" value="" class="form-control" placeholder="Search..."
-				[(ngModel)]="keyword" [ngModelOptions]="{standalone: true}">
+				[(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" (keyup.enter)="search()">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-warning btn-flat" (click)="search()" >search</button>
+					<button type="button" class="btn btn-danger btn-flat" (click)="keyword = ''" >Clean</button>
 					<button type="button" class="btn btn-info btn-flat" (click)="getOrganizations()" >All</button>
 				</span>
 			</div>
-		</div> -->
-		<div class="" >
+		</div>
+		<div class="col-md-2">
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
 					<i *ngIf="!collapsed" class="fa fa-minus"></i>
 					<i *ngIf="collapsed" class="fa fa-plus"></i>
 				</button> &nbsp;
-				<button type="button" class="btn btn-default btn-flat" (click)="viewKanban()" >
+				<button *ngIf="!kanban" type="button" class="btn btn-default btn-flat" (click)="viewKanban()" >
 					<i class="fa fa-lg fa-th-large"></i>
 				</button> &nbsp;
-				<button type="button" class="btn  btn-default btn-flat" (click)="viewKanban()" >
+				<button *ngIf="kanban" type="button" class="btn  btn-default btn-flat" (click)="viewKanban()" >
 					<i class="fa fa-list"></i>
 				</button> &nbsp;
 			</div>

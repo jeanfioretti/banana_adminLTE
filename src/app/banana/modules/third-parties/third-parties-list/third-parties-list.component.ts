@@ -21,7 +21,7 @@ export class ThirdPartiesListComponent implements OnInit {
 	public body: any ;
 	public thirds: any = [];
 	public keyword:any;
-	public kanban:false;
+	public kanban:boolean;
 
   constructor(public http: HttpClient, public router: Router) { }
 
@@ -32,8 +32,8 @@ export class ThirdPartiesListComponent implements OnInit {
 		sessionStorage.setItem('table_id', '17');
 	}
 
-	viewKanban(type){
-		this.kanban = type;
+	viewKanban(){
+		this.kanban = !this.kanban;
 	}
 
 	getThirds(): void {
@@ -66,33 +66,33 @@ export class ThirdPartiesListComponent implements OnInit {
 		    );
 	}
 
-search() : void {
-	this.loading = true;
-	const headers = new HttpHeaders().set('Authorization', window.location.origin)
-		.append('user_id', sessionStorage.getItem('user_id'))
-		.append('token', sessionStorage.getItem('user_token'))
-		.append('app', 'bananaCli');
-	const options =  {
-	        headers: headers,
-	        params: { filter: this.keyword}
-	    };
-	this.http.get(BananaConstants.urlServer+'api/thirds/filter', options).toPromise()
-		.then(
-	        result => {
-	            //console.log('result', result);
-	            this.loading = false;
-	            this.body = result;
-	            this.thirds = this.body.filter_thirds;
-	        },
-	        msg => {
-	          if (msg.status == 406) {
-	            tokenUtil(this.router);
-	          }
-	          this.loading = false;
-	          notifyManage(msg);
-	      }
-	  	);
-}
+	search() : void {
+		this.loading = true;
+		const headers = new HttpHeaders().set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+				headers: headers,
+				params: { filter: this.keyword}
+			};
+		this.http.get(BananaConstants.urlServer+'api/thirds/filter', options).toPromise()
+			.then(
+				result => {
+					//console.log('result', result);
+					this.loading = false;
+					this.body = result;
+					this.thirds = this.body.filter_thirds;
+				},
+				msg => {
+					if (msg.status == 406) {
+						tokenUtil(this.router);
+					}
+					this.loading = false;
+					notifyManage(msg);
+				}
+			);
+	}
 
 	archivedThird(third, archived) : void {
 		this.loading = true;
@@ -107,7 +107,7 @@ search() : void {
 			third_id : third.id,
 			archived: archived
 		};
-		this.http.post(BananaConstants.urlServer+'api/thirds/archived', body, options).toPromise()
+		this.http.put(BananaConstants.urlServer+'api/thirds/archived', body, options).toPromise()
 			.then(
 				result => {
 					this.loading = false;

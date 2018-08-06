@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { Contact } from '../../models/contact';
@@ -20,7 +20,7 @@ export class ContactListComponent implements OnInit {
 	contact_list : Contact = new Contact();
 	type_view : number;
 
-	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
+	constructor(public http: HttpClient, public router: Router) { }
 
 	ngOnInit() {
   	}
