@@ -15,6 +15,7 @@ import { UsersModule } from './modules/users/users.module';
 import { ComponentsModule } from './components/components.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { MigrationsModule } from './modules/migrations/migrations.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     ThirdPartiesModule,
     RolesModule,
     UsersModule,
+    MigrationsModule,
     OrganizationsModule,
     LoadingModule,
     FormsModule,

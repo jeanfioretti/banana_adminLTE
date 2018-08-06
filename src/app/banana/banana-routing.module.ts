@@ -9,9 +9,11 @@ import { UsersCrudComponent } from './modules/users/users-crud/users-crud.compon
 import { OrganizationListComponent } from './modules/organizations/organization-list/organization-list.component';
 import { OrganizationCrudComponent } from './modules/organizations/organization-crud/organization-crud.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { MigrationsComponent } from './modules/migrations/migrations.component';
 
 const routes: Routes = [
   { path: 'app/dashboard',     component: DashboardComponent },
+  { path: 'app/migration',     component: MigrationsComponent },
   { path: 'app/third-parties',     component: ThirdPartiesListComponent },
   { path: 'app/third-parties/new',   component: ThirdPartiesCrudComponent },
   { path: 'app/third-parties/edit/:id',   component: ThirdPartiesCrudComponent },

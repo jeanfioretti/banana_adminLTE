@@ -1,0 +1,121 @@
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Page Header
+      <small>Optional description</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+      <li class="active">Here</li>
+    </ol>
+  </section>
+    <!-- Main content -->
+  <section class="content">
+    <div class="main-content">
+
+      <div class="container-fluid">
+
+
+          <!-- <table class="sjs-table">
+              <tr *ngFor="let row of data; let i index">
+                <td *ngFor="let val of row">
+                  {{val}}
+                </td>
+              </tr>
+            </table> -->
+
+            <div class="box box-info ">
+                <div class="box-header ">
+                  <div class="col-md-6" >
+                      <h4 class="box-title mt-0"> Migrations</h4>
+                    <p class="box-category"> Here is a subtitle for this table</p>
+
+                    <div class="col-md-6">
+                        <label><span>Type file</span></label>
+                        <select name="type" class="form-control" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                          <option  [ngValue]="1">
+                            XLS
+                          </option>
+                          <option  [ngValue]="2">
+                              CSV
+                            </option>
+                        </select>
+                      </div>
+
+                      <div *ngIf="type==1">
+                          <label><span>select xls  file</span></label>
+                          <input type="file" (change)="xlsFile($event)" multiple="false" />
+                      </div>
+                      <div *ngIf="type==2">
+                          <label><span>select csv file</span></label>
+                          <input type="file" (change)="convertFile($event)" multiple="false" />
+                      </div>
+
+                  </div>
+
+
+                </div>
+
+                <div class="box-body">
+                  <div class="col-md-12" >
+                      <button  mat-raised-button  class="btn btn-danger pull-right" (click)="clean()" >Clean</button>
+                  </div>
+                  <div class="col-md-12" >
+                      <div *ngFor="let header of guideMigration" >
+
+                          <div class="col-md-3">
+                              <label><span>{{header.columnName}}</span></label>
+                              <select name="type" class="form-control" [(ngModel)]="header.column" [ngModelOptions]="{standalone: true}" (change)="selectColumn(header.column)" >
+
+                                    <optgroup *ngFor="let table of tables"
+                                            label= {{table}} >
+                                      <ng-container *ngFor="let column of selectColumns" >
+                                        <option *ngIf="column.table_name === table" [disabled]="column.selected == 1"  [ngValue]="column" >
+                                            {{column.column_name}} <strong *ngIf="column.required == 1" >(Requerido)</strong>
+                                        </option>
+                                      </ng-container>
+                                  </optgroup>
+                              </select>
+                            </div>
+
+                      </div>
+
+                  </div>
+
+                  <div *ngIf="data != undefined && data.length > 0 " class="col-md-12"  >
+                    <div style="padding: 5px; height: 500px; overflow: scroll;" >
+                        <table class="table-responsive" style="margin-top: 15px">
+                            <tr *ngFor="let row of data">
+                              <td *ngFor="let val of row" style="border: solid 1px; padding: 3px;">
+                                {{val}}
+                              </td>
+                            </tr>
+                          </table>
+                    </div>
+
+
+                  </div>
+
+
+
+
+                  </div>
+
+                  <div class="box-footer" *ngIf="data != undefined && data.length > 0 " >
+                      <div class="col-md-12" >
+                          <button  mat-raised-button  class="btn btn-danger pull-right" (click)="sendMigration()" >send</button>
+                      </div>
+                  </div>
+
+            </div>
+
+
+
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+  <ngx-loading [show]="loading"></ngx-loading>
+
+
