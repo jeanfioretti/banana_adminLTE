@@ -19,7 +19,8 @@ export class UsersCrudComponent implements OnInit {
   titleUser = 'Editar Usuario';
   user: any = {};
   typeView:number;
-  // contact :Contact[]=[];
+  permissions: any[];
+  selectedPermission: any[] = [];
   contact: Contact = new Contact();
   ConfirmPassword:string;
   loading = false;
@@ -41,6 +42,7 @@ export class UsersCrudComponent implements OnInit {
       } else {
 
         this.titleUser = 'Create User';
+        this.user.id = -1;
         this.typeView = 1;
 
       }
@@ -61,12 +63,9 @@ export class UsersCrudComponent implements OnInit {
                      console.log('result.status', result);
                      const body :any = result;
                      this.user = body[0];
-                    //  console.log(this.user);
-                    this.user.password = '';
+                     this.user.password = '';
                      this.contact = this.user.contact_id;
-
-                    //  this.contact.push(this.user.contact_id)
-                    //  console.log( this.contact)
+                     this.getPermits(2,this.user.id);
                      this.loading = false;
             },
             msg => {
@@ -170,6 +169,85 @@ getElements(): void {
 
 
 }
+
+getPermits(type,id): void {
+  this.loading = true;
+
+  const headers = new HttpHeaders().set('Authorization', window.location.origin)
+  .append('user_id', sessionStorage.getItem('user_id'))
+  .append('token', sessionStorage.getItem('user_token'))
+  .append('app', 'bananaCli');
+  const options =  {
+          headers: headers,
+          params:{
+            id:id,
+            type:type
+          }
+      };
+  this.http.get(BananaConstants.urlServer+'api/users/getPermits', options).toPromise().then(
+          result => {
+                //  console.log('result.status', result);
+                const body:any = result;
+                this.permissions = body.permissions;
+                //  console.log(this.permissions)
+                this.permissSelect();
+                this.loading = false;
+          },
+          msg => {
+            if (msg.status == 406) {
+              tokenUtil(this.router);
+            }
+            this.loading = false;
+            notifyManage(msg);
+        }
+    );
+
+
+}
+selectColumn(columnsPer, event, action){
+  let exist = false;
+  switch (action) {
+    case 'create':
+      columnsPer.create = (event) ? 1 : 0;
+    break;
+    case 'update':
+      columnsPer.update = (event) ? 1 : 0;
+    break;
+    case 'read':
+      columnsPer.read = (event) ? 1 : 0;
+    break;
+    case 'delete':
+      columnsPer.delete = (event) ? 1 : 0;
+    break;
+  }
+
+  for (let i = 0; i < this.selectedPermission.length; i++) {
+
+    if (this.selectedPermission[i].column_id == columnsPer.column_id){
+      this.selectedPermission[i] = columnsPer;
+      exist = true;
+      break;
+    }
+
+  }
+  if (!exist) {
+    this.selectedPermission.push( columnsPer );
+  }
+
+}
+
+permissSelect() {
+  for (let i = 0; i < this.permissions.length; i++) {
+
+    for (let j = 0; j < this.permissions[i].columns.length; j++) {
+
+      if (this.permissions[i].columns[j].selected == 1) {
+        this.selectedPermission.push( this.permissions[i].columns[j]);
+      }
+    }
+  }
+}
+
 
 
 

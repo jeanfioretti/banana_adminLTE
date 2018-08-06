@@ -1,199 +1,116 @@
-
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="col-md-12" >
-        <div class="col-md-6">
-            <h1>
-                Third
-                 <small>Optional description</small>
-               </h1>
-        </div>
-        <div class="col-md-5" >
-          <div class="input-group no-border" width="80%">
-              <input type="text" value="" class="form-control" placeholder="Search..."
-              [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}">
-
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-warning btn-flat" (click)="search()" >search</button>
-                <button type="button" class="btn btn-info btn-flat" (click)="getThirds()" >All</button>
-              </span>
-          </div>
-        </div>
-        <div class="" >
-            <div class="btn-group pull-right">
-                <button type="button" class="btn btn-default btn-flat" (click)="viewKanban(true)" ><i class="fa fa-lg fa-th-large"></i></button>
-                <button type="button" class="btn  btn-default btn-flat" (click)="viewKanban(false)" ><i class="fa fa-list"></i></button>
-              </div>
-        </div>
-    </div>
-
-
-    <!-- <ol class="breadcrumb">
-      <li><a ><i class="fa fa-dashboard"></i> third</a></li>
-      <li class="active">list</li>
-    </ol> -->
-  </section>
+<section class="content-header">
+	<div class="row" >
+		<div class="col-md-4">
+			<h1>
+				Clients
+				<!-- <small>Optional description</small> -->
+			</h1>
+		</div>
+		<div class="col-md-6" >
+			<div class="input-group no-border" width="80%">
+				<input type="text" value="" class="form-control" placeholder="Search..."
+				[(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" (keyup.enter)="search()">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-warning btn-flat" (click)="search()" >search</button>
+					<button type="button" class="btn btn-danger btn-flat" (click)="keyword = ''" >Clean</button>
+					<button type="button" class="btn btn-info btn-flat" (click)="getThirds()" >All</button>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="btn-group pull-right">
+				<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
+					<i *ngIf="!collapsed" class="fa fa-minus"></i>
+					<i *ngIf="collapsed" class="fa fa-plus"></i>
+				</button> &nbsp;
+				<button *ngIf="!kanban" type="button" class="btn btn-default btn-flat" (click)="viewKanban()" >
+					<i class="fa fa-lg fa-th-large"></i>
+				</button> &nbsp;
+				<button *ngIf="kanban" type="button" class="btn  btn-default btn-flat" (click)="viewKanban()" >
+					<i class="fa fa-list"></i>
+				</button> &nbsp;
+			</div>
+		</div>
+	</div>
+</section>
 
   <!-- Main content -->
-  <section class="content">
-
-    <!-- Your Page Content Here -->
-
-    <div class="main-content">
-      <div class="container-fluid">
-
-          <div class="row">
-              <div class="row" *ngIf="kanban" >
-                  <div class="col-md-12">
-                      <div *ngFor="let third of thirds">
-
-
-
-                        <!-- <div class="col-md-3" >
-                          <div class="box box-info"  >
-                                <div class="box-header">
-                                    <h4 class="box-title">{{third.name}}</h4>
-                                </div>
-
-                                <div class="box-body" style="height: 100px;" >
-                                  <img class="img-circle" src="assets\img\user1-128x128.jpg" alt="User Avatar">
-                                  <h4 class="box-title">{{third.name}}</h4>
-                                  <h6 class="box-subtitle text-muted"> {{third.url}}</h6>
-
-
-                                </div>
-                                <div class="box-footer" >
-                                  <div class="pull-right" >
-                                      <button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEditThird(third.id)" ><i class="fa fa-pencil"></i></button>
-                                      <button *ngIf="!third.archived" (click)="archivedThird(third.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                      <button *ngIf="third.archived"  (click)="archivedThird(third.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
-                                  </div>
-
-                                </div>
-                          </div>
-
-                        </div> -->
-
-                        <div class="col-md-3">
-                            <!-- Widget: user widget style 1 -->
-                            <div class="box box-widget widget-user-2" >
-                              <!-- Add the bg color to the header using any of the bg-* classes -->
-                              <div class="widget-user-header bg-aqua" style="height: 100px;">
-                                <div class="widget-user-image">
-                                  <img class="img-circle" src="assets\img\user1-128x128.jpg" alt="User Avatar">
-                                </div>
-                                <!-- /.widget-user-image -->
-                                <h6 class="widget-user-username truncate">{{third.name}}</h6>
-                                <h6 class="widget-user-desc"> {{third.url}}</h6>
-                              </div>
-                              <div class="box-footer" >
-                                  <div class="pull-right" >
-                                      <button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEditThird(third.id)" ><i class="fa fa-pencil"></i></button>
-                                      <button *ngIf="!third.archived" (click)="archivedThird(third.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                      <button *ngIf="third.archived"  (click)="archivedThird(third.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
-                                  </div>
-
-                                </div>
-                            </div>
-                            <!-- /.widget-user -->
-                          </div>
-
-
-
-
-
-                      </div>
-                    </div>
-              </div>
-
-              <div class="col-md-12" *ngIf="!kanban" >
-                  <div class="box box-info ">
-                      <div class="box-header ">
-                        <div class="col-md-6" >
-                            <h4 class="box-title mt-0"> Thirds</h4>
-                          <p class="box-category"> Here is a subtitle for this table</p>
-                        </div>
-                        <div class="col-md-6" >
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="goToCreateThird()">Create Third</button>
-                        </div>
-
-                      </div>
-                      <div class="box-body">
-
-                          <div class="table-responsive">
-                              <table class="table table-hover">
-                                  <thead class="">
-                                      <th>
-                                          Options
-                                        </th>
-                                      <th>
-                                          ID
-                                      </th>
-                                      <th>
-                                          Logo
-                                      </th>
-                                      <th>
-                                          Name
-                                      </th>
-                                      <th>
-                                          Archived
-                                      </th>
-                                      <th>
-                                          URL
-                                      </th>
-                                      <th>
-                                          Create at
-                                      </th>
-                                      <th>
-                                          Update at
-                                      </th>
-
-                                  </thead>
-                                  <tbody>
-                                      <tr *ngFor="let third of thirds">
-                                          <td>
-                                              <button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEditThird(third.id)" ><i class="fa fa-pencil"></i></button>
-                                              <button *ngIf="!third.archived" (click)="archivedThird(third.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                              <button *ngIf="third.archived" (click)="archivedThird(third.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
-                                            </td>
-                                          <td>
-                                              {{third.id}}
-                                          </td>
-                                          <td>
-                                              {{third.logo}}
-                                          </td>
-                                          <td>
-                                              {{third.name}}
-                                          </td>
-                                          <td>
-                                              {{third.archived}}
-                                          </td>
-                                          <td>
-                                              {{third.url}}
-                                          </td>
-                                          <td>
-                                              {{third.created_at}}
-                                          </td>
-                                          <td>
-                                              {{third.updated_at}}
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>
-
-
-  </section>
-  <!-- /.content -->
-
-
-
-
+<section class="content">
+	<div class="main-content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="row" *ngIf="kanban" >
+					<div class="col-md-12">
+						<div *ngFor="let third of thirds">
+							<div class="col-md-3">
+								<!-- Widget: user widget style 1 -->
+								<div class="box box-widget widget-user-2" >
+									<!-- Add the bg color to the header using any of the bg-* classes -->
+									<div class="widget-user-header bg-aqua" style="height: 100px;">
+										<div class="widget-user-image">
+											<img class="img-circle" src="assets\img\user1-128x128.jpg" alt="User Avatar">
+										</div>
+										<!-- /.widget-user-image -->
+										<h6 class="widget-user-username truncate">{{third.name}}</h6>
+										<h6 class="widget-user-desc"> {{third.phone}}</h6>
+										<h6 class="widget-user-desc"> {{third.phone_2}}</h6>
+									</div>
+									<div class="box-footer" >
+										<div class="pull-right" >
+											<button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEditThird(third.id)" ><i class="fa fa-pencil"></i></button>
+											<button *ngIf="!third.archived" (click)="archivedThird(third, 1)" mat-raised-button class="btn btn-warning btn-sm"><i class="fa fa-folder"></i></button>
+											<button *ngIf="third.archived"  (click)="archivedThird(third, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></button>
+										</div>
+									</div>
+								</div>
+							<!-- /.widget-user -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12" *ngIf="!kanban" >
+					<div class="box box-info ">
+						<div class="box-header ">
+							<div class="col-md-6" >
+								<h4 class="box-title mt-0"> Thirds</h4>
+								<p class="box-category"> Here is a subtitle for this table</p>
+							</div>
+							<div class="col-md-6" >
+								<button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="goToCreateThird()">Create Third</button>
+							</div>
+						</div>
+						<div class="box-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead class="">
+										<th>Options</th>
+										<th>ID</th>
+										<th>Reference nro</th>
+										<th>Name</th>
+										<th>Phone 1</th>
+										<th>Phone 2</th>
+									</thead>
+									<tbody>
+										<tr *ngFor="let third of thirds">
+											<td>
+												<button mat-raised-button class="btn btn-success btn-sm" (click)="goToEditThird(third.id)" ><i class="fa fa-pencil"></i></button>
+												<button *ngIf="!third.archived" (click)="archivedThird(third, 1)" mat-raised-button class="btn btn-warning btn-sm"><i class="fa fa-folder"></i></button>
+												<button *ngIf="third.archived" (click)="archivedThird(third, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></button>
+											</td>
+											<td>{{third.id}}</td>
+											<td>{{third.reference_no}}</td>
+											<td>{{third.name}}</td>
+											<td>{{third.phone}}</td>
+											<td>{{third.phone_2}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <ngx-loading [show]="loading"></ngx-loading>
-

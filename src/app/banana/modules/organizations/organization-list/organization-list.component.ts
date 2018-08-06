@@ -68,6 +68,33 @@ export class OrganizationListComponent implements OnInit {
 		    );
 	}
 
+	search() : void {
+		this.loading = true;
+		const headers = new HttpHeaders().set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+				headers: headers,
+				params: { filter: this.keyword}
+			};
+		this.http.get(BananaConstants.urlServer+'api/organizations/filter', options).toPromise()
+			.then(
+				result => {
+					this.loading = false;
+					this.body = result;
+					this.organizations = this.body.filter_organizations;
+				},
+				msg => {
+					if (msg.status == 406) {
+						tokenUtil(this.router);
+					}
+					this.loading = false;
+					notifyManage(msg);
+				}
+			);
+	}
+
 	archivedOrganization(organization, archived) : void {
 		this.loading = true;
 		showNotification("Archivando organizacion", 2);

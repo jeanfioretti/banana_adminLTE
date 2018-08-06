@@ -37,7 +37,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		// 	let prev = JSON.stringify(chng.previousValue);
 		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
 		// }
-		this.fullAddress();
+		setTimeout(() => { this.fullAddress(); }, 0);
 	}
 
 	fullAddress () {
