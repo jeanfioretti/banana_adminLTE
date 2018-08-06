@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -13,10 +13,10 @@ declare var $: any;
 	templateUrl: './contact.component.html',
 	styleUrls: ['./contact.component.css']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
 	loading = false;
-  @Input() type_view : number;
-  @Input() type : number = 0;
+	@Input() type_view : number;
+	@Input() type : number = 0;
 	@Input() contact : Contact = new Contact();
 	id : number;
 	url_create : string = '';
@@ -36,6 +36,11 @@ export class ContactComponent implements OnInit {
 		this._activeRoute.url.subscribe(url => {
 			this.getRouteContact(url[1].path);
 		});
+		//console.log(this.contact);
+	}
+
+	ngOnDestroy () {
+		//console.log(this.contact);
 	}
 
 	getRouteContact (url) : void {
@@ -43,8 +48,8 @@ export class ContactComponent implements OnInit {
 		switch (url) {
 
 			case 'third-parties':
-				this.url_create = 'thirds/contact/create';
-				this.url_delete = 'thirds/contact/delete';
+				this.url_create = 'thirds/contact/create/';
+				this.url_delete = 'thirds/contact/delete/';
 			break;
 		}
 	}
@@ -54,15 +59,18 @@ export class ContactComponent implements OnInit {
 		this.loading = true;
 		showNotification("Creando contacto", 2);
 		let body : any;
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
 		body = this.contact;
 		body.id = this.id;
-		body.authorization = window.location.origin;
-		body.user_id = sessionStorage.getItem('user_id');
-		body.token = sessionStorage.getItem('user_token');
-		body.app = "BananaCli";
 
 		//console.log(body);
-		this.http.post(BananaConstants.urlServer+'api/' + this.url_create, body).toPromise().then(
+		this.http.post(BananaConstants.urlServer+'api/' + this.url_create, body, options).toPromise().then(
 			result => {
 				//console.log('result.status', result);
 				this.body = result;
@@ -125,14 +133,16 @@ export class ContactComponent implements OnInit {
 		this.loading = true;
 		showNotification("Actualizando contacto", 2);
 		let body : any;
+		const headers = new HttpHeaders()
+			.set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
 		body = this.contact;
-		body.authorization = window.location.origin;
-		body.user_id = sessionStorage.getItem('user_id');
-		body.token = sessionStorage.getItem('user_token');
-		body.app = "BananaCli";
-
-		console.log(body);
-		this.http.post(BananaConstants.urlServer+'api/contacts/update', body).toPromise().then(
+		this.http.put(BananaConstants.urlServer+'api/contacts/update', body, options).toPromise().then(
 			result => {
 				//console.log('result.status', result);
 				showNotification('Actualizado con exito', 1);
@@ -151,18 +161,22 @@ export class ContactComponent implements OnInit {
 	deleteContact (contact) {
 		this.loading = true;
 		showNotification("Eliminando contacto de tercero", 2);
-		let body : any = {};
-		body.contact_id = contact.id;
-		body.third_id = this.id;
-		body.authorization = window.location.origin;
-		body.user_id = sessionStorage.getItem('user_id');
-		body.token = sessionStorage.getItem('user_token');
-		body.app = "BananaCli";
-
-		this.http.post(BananaConstants.urlServer+'api/' + this.url_delete, body).toPromise().then(
+		const headers = new HttpHeaders()
+			.set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
+		this.http.delete(BananaConstants.urlServer+'api/' + this.url_delete + this.id + '/' + contact.id, options).toPromise().then(
 			result => {
 				showNotification('Eliminado con exito', 1);
-				this.contactDelete.emit( contact );
+				this.body = result;
+				if (this.body.third_contact_removed)
+					this.contactDelete.emit( contact );
+				else
+					showNotification('Error al eliminar', 2);
 				this.loading = false;
 			},
 			msg => {

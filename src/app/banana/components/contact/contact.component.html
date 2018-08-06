@@ -6,12 +6,7 @@
 	<div class="modal-dialog  animated">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 *ngIf="type_view == 3">Edit Contact</h3>
-				<h3 *ngIf="type_view == 1">Create Contact</h3>
 				<div class="btn-group pull-right">
-					<button *ngIf="type_view == 3" (click)="deleteContact(contact)" class="btn btn-danger btn-sm">
-						<i class="fa fa-trash"></i>
-					</button>
 					<button type="button" class="close" data-dismiss="modal"
 						(click)="closeModalEdit()" aria-hidden="true"
 					>
@@ -21,6 +16,15 @@
 			</div>
 			<div class="modal-body">
 				<div class="box">
+					<div class="box-header">
+						<h3 *ngIf="type_view == 3">Edit Contact</h3>
+						<h3 *ngIf="type_view == 1">Create Contact</h3>
+						<div class="pull-right box-tools">
+							<button *ngIf="type_view == 3" (click)="deleteContact(contact)" class="btn btn-danger btn-sm">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+					</div>
 					<div class="box-body">
 						<div class="scroll-chevere">
 							<div *ngIf="type_view == 1" class="col-md-12">

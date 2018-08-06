@@ -176,7 +176,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		body.storageNameClient = sessionStorage.getItem('clientStorageName');
 		body.image = this.imageSrc;
 		console.log(body);
-		this.http.post(BananaConstants.urlServer+'api/thirds/update', body, options).toPromise().then(
+		this.http.put(BananaConstants.urlServer+'api/thirds/update', body, options).toPromise().then(
 			result => {
 				showNotification('guardado con exito', 1);
 				this.body = result;

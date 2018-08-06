@@ -59,14 +59,18 @@ export class ContactListComponent implements OnInit {
 		}
 		showNotification(msg_info, 2);
 		let body : any = {};
+		const headers = new HttpHeaders()
+			.set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
 		body.contact_id = contact.id;
 		body.archived = archived;
-		body.authorization = window.location.origin;
-		body.user_id = sessionStorage.getItem('user_id');
-		body.token = sessionStorage.getItem('user_token');
-		body.app = "BananaCli";
 
-		this.http.post(BananaConstants.urlServer+'api/contacts/archived', body).toPromise().then(
+		this.http.put(BananaConstants.urlServer+'api/contacts/archived', body, options).toPromise().then(
 			result => {
 				//this.body = result;
 				showNotification(msg_success, 1);

@@ -2,39 +2,23 @@
 	<div class="col-md-12">
 		<div class="box box-info" [ngClass]="{'collapsed-box': collapsed, '': !collapsed}" >
 			<div class="box-header">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="row">
-								<div class="col">
-									<h4 class="box-title mt-0"> Contacts</h4>
-									<!-- <p class="box-category"> Here is a subtitle for this table</p> -->
-								</div>
-								<div *ngIf="!collapsed" class="col">
-									<app-contact
-										[contact]="contact_list"
-										[type_view]="type_view"
-										(contactInsert)="getContactInsert($event)"
-										(contactDelete)="getContactDelete($event)"
-										(cleanContact)="cleanContact($event)"
-									>
-									</app-contact>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="row">
-								<div class="col">
-									<div class="btn-group pull-right">
-										<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
-											<i *ngIf="!collapsed" class="fa fa-minus"></i>
-											<i *ngIf="collapsed" class="fa fa-plus"></i>
-										</button> &nbsp;
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+				<h4 class="box-title mt-0"> Contacts</h4>
+				<!-- <p class="box-category"> Here is a subtitle for this table</p> -->
+				&nbsp;
+				<app-contact
+					*ngIf="!collapsed"
+					[contact]="contact_list"
+					[type_view]="type_view"
+					(contactInsert)="getContactInsert($event)"
+					(contactDelete)="getContactDelete($event)"
+					(cleanContact)="cleanContact($event)"
+				>
+				</app-contact>
+				<div class="pull-right box-tools">
+					<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
+						<i *ngIf="!collapsed" class="fa fa-minus"></i>
+						<i *ngIf="collapsed" class="fa fa-plus"></i>
+					</button> &nbsp;
 				</div>
 			</div>
 			<div class="box-body">
