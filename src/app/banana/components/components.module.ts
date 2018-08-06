@@ -8,6 +8,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ReactiveFormsModule, FormsModule } from '../../../../node_modules/@angular/forms';
 import { LoadingModule } from '../../../../node_modules/ngx-loading';
 import { BranchListComponent } from './branch-list/branch-list.component';
+import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { BranchListComponent } from './branch-list/branch-list.component';
     CustomColumnsComponent,
     EditFormComponent,
     LocalizationComponent,
-    BranchListComponent
+    BranchListComponent,
+    BranchComponent
   ],
   exports: [
     ContactComponent,
@@ -30,6 +32,8 @@ import { BranchListComponent } from './branch-list/branch-list.component';
     CustomColumnsComponent,
     EditFormComponent,
     LocalizationComponent,
-    BranchListComponent]
+    BranchListComponent,
+    BranchComponent
+  ]
 })
 export class ComponentsModule { }
