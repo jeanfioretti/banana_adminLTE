@@ -1,59 +1,56 @@
 <div class="row">
-	<div class="col-md-12">
-		<div class="box box-info" [ngClass]="{'collapsed-box': collapsed, '': !collapsed}" >
-			<div class="box-header">
-				<h4 class="box-title mt-0"> Branch offices</h4>
-				<!-- <p class="box-category"> Here is a subtitle for this table</p> -->
-				&nbsp;
-				<app-branch></app-branch>
-				<div class="pull-right box-tools">
-					<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
-					<i *ngIf="!collapsed" class="fa fa-minus"></i>
-					<i *ngIf="collapsed" class="fa fa-plus"></i>
-					</button> &nbsp;
-				</div>
-			</div>
-			<div class="box-body">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead class="">
-							<th>Options</th>
-							<th>ID</th>
-							<th>Name</th>
-							<th>Phone 1</th>
-							<th>Phone 2</th>
-							<th>Created</th>
-							<th>Updated</th>
-						</thead>
-						<tbody>
-							<tr *ngFor="let branch of branch_offices">
-								<td>
-									<button class="btn btn-success btn-sm" (click)="gotToEditBranch(branch)">
-										<i class="fa fa-pencil"></i>
-									</button>
-									<button *ngIf="!branch.archived" (click)="archivedBranch(branch, 1)" class="btn btn-warning btn-sm">
-										<i class="fa fa-folder"></i>
-									</button>
-									<button *ngIf="branch.archived" (click)="archivedBranch(branch, 0)" class="btn btn-info btn-sm">
-										<i class="fa fa-folder-open"></i>
-									</button>
-									<!-- <button (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
-										<i class="fa fa-trash"></i>
-									</button> -->
-								</td>
-								<td>{{branch.id}}</td>
-								<td>{{branch.name}}</td>
-								<td>{{branch.phone}}</td>
-								<td>{{branch.phone_2}}</td>
-								<td>{{branch.created_at}}</td> 
-								<td>{{branch.updated_at}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+	<div class="box box-info" [ngClass]="{'collapsed-box': collapsed, '': !collapsed}" >
+		<div class="box-header">
+			<h4 class="box-title mt-0"> Branch offices</h4>
+			<!-- <p class="box-category"> Here is a subtitle for this table</p> -->
+			&nbsp;
+			<app-branch></app-branch>
+			<div class="pull-right box-tools">
+				<button type="button" class="btn btn-default btn-flat" (click)="collapsedCard()">
+				<i *ngIf="!collapsed" class="fa fa-minus"></i>
+				<i *ngIf="collapsed" class="fa fa-plus"></i>
+				</button> &nbsp;
 			</div>
 		</div>
-    </div>
-  </div>
-  <ngx-loading [show]="loading"></ngx-loading>
-  
+		<div class="box-body">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="">
+						<th>Options</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Phone 1</th>
+						<th>Phone 2</th>
+						<th>Created</th>
+						<th>Updated</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let branch of branch_offices">
+							<td>
+								<button class="btn btn-success btn-sm" (click)="gotToEditBranch(branch)">
+									<i class="fa fa-pencil"></i>
+								</button>
+								<button *ngIf="!branch.archived" (click)="archivedBranch(branch, 1)" class="btn btn-warning btn-sm">
+									<i class="fa fa-folder"></i>
+								</button>
+								<button *ngIf="branch.archived" (click)="archivedBranch(branch, 0)" class="btn btn-info btn-sm">
+									<i class="fa fa-folder-open"></i>
+								</button>
+								<!-- <button (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
+									<i class="fa fa-trash"></i>
+								</button> -->
+							</td>
+							<td>{{branch.id}}</td>
+							<td>{{branch.name}}</td>
+							<td>{{branch.phone}}</td>
+							<td>{{branch.phone_2}}</td>
+							<td>{{branch.created_at}}</td> 
+							<td>{{branch.updated_at}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>  

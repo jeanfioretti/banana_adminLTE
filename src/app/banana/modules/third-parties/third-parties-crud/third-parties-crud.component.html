@@ -1,6 +1,4 @@
-
-  <!-- Content Header (Page header) -->
-<section class="content-header">
+<!-- <section class="content-header">
 	<h1>
 	  Page Header
 	  <small>Optional description</small>
@@ -9,194 +7,192 @@
 	  <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
 	  <li class="active">Here</li>
 	</ol>
-</section>
+</section> -->
   <!-- Main content -->
 <section class="content">
 	<div class="main-content">
-		<div class="col-md-12" ><!-- <app-custom-columns></app-custom-columns> --></div>
+		<!-- <div class="col-md-12" ><app-custom-columns></app-custom-columns></div> -->
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-info">
-						<div class="box-header">
-							<h3 class="box-title">{{title_third}}</h3>
-							<div class="pull-right box-tools">
-								<button *ngIf="type_view == 3" class="btn btn-danger btn-sm" data-toggle="tooltip" title=""
-									type="button" data-original-title="Delete third"
-									(click)="deleteThird()">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
+				<div class="box box-info">
+					<div class="box-header">
+						<h3 class="box-title">{{title_third}}</h3>
+						<div class="pull-right box-tools">
+							<button *ngIf="type_view == 3" class="btn btn-danger btn-sm" data-toggle="tooltip" title=""
+								type="button" data-original-title="Delete third"
+								(click)="deleteThird()">
+								<i class="fa fa-trash"></i>
+							</button>
 						</div>
-						<div class="box-body">
-							<!-- <app-dynamic-form [entity]="third" (myEvent)="getEventform($event)" [type]="1" ></app-dynamic-form> -->
-							<div class="col-md-6">
-								<label><span>Client</span></label>
-								<input type="text" readonly class="form-control" [(ngModel)]="client.client_name" [ngModelOptions]="{standalone: true}">
-							</div>
-							<div class="col-md-6">
-								<div class="image-upload">
-									<img [src]="imageSrc" style="max-width:300px;max-height:300px"/>
-									<input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<label for="organization"><span>Organization</span></label>
-								<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
-									<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
-										{{organization.name}}
-									</option>
-								</select>
-							</div>
-							<div class="col-md-6">
-								<label for="name"><span>Business name</span></label>
-								<input name="name" type="text" class="form-control" [(ngModel)]="third.name" [ngModelOptions]="{standalone: true}">
-							</div>
-
-							<div class="col-md-6">
-								<label for="group_third"><span>Group of thirds</span></label>
-								<select name="group_third" class="form-control">
-									<option value="0"></option>
-								</select>
-							</div>
-							<div class="col-md-6">
-								<label for="name_2"><span>Company name</span></label>
-								<input name="name_2" type="text" class="form-control"
-									[(ngModel)]="third.name_2" [ngModelOptions]="{standalone: true}"
-								>
-							</div>
-
-							<div class="col-md-6">
-								<label for="reference_no"><span>Reference Number</span></label>
-								<input name="reference_no" type="text" class="form-control" placeholder="Reference No" [(ngModel)]="third.reference_no" [ngModelOptions]="{standalone: true}">
-							</div>
-							<div class="col-sm-6">
-								<label for="customer">
-									<input name="customer" class="form-check-input" type="checkbox" value=""
-										[checked]="third.is_customer == 1 ? true : false"
-										[(ngModel)]="third.is_customer"
-										[ngModelOptions]="{standalone: true}"
-									>
-									<span>Customer</span>
-								</label>
-							</div>
-
-							<div class="col-sm-6">
-								<label for="vendor">
-									<input name="vendor" class="form-check-input" type="checkbox" value=""
-										[checked]="third.is_vendor == 1 ? true : false"
-										[(ngModel)]="third.is_vendor" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Vendor</span>
-								</label>
-							</div>
-							<div class="col-sm-6">
-								<label for="sales_rep">
-									<input name="sales_rep" class="form-check-input" type="checkbox" value=""
-										[checked]="third.is_sales_rep == 1 ? true : false"
-										[(ngModel)]="third.is_sales_rep"
-										[ngModelOptions]="{standalone: true}"
-									>
-									<span>Sales representative</span>
-								</label>
-							</div>
-
-							<div class="col-sm-6">
-								<label for="prospect">
-									<input name="prospect" class="form-check-input" type="checkbox" value=""
-										[checked]="third.is_prospect == 1 ? true : false"
-										[(ngModel)]="third.is_prospect"
-										[ngModelOptions]="{standalone: true}"
-									>
-									<span>Prospect</span>
-								</label>
-							</div>
-							<div class="col-sm-6">
-								<label for="tax_exempt">
-									<input name="tax_exempt" class="form-check-input" type="checkbox" value=""
-										[checked]="third.is_tax_exempt == 1 ? true : false"
-										[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Exempt from sales</span>
-								</label>
-							</div>
-
-							<div class="col-sm-6">
-								<label for="po_tax_exempt">
-									<input name="po_tax_exempt" class="form-check-input" type="checkbox" value=""
-										[checked]="third.is_po_tax_exempt == 1 ? true : false"
-										[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Exempt from purchase</span>
-								</label>
-							</div>
-							<div class="col-sm-6">
-								<label for="url"><span>Url</span></label>
-								<input name="url" type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
-							</div>
-
-							<div class="col-sm-6">
-								<label for="phone"><span>Phone</span></label>
-								<input name="phone" type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
-							</div>
-							<div class="col-sm-6">
-								<label><span>Address</span></label>
-								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-								<app-localization
-									[localization]="localization"
-									[countries]="countries"
-									[states]="states"
-									[cities]="cities"
-									(address)="getFullAddress($event)"
-								>
-								</app-localization>
-							</div>
-
-							<div class="col-sm-6">
-								<label for="represent_id">Sales representative</label>
-								<select name="represent_id" class="form-control" [(ngModel)]="third.sales_rep_id" [ngModelOptions]="{standalone: true}">
-									<option *ngFor="let represent of combo_select.sales_representatives" [ngValue]="represent.id">
-										{{represent.name}}
-									</option>
-								</select>
-							</div>
-							<div class="col-sm-6">
-								<label for="phone_2"><span>Phone</span></label>
-								<input name="name_2" type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
-							</div>
-							
-							<div class="col-md-12">
-								<label for="description">Description</label>
-								<textarea name="description" class="form-control" rows="3" [(ngModel)]="third.description" [ngModelOptions]="{standalone: true}">
-								</textarea>
-							</div>
-							
-							<div class="col-sm-6">
-								<label>Credit limit</label>
-								<input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
-							</div>
-							<div class="col-sm-6">
-								<label>Flat discount</label>
-								<input type="text" class="form-control" placeholder="Flat Discount" [(ngModel)]="third.flat_discount" [ngModelOptions]="{standalone: true}">
-							</div>
-							
-							<div class="col-sm-6">
-								<label>Language</label>
-								<select class="form-control" [(ngModel)]="third.language_id" [ngModelOptions]="{standalone: true}">
-									<option *ngFor="let language of combo_select.languages" [ngValue]="language.id">
-										{{ language.languagescol }}
-									</option>
-								</select>
-							</div>
-
-						</div>
-						<div class="box-footer">
-							<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
-							<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
-						</div>
-						<div class="clearfix"></div>
 					</div>
+					<div class="box-body">
+						<!-- <app-dynamic-form [entity]="third" (myEvent)="getEventform($event)" [type]="1" ></app-dynamic-form> -->
+						<div class="col-md-6">
+							<label><span>Client</span></label>
+							<input type="text" readonly class="form-control" [(ngModel)]="client.client_name" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-md-6">
+							<div class="image-upload">
+								<img [src]="imageSrc" style="max-width:300px;max-height:300px"/>
+								<input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<label for="organization"><span>Organization</span></label>
+							<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
+								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
+									{{organization.name}}
+								</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label for="name"><span>Business name</span></label>
+							<input name="name" type="text" class="form-control" [(ngModel)]="third.name" [ngModelOptions]="{standalone: true}">
+						</div>
+
+						<div class="col-md-6">
+							<label for="group_third"><span>Group of thirds</span></label>
+							<select name="group_third" class="form-control">
+								<option value="0"></option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label for="name_2"><span>Company name</span></label>
+							<input name="name_2" type="text" class="form-control"
+								[(ngModel)]="third.name_2" [ngModelOptions]="{standalone: true}"
+							>
+						</div>
+
+						<div class="col-md-6">
+							<label for="reference_no"><span>Reference Number</span></label>
+							<input name="reference_no" type="text" class="form-control" placeholder="Reference No" [(ngModel)]="third.reference_no" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-6">
+							<label for="customer">
+								<input name="customer" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_customer == 1 ? true : false"
+									[(ngModel)]="third.is_customer"
+									[ngModelOptions]="{standalone: true}"
+								>
+								<span>Customer</span>
+							</label>
+						</div>
+
+						<div class="col-sm-6">
+							<label for="vendor">
+								<input name="vendor" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_vendor == 1 ? true : false"
+									[(ngModel)]="third.is_vendor" [ngModelOptions]="{standalone: true}"
+								>
+								<span>Vendor</span>
+							</label>
+						</div>
+						<div class="col-sm-6">
+							<label for="sales_rep">
+								<input name="sales_rep" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_sales_rep == 1 ? true : false"
+									[(ngModel)]="third.is_sales_rep"
+									[ngModelOptions]="{standalone: true}"
+								>
+								<span>Sales representative</span>
+							</label>
+						</div>
+
+						<div class="col-sm-6">
+							<label for="prospect">
+								<input name="prospect" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_prospect == 1 ? true : false"
+									[(ngModel)]="third.is_prospect"
+									[ngModelOptions]="{standalone: true}"
+								>
+								<span>Prospect</span>
+							</label>
+						</div>
+						<div class="col-sm-6">
+							<label for="tax_exempt">
+								<input name="tax_exempt" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_tax_exempt == 1 ? true : false"
+									[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
+								>
+								<span>Exempt from sales</span>
+							</label>
+						</div>
+
+						<div class="col-sm-6">
+							<label for="po_tax_exempt">
+								<input name="po_tax_exempt" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_po_tax_exempt == 1 ? true : false"
+									[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
+								>
+								<span>Exempt from purchase</span>
+							</label>
+						</div>
+						<div class="col-sm-6">
+							<label for="url"><span>Url</span></label>
+							<input name="url" type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
+						</div>
+
+						<div class="col-sm-6">
+							<label for="phone"><span>Phone</span></label>
+							<input name="phone" type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-6">
+							<label><span>Address</span></label>
+							<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+							<app-localization
+								[localization]="localization"
+								[countries]="countries"
+								[states]="states"
+								[cities]="cities"
+								(address)="getFullAddress($event)"
+							>
+							</app-localization>
+						</div>
+
+						<div class="col-sm-6">
+							<label for="represent_id">Sales representative</label>
+							<select name="represent_id" class="form-control" [(ngModel)]="third.sales_rep_id" [ngModelOptions]="{standalone: true}">
+								<option *ngFor="let represent of combo_select.sales_representatives" [ngValue]="represent.id">
+									{{represent.name}}
+								</option>
+							</select>
+						</div>
+						<div class="col-sm-6">
+							<label for="phone_2"><span>Phone</span></label>
+							<input name="name_2" type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
+						</div>
+						
+						<div class="col-md-12">
+							<label for="description">Description</label>
+							<textarea name="description" class="form-control" rows="3" [(ngModel)]="third.description" [ngModelOptions]="{standalone: true}">
+							</textarea>
+						</div>
+						
+						<div class="col-sm-6">
+							<label>Credit limit</label>
+							<input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-6">
+							<label>Flat discount</label>
+							<input type="text" class="form-control" placeholder="Flat Discount" [(ngModel)]="third.flat_discount" [ngModelOptions]="{standalone: true}">
+						</div>
+						
+						<div class="col-sm-6">
+							<label>Language</label>
+							<select class="form-control" [(ngModel)]="third.language_id" [ngModelOptions]="{standalone: true}">
+								<option *ngFor="let language of combo_select.languages" [ngValue]="language.id">
+									{{ language.languagescol }}
+								</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="box-footer">
+						<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
+						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createThird()" >Create Third</button>
+					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
 			<div *ngIf="type_view == 3">
