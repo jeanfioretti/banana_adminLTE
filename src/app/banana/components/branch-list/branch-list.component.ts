@@ -5,6 +5,7 @@ import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../utils/notifyUtil';
 import { BranchOffice } from '../../models/branch';
 import { BananaConstants } from '../../utils/constants';
+import { Localization } from '../../models/localization';
 declare var $: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class BranchListComponent implements OnInit {
 	body : any;
 	collapsed : boolean = true;
 	@Input() branch_offices : Array<any> = [];
+	localization : Localization = new Localization();
 	branch_list : BranchOffice = new BranchOffice();
 	type_view : number;
 

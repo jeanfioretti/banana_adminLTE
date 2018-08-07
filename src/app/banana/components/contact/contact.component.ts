@@ -195,8 +195,8 @@ export class ContactComponent implements OnInit, OnDestroy {
 			$('#contactModal').modal('show');
 		},
 		230);
-  }
-  openContactModalEmpty () {
+	}
+	openContactModalEmpty () {
 		this.type_view = 1;
 		this.contact = new Contact();
 

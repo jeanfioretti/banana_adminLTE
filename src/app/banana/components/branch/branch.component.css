@@ -1,0 +1,6 @@
+.scroll-chevere {
+    transform: translate(0, 0);
+    padding: 10px;
+    height: 375px;
+    overflow: auto;
+}

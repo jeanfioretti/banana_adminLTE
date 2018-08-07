@@ -17,6 +17,7 @@ declare var $: any;
 export class LocalizationComponent implements OnInit, OnChanges {
 	loading = false;
 	localizationTitle : string ='Crear Localizacion';
+	@Input() id_modal : string;
 	@Input() localization : Localization = new Localization();
 	@Input() countries : any = [];
 	@Input() states : any = [];
@@ -163,8 +164,9 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	}
 
 	openLocalizationModal(){
+		var id_modal = '#'+this.id_modal;
 		setTimeout( function(){
-			$('#localizationModal').modal('show');
+			$(id_modal).modal('show');
 		},
 		230);
 	}

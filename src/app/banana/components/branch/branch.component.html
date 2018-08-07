@@ -1,3 +1,116 @@
-<p>
-  branch works!
-</p>
+<button class="btn btn-success btn-sm" (click)="openBranchModalEmpty()"  *ngIf="type != 1" ><i class="fa fa-plus"></i> New Branch Offices</button>
+
+<!-- <button class="btn btn-success btn-sm" (click)="openBranchModal()" *ngIf="type == 1" ><i class="fa fa-plus"></i> View Branch</button> -->
+
+<div  class="modal" id="branchModal" >
+	<div class="modal-dialog  animated">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="btn-group pull-right">
+					<button type="button" class="close" data-dismiss="modal"
+						(click)="closeModalEdit()" aria-hidden="true"
+					>
+						&times;
+					</button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="box">
+					<div class="box-header">
+						<h3 *ngIf="type_view == 3">Edit Branch Offices</h3>
+						<h3 *ngIf="type_view == 1">Create Branch Offices</h3>
+						<div class="pull-right box-tools">
+							<button *ngIf="type_view == 3" (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="scroll-chevere">
+							<div class="col-md-12">
+								<label><span>Name</span></label>
+								<input [(ngModel)]="branch.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch name" >
+							</div>
+							<div class="col-md-12">
+								<label><span>Title</span></label>
+								<input [(ngModel)]="branch.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch title" >
+							</div>
+							<div class="col-sm-12">
+								<label><span>Address</span></label>
+								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+								<app-localization
+									[id_modal]="'locationBranch'"
+									[localization]="localization"
+									[countries]="countries"
+									[states]="states"
+									[cities]="cities"
+									(address)="getFullAddress($event)"
+								>
+								</app-localization>
+							</div>
+							<div class="col-md-3">
+								<label for="ship_to">
+									<input name="ship_to" class="form-check-input" type="checkbox"
+										[checked]="branch.is_ship_to == 1 ? true : false"
+										[(ngModel)]="branch.is_ship_to" [ngModelOptions]="{standalone: true}"
+									>
+									<span>Ship to</span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label for="bill_to">
+									<input name="bill_to" class="form-check-input" type="checkbox"
+										[checked]="branch.is_bill_to == 1 ? true : false"
+										[(ngModel)]="branch.is_bill_to" [ngModelOptions]="{standalone: true}"
+									>
+									<span>Bill to</span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label for="pay_from">
+									<input name="pay_from" class="form-check-input" type="checkbox"
+										[checked]="branch.is_pay_from == 1 ? true : false"
+										[(ngModel)]="branch.is_pay_from" [ngModelOptions]="{standalone: true}"
+									>
+									<span>Pay From</span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label for="remit_to">
+									<input name="remit_to" class="form-check-input" type="checkbox"
+										[checked]="branch.is_remit_to == 1 ? true : false"
+										[(ngModel)]="branch.is_remit_to" [ngModelOptions]="{standalone: true}"
+									>
+									<span>Remit to</span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label><span>Phone</span></label>
+								<input [(ngModel)]="branch.phone" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch phone" >
+							</div>
+							<div class="col-md-6">
+								<label><span>Phone 2</span></label>
+								<input [(ngModel)]="branch.phone_2" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch phone 2" >
+							</div>
+							<div class="col-md-6">
+								<label><span>Fax</span></label>
+								<input [(ngModel)]="branch.fax" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch fax" >
+							</div>
+							<div class="col-md-6">
+								<label><span>ISDN</span></label>
+								<input [(ngModel)]="branch.isdn" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch birthday" >
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateBranchOffice()" >Update Branch Offices</button>
+						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createBranchOffice()" >Create Branch Offices</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
