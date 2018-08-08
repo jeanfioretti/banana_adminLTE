@@ -102,19 +102,18 @@ export class RolesCrudComponent implements OnInit {
   }
   createRol(): void {
     this.loading = true;
-    const body = {
-      authorization: window.location.origin,
-      user_id: sessionStorage.getItem('user_id'),
-      token: sessionStorage.getItem('user_token'),
-      app:'bananaCli',
-      rol_name: this.rol.rol_name,
-      description:this.rol.description,
-      all_access_column:this.rol.all_access_column,
-      all_access_organization:this.rol.all_access_organization,
-      permits_rol :this.selectedPermission
-    };
+    const headers = new HttpHeaders().set('Authorization', window.location.origin)
+    .append('user_id', sessionStorage.getItem('user_id'))
+    .append('token', sessionStorage.getItem('user_token'))
+    .append('app', 'bananaCli');
+    const options =  {
+            headers: headers,
+        };
+    let body : any;
+    body = this.rol;
+    body.permits_rol = this.selectedPermission;
     console.log(body);
-    this.http.post(BananaConstants.urlServer+'api/rols/create', body).toPromise().then(
+    this.http.post(BananaConstants.urlServer+'api/rols/create', body, options).toPromise().then(
             result => {
                     console.log('result.status', result);
                     this.loading = false;
@@ -131,20 +130,19 @@ export class RolesCrudComponent implements OnInit {
   }
   updateRol(): void {
     this.loading = true;
-    const body = {
-      authorization: window.location.origin,
-      user_id: sessionStorage.getItem('user_id'),
-      token: sessionStorage.getItem('user_token'),
-      app:'bananaCli',
-      rol_id : this.id,
-      rol_name: this.rol.rol_name,
-      description:this.rol.description,
-      all_access_column:this.rol.all_access_column,
-      all_access_organization:this.rol.all_access_organization,
-      permits_rol :this.selectedPermission
+    const headers = new HttpHeaders().set('Authorization', window.location.origin)
+    .append('user_id', sessionStorage.getItem('user_id'))
+    .append('token', sessionStorage.getItem('user_token'))
+    .append('app', 'bananaCli');
+    const options =  {
+        headers: headers,
     };
+    
+    let body : any;
+    body = this.rol;
+    body.permits_rol = this.selectedPermission;
     console.log(body);
-    this.http.post(BananaConstants.urlServer+'api/rols/update', body).toPromise().then(
+    this.http.put(BananaConstants.urlServer+'api/rols/update', body, options).toPromise().then(
             result => {
                     console.log('result.status', result);
                     this.loading = false;

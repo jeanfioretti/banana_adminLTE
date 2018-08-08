@@ -32,7 +32,7 @@ export class RolesListComponent implements OnInit {
     .append('token', sessionStorage.getItem('user_token'))
     .append('app', 'bananaCli');
     const options =  {
-            headers: headers,
+          headers: headers,
         };
     this.http.get(BananaConstants.urlServer+'api/rols', options).toPromise().then(
             result => {
@@ -50,25 +50,27 @@ export class RolesListComponent implements OnInit {
               notifyManage(msg);
           }
       );
-
-
   }
 
-  archivedRol(id, archived) : void {
+  archivedRol(rol, archived) : void {
     this.loading = true;
+    const headers = new HttpHeaders().set('Authorization', window.location.origin)
+      .append('user_id', sessionStorage.getItem('user_id'))
+      .append('token', sessionStorage.getItem('user_token'))
+      .append('app', 'bananaCli');
+
+    const options =  {
+      headers: headers,
+    };
+
     const body :any = {
-      rol_id : id,
+      rol_id : rol.id,
       archived: archived
     };
-    body.authorization = window.location.origin;
-    body.user_id = sessionStorage.getItem('user_id');
-    body.token = sessionStorage.getItem('user_token');
-    body.app = "BananaCli";
-    console.log(body);
-    this.http.post(BananaConstants.urlServer+'api/rols/archived', body).toPromise().then(
+
+    this.http.put(BananaConstants.urlServer+'api/rols/archived', body, options).toPromise().then(
       result => {
-        console.log('result.status', result);
-        this.getRols();
+        rol.archived = archived;
          showNotification('archivado con exito', 1);
          this.loading = false;
       },
@@ -92,6 +94,7 @@ export class RolesListComponent implements OnInit {
     showNotification('Redireccionando.. espere', 3);
     this.router.navigate(['app/roles/new'])
   }
+  
   search(){
 
     // if ((<string>this.keyword).length < 3) {

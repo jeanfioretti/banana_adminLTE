@@ -43,7 +43,7 @@ export class ThirdPartiesListComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 
 		this.http.get(BananaConstants.urlServer+'api/thirds', options).toPromise()

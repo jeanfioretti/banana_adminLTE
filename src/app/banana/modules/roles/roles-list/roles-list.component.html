@@ -123,14 +123,14 @@
                                     <tr *ngFor="let rol of rols">
                                         <td>
                                             <button mat-raised-button class="btn btn-warning btn-sm" (click)="goToEdit(rol.id)" ><i class="fa fa-pencil"></i></button>
-                                            <button *ngIf="!rol.archived" (click)="archivedRol(rol.id, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                            <button *ngIf="rol.archived" (click)="archivedRol(rol.id, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
+                                            <button *ngIf="!rol.archived" (click)="archivedRol(rol, 1)" mat-raised-button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                            <button *ngIf="rol.archived" (click)="archivedRol(rol, 0)" mat-raised-button class="btn btn-info btn-sm"><i class="fa fa-check"></i></button>
                                           </td>
                                         <td>
                                             {{rol.id}}
                                         </td>
                                         <td>
-                                            {{rol.rol_name}}
+                                            {{rol.name}}
                                         </td>
                                         <td>
                                             {{rol.description}}
