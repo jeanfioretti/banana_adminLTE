@@ -27,6 +27,36 @@ export class BranchListComponent implements OnInit {
 	ngOnInit() {
 	}
 
+	getBranchInsert (branch) {
+		this.branch_offices.splice(0, 0, branch);
+	}
+
+	gotToEditBranch(branch) {
+		this.branch_list = branch;
+		this.localization = branch.localization;
+		this.type_view = 3;
+		setTimeout(
+			function(){
+				$('#branchModal').modal('show');
+			},
+			230
+		);
+	}
+
+	cleanBranch(clean_branch) {
+		this.type_view = 3;
+		this.branch_list = clean_branch;
+	}
+
+	getBranchDelete (branch_delete) {
+		for (var i = 0; i < this.branch_offices.length; ++i) {
+			if ( this.branch_offices[i].id == branch_delete.id ) {
+				this.branch_offices.splice(i,1);
+				break;
+			}
+		}
+	}
+
 	collapsedCard(){
 		this.collapsed = !this.collapsed;
 	}

@@ -64,9 +64,20 @@
 				<div class="col-md-12">
 					<div class="box box-info ">
 						<div class="box-header ">
-							<button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="goToCreateThird()">
+							<button mat-raised-button type="submit" class="btn btn-danger" (click)="goToCreateThird()">
 								Create Third
 							</button>
+						<div class="btn-group pull-right">
+							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('all')" >
+								All
+							</button>
+							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('vendor')" >
+								Vendor
+							</button>
+							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('customer')" >
+								Customer
+							</button>
+						</div>
 						</div>
 						<div class="box-body">
 							<div class="table-responsive">
@@ -76,8 +87,6 @@
 										<th>ID</th>
 										<th>Reference nro</th>
 										<th>Name</th>
-										<th>Phone 1</th>
-										<th>Phone 2</th>
 									</thead>
 									<tbody>
 										<tr *ngFor="let third of thirds">
@@ -89,8 +98,6 @@
 											<td>{{third.id}}</td>
 											<td>{{third.reference_no}}</td>
 											<td>{{third.name}}</td>
-											<td>{{third.phone}}</td>
-											<td>{{third.phone_2}}</td>
 										</tr>
 									</tbody>
 								</table>
