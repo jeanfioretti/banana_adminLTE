@@ -25,9 +25,9 @@ export class BranchComponent implements OnInit {
 	states : any = [];
 	cities : any = [];
 	full_address : string = '';
-	/* @Output() contactInsert = new EventEmitter<any>();
-	@Output() contactDelete = new EventEmitter<any>();
-	@Output() cleanContact = new EventEmitter<any>(); */
+	@Output() branchInsert = new EventEmitter<any>();
+	@Output() branchDelete = new EventEmitter<any>();
+	@Output() cleanBranch = new EventEmitter<any>();
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
@@ -45,7 +45,7 @@ export class BranchComponent implements OnInit {
 	createBranchOffice(): void {
 
 		this.loading = true;
-		showNotification("Creando contacto", 2);
+		showNotification("Creando sucursal", 2);
 		let body : any;
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user_id', sessionStorage.getItem('user_id'))
@@ -59,14 +59,73 @@ export class BranchComponent implements OnInit {
 		body.branch_location = this.localization;
 		this.http.post(BananaConstants.urlServer+'api/' + 'thirds/branch/create', body, options).toPromise().then(
 			result => {
-				//console.log('result.status', result);
+				this.body = result;
+				showNotification('guardado con exito', 1);
+				this.branchInsert.emit( this.body.branch_office );
+				this.branch = new BranchOffice();
+				this.loading = false;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
+	updateBranchOffice(): void {
+		this.loading = true;
+		showNotification("Actualizando sucursal", 2);
+		let body : any;
+		const headers = new HttpHeaders()
+			.set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
+		body = this.branch;
+		body.branch_location = this.localization;
+		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/update', body, options).toPromise().then(
+			result => {
 				this.body = result;
 				console.log(this.body);
-				showNotification('guardado con exito', 1);
-				// this.contactInsert.emit( this.body.contact );
-				// this.contact = new Contact();
+				showNotification('Actualizado con exito', 1);
 				this.loading = false;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
 
+	deleteBranch (branch) {
+		this.loading = true;
+		showNotification("Eliminando sucursal", 2);
+		const headers = new HttpHeaders()
+			.set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+		};
+		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + branch.id, options).toPromise().then(
+			result => {
+				showNotification('Eliminado con exito', 1);
+				this.body = result;
+				if (this.body.branch_removed)
+					this.branchDelete.emit( branch );
+				else
+					showNotification('Error al eliminar', 2);
+				this.loading = false;
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -139,11 +198,18 @@ export class BranchComponent implements OnInit {
 	openBranchModalEmpty () {
 		this.type_view = 1;
 		this.branch = new BranchOffice();
+		this.localization = new Localization();
 
 		setTimeout( function(){
 			$('#branchModal').modal('show');
 		},
 		230);
+	}
+
+	closeModalEdit () {
+		var clean_branch = new BranchOffice();
+		this.type_view = 3;
+		this.cleanBranch.emit(clean_branch);
 	}
 
 }

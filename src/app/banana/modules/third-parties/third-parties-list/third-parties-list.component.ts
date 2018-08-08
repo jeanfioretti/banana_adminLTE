@@ -27,7 +27,7 @@ export class ThirdPartiesListComponent implements OnInit {
 
 	ngOnInit() {
 		AuthBanana(this.router);
-		this.getThirds();
+		this.getThirds('all');
 		this.titleTable = 'Terceros';
 		sessionStorage.setItem('table_id', '17');
 	}
@@ -36,7 +36,7 @@ export class ThirdPartiesListComponent implements OnInit {
 		this.kanban = !this.kanban;
 	}
 
-	getThirds(): void {
+	getThirds(type_third): void {
 		this.loading = true;
 		const headers = new HttpHeaders().set('Authorization', window.location.origin)
 			.append('user_id', sessionStorage.getItem('user_id'))
@@ -44,6 +44,7 @@ export class ThirdPartiesListComponent implements OnInit {
 			.append('app', 'bananaCli');
 		const options =  {
 			headers: headers,
+			params: { type_third: type_third }
 		};
 
 		this.http.get(BananaConstants.urlServer+'api/thirds', options).toPromise()
@@ -73,9 +74,9 @@ export class ThirdPartiesListComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
-				headers: headers,
-				params: { filter: this.keyword}
-			};
+			headers: headers,
+			params: { filter: this.keyword}
+		};
 		this.http.get(BananaConstants.urlServer+'api/thirds/filter', options).toPromise()
 			.then(
 				result => {

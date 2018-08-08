@@ -154,6 +154,7 @@
 						<div class="col-sm-6">
 							<label for="represent_id">Sales representative</label>
 							<select name="represent_id" class="form-control" [(ngModel)]="third.sales_rep_id" [ngModelOptions]="{standalone: true}">
+								<option [ngValue]="null">Select representative</option>
 								<option *ngFor="let represent of combo_select.sales_representatives" [ngValue]="represent.id">
 									{{represent.name}}
 								</option>

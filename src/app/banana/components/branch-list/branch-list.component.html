@@ -9,6 +9,9 @@
 				[branch]="branch_list"
 				[localization]="localization"
 				[type_view]="type_view"
+				(branchInsert)="getBranchInsert($event)"
+				(branchDelete)="getBranchDelete($event)"
+				(cleanBranch)="cleanBranch($event)"
 			>
 			</app-branch>
 			<div class="pull-right box-tools">
