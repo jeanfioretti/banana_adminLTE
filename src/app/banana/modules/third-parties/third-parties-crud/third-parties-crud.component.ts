@@ -180,7 +180,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			result => {
 				showNotification('guardado con exito', 1);
 				this.body = result;
-				console.log(this.body);
+				//console.log(this.body);
 				this.loading = false;
 			},
 			msg => {
