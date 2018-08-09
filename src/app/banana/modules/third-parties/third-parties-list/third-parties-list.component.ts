@@ -27,8 +27,8 @@ export class ThirdPartiesListComponent implements OnInit {
 
 	ngOnInit() {
 		AuthBanana(this.router);
-		this.getThirds('all');
-		this.titleTable = 'Terceros';
+		this.getThirds('Thirds');
+		this.titleTable = 'Thirds';
 		sessionStorage.setItem('table_id', '17');
 	}
 
@@ -37,6 +37,7 @@ export class ThirdPartiesListComponent implements OnInit {
 	}
 
 	getThirds(type_third): void {
+		this.titleTable = type_third;
 		this.loading = true;
 		const headers = new HttpHeaders().set('Authorization', window.location.origin)
 			.append('user_id', sessionStorage.getItem('user_id'))

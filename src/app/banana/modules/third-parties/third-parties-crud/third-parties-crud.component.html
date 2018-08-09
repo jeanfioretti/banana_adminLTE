@@ -138,17 +138,21 @@
 							<input name="phone" type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
 						</div>
 						<div class="col-sm-6">
-							<label><span>Address</span></label>
-							<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-							<app-localization
-								[id_modal]="'locationThird'"
-								[localization]="localization"
-								[countries]="countries"
-								[states]="states"
-								[cities]="cities"
-								(address)="getFullAddress($event)"
-							>
-							</app-localization>
+							<div class="input-group no-border">
+								<label><span>Address</span></label>
+								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+								<span class="input-group-btn">
+									<app-localization
+									[id_modal]="'locationThird'"
+									[localization]="localization"
+									[countries]="countries"
+									[states]="states"
+									[cities]="cities"
+									(address)="getFullAddress($event)"
+									>
+									</app-localization>
+								</span>
+							</div>
 						</div>
 
 						<div class="col-sm-6">

@@ -16,13 +16,16 @@ declare var $: any;
 })
 export class LocalizationComponent implements OnInit, OnChanges {
 	loading = false;
-	localizationTitle : string ='Crear Localizacion';
+	localizationTitle : string ='Localizacion';
 	@Input() id_modal : string;
 	@Input() localization : Localization = new Localization();
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
 	@Output() address = new EventEmitter<any>();
+	searching : boolean = false;
+	search : string = '';
+	locations_search : Array<any> = [];
 	body: any;
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
@@ -39,6 +42,48 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
 		// }
 		setTimeout(() => { this.fullAddress(); }, 0);
+	}
+
+	searchingLocation (event: any): void {
+		if (event.target.value.length >= 3) {
+		  this.searching = true;
+		  this.searchLocation();
+		} else {
+		  this.searching = false;
+		  this.locations_search = [];
+		}
+	}
+
+	searchLocation () {
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers,
+			params: { search: this.search }
+		};
+
+		this.http.get(BananaConstants.urlServer+'api/contacts/search', options).toPromise().then(
+			result => {
+				this.body = result;
+				this.locations_search = this.body.search_contacts;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
+	selectLocation (contact) {
+		this.contact = contact;
+		this.locations_search = [];
+		this.searching = false;
+		this.search = '';
 	}
 
 	fullAddress () {

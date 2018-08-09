@@ -36,17 +36,21 @@
 								<input [(ngModel)]="branch.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch title" >
 							</div>
 							<div class="col-sm-12">
-								<label><span>Address</span></label>
-								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-								<app-localization
-									[id_modal]="'locationBranch'"
-									[localization]="localization"
-									[countries]="countries"
-									[states]="states"
-									[cities]="cities"
-									(address)="getFullAddress($event)"
-								>
-								</app-localization>
+								<div class="input-group no-border">
+									<label><span>Address</span></label>
+									<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+									<span class="input-group-btn">
+										<app-localization
+											[id_modal]="'locationBranch'"
+											[localization]="localization"
+											[countries]="countries"
+											[states]="states"
+											[cities]="cities"
+											(address)="getFullAddress($event)"
+										>
+										</app-localization>
+									</span>
+								</div>
 							</div>
 							<div class="col-md-3">
 								<label for="ship_to">

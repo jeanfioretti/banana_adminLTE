@@ -1,7 +1,7 @@
 <section class="content-header">
 	<div class="col-md-4">
 		<h1>
-			Clients
+			{{ titleTable }}
 			<!-- <small>Optional description</small> -->
 		</h1>
 	</div>
@@ -68,13 +68,13 @@
 								Create Third
 							</button>
 						<div class="btn-group pull-right">
-							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('all')" >
+							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('Thirds')" >
 								All
 							</button>
-							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('vendor')" >
+							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('Vendor')" >
 								Vendor
 							</button>
-							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('customer')" >
+							<button type="button" class="btn btn-default btn-flat" (click)="getThirds('Customer')" >
 								Customer
 							</button>
 						</div>
