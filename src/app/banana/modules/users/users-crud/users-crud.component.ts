@@ -95,7 +95,7 @@ export class UsersCrudComponent implements OnInit {
       const md5 = new Md5();
       body = this.user;
 
-      this.http.post(BananaConstants.urlServer+'api/users/update', body, options).toPromise().then(
+      this.http.put(BananaConstants.urlServer+'api/users/update', body, options).toPromise().then(
         result => {
           showNotification('guardado con exito', 1);
           this.loading = false;
