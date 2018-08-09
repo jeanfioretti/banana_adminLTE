@@ -58,18 +58,16 @@ export class ContactComponent implements OnInit, OnDestroy {
 
 		this.loading = true;
 		showNotification("Creando contacto", 2);
-		let body : any;
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user_id', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
-		body = this.contact;
+		let body : any = {};
+		body.contact = this.contact;
 		body.id = this.id;
-
-		//console.log(body);
 		this.http.post(BananaConstants.urlServer+'api/' + this.url_create, body, options).toPromise().then(
 			result => {
 				//console.log('result.status', result);
@@ -96,6 +94,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 		  this.searchContact();
 		} else {
 		  this.searching = false;
+		  this.contacts_search = [];
 		}
 	}
 
@@ -124,8 +123,11 @@ export class ContactComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	selectContact (item) {
-		console.log(item);
+	selectContact (contact) {
+		this.contact = contact;
+		this.contacts_search = [];
+		this.searching = false;
+		this.search = '';
 	}
 
 	updateContact(): void {

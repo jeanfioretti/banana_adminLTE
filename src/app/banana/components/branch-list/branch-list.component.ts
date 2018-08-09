@@ -48,6 +48,43 @@ export class BranchListComponent implements OnInit {
 		this.branch_list = clean_branch;
 	}
 
+	archivedBranch(branch, archived): void {
+		this.loading = true;
+		var msg_info = 'Desarchivando sucursal';
+		var msg_success = 'Desarchivado con exito';
+		if ( archived ) {
+			msg_info = 'Archivando sucursal';
+			msg_success = 'Archivado con exito';
+		}
+		showNotification(msg_info, 2);
+		let body : any = {};
+		const headers = new HttpHeaders()
+			.set('Authorization', window.location.origin)
+			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'bananaCli');
+		const options =  {
+			headers: headers
+		};
+		body.branch_id = branch.id;
+		body.archived = archived;
+
+		this.http.put(BananaConstants.urlServer+'api/thirds/branch/archived', body, options).toPromise().then(
+			result => {
+				showNotification(msg_success, 1);
+				branch.archived = archived;
+				this.loading = false;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
 	getBranchDelete (branch_delete) {
 		for (var i = 0; i < this.branch_offices.length; ++i) {
 			if ( this.branch_offices[i].id == branch_delete.id ) {
