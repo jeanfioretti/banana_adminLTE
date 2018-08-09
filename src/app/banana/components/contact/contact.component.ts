@@ -88,8 +88,8 @@ export class ContactComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	searchingContact (event: any): void {
-		if (event.target.value.length >= 3) {
+	searchingContact (): void {
+		if (this.search.length >= 3) {
 		  this.searching = true;
 		  this.searchContact();
 		} else {

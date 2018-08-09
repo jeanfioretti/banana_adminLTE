@@ -10,7 +10,7 @@
 			<input type="text" value="" class="form-control" placeholder="Search..."
 			[(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" (keyup.enter)="search()">
 			<span class="input-group-btn">
-				<button type="button" class="btn btn-warning btn-flat" (click)="search()" >search</button>
+				<button type="button" class="btn btn-warning btn-flat" (click)="search()" >Search</button>
 				<button type="button" class="btn btn-danger btn-flat" (click)="keyword = ''" >Clean</button>
 				<button type="button" class="btn btn-info btn-flat" (click)="getOrganizations()" >All</button>
 			</span>
@@ -86,8 +86,6 @@
 										<th>Reference Number</th>
 										<th>Name</th>
 										<th>Description</th>
-										<th>Created</th>
-										<th>Updated</th>
 									</thead>
 									<tbody>
 										<tr *ngFor="let organization of organizations">
@@ -101,16 +99,11 @@
 												<button *ngIf="organization.archived" (click)="archivedOrganization(organization, 0)" class="btn btn-info btn-sm">
 													<i class="fa fa-folder-open"></i>
 												</button>
-												<!-- <button (click)="deleteorganization(organization)" class="btn btn-danger btn-sm">
-													<i class="fa fa-trash"></i>
-												</button> -->
 											</td>
 											<td>{{organization.id}}</td>
 											<td>{{organization.reference_no}}</td>
 											<td>{{organization.name}}</td>
 											<td>{{organization.description}}</td>
-											<td>{{organization.created_at}}</td>
-											<td>{{organization.updated_at}}</td>
 										</tr>
 									</tbody>
 								</table>

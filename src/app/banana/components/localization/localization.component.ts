@@ -23,7 +23,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	@Input() states : any = [];
 	@Input() cities : any = [];
 	@Output() address = new EventEmitter<any>();
-	searching : boolean = false;
+	create_location : boolean = false;
+	searching : boolean = true;
 	search : string = '';
 	locations_search : Array<any> = [];
 	body: any;
@@ -31,6 +32,10 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
+		this._activeRoute.url.subscribe(url => {
+			if (url[2].path == 'new')
+				this.create_location = true;
+		});
 		this.getCountries();
 	}
 
@@ -44,14 +49,14 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		setTimeout(() => { this.fullAddress(); }, 0);
 	}
 
-	searchingLocation (event: any): void {
-		if (event.target.value.length >= 3) {
+	searchingLocation (): void {
+		if (this.search.length >= 3) {
 		  this.searching = true;
 		  this.searchLocation();
-		} else {
+		} /* else {
 		  this.searching = false;
 		  this.locations_search = [];
-		}
+		} */
 	}
 
 	searchLocation () {
@@ -64,10 +69,10 @@ export class LocalizationComponent implements OnInit, OnChanges {
 			params: { search: this.search }
 		};
 
-		this.http.get(BananaConstants.urlServer+'api/contacts/search', options).toPromise().then(
+		this.http.get(BananaConstants.urlServer+'api/location/search', options).toPromise().then(
 			result => {
 				this.body = result;
-				this.locations_search = this.body.search_contacts;
+				this.locations_search = this.body.search_locations;
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -79,10 +84,10 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		);
 	}
 
-	selectLocation (contact) {
-		this.contact = contact;
-		this.locations_search = [];
-		this.searching = false;
+	selectLocation (localization) {
+		this.localization = localization;
+		/* this.locations_search = [];
+		this.searching = false; */
 		this.search = '';
 	}
 

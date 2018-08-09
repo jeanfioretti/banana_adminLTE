@@ -41,6 +41,7 @@
 						<div class="col-md-6">
 							<label for="organization"><span>Organization</span></label>
 							<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
+								<option [ngValue]="null">Select organization</option>
 								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
 									{{organization.name}}
 								</option>
@@ -134,7 +135,7 @@
 						</div>
 
 						<div class="col-sm-6">
-							<label for="phone"><span>Phone</span></label>
+							<label for="phone"><span>Phone 1</span></label>
 							<input name="phone" type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
 						</div>
 						<div class="col-sm-6">
@@ -165,7 +166,7 @@
 							</select>
 						</div>
 						<div class="col-sm-6">
-							<label for="phone_2"><span>Phone</span></label>
+							<label for="phone_2"><span>Phone 2</span></label>
 							<input name="name_2" type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
 						</div>
 						
@@ -187,6 +188,7 @@
 						<div class="col-sm-6">
 							<label>Language</label>
 							<select class="form-control" [(ngModel)]="third.language_id" [ngModelOptions]="{standalone: true}">
+								<option [ngValue]="null">Select language</option>
 								<option *ngFor="let language of combo_select.languages" [ngValue]="language.id">
 									{{ language.languagescol }}
 								</option>

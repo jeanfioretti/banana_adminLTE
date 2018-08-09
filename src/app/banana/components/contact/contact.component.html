@@ -28,11 +28,16 @@
 					<div class="box-body">
 						<div class="scroll-chevere">
 							<div *ngIf="type_view == 1" class="col-md-12">
-								<label><span>Search</span></label>
-								<input [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
-									type="search" class="form-control" placeholder="Search..."
-									(keyup.enter)="searchingContact($event)"
-								>
+								<div class="input-group no-border" width="80%">
+									<input [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
+										type="search" class="form-control" placeholder="Search..."
+										(keyup.enter)="searchingContact()"
+									>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-warning btn-flat" (click)="searchingContact()" >Search</button>
+										<button type="button" class="btn btn-danger btn-flat" (click)="search = ''" >Clean</button>
+									</span>
+								</div>								
 								<div *ngIf="searching === true">
 									<ul (click)="selectContact(item)" *ngFor="let item of contacts_search">
 										<li>
@@ -41,22 +46,6 @@
 										</li>
 									</ul>
 								</div>
-								<!-- <div *ngIf="searching === true">
-									<table>
-										<thead>
-											<tr>
-												<th>Name</th>
-												<th>Title</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr (click)="selectContact(item)" *ngFor="let item of contacts_search">
-												<td>{{item.name}}</td>
-												<td>{{item.title}}</td>
-											</tr>
-										</tbody>
-									</table>
-								</div> -->
 							</div>
 							<div class="col-md-12">
 								<label><span>Name</span></label>
