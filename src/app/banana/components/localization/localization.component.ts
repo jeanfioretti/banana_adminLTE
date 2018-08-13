@@ -24,7 +24,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	@Input() cities : any = [];
 	@Output() address = new EventEmitter<any>();
 	create_location : boolean = false;
-	searching : boolean = true;
+	searching : boolean = false;
 	search : string = '';
 	locations_search : Array<any> = [];
 	body: any;
@@ -53,10 +53,10 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		if (this.search.length >= 3) {
 		  this.searching = true;
 		  this.searchLocation();
-		} /* else {
+		} else {
 		  this.searching = false;
 		  this.locations_search = [];
-		} */
+		}
 	}
 
 	searchLocation () {
@@ -86,8 +86,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 
 	selectLocation (localization) {
 		this.localization = localization;
-		/* this.locations_search = [];
-		this.searching = false; */
+		this.locations_search = [];
+		this.searching = false;
 		this.search = '';
 	}
 

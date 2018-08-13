@@ -35,10 +35,10 @@
 							>
 						</div>
 						<div class="col-md-6">
-							<div class="input-group no-border">
+							<!-- <div class="input-group no-border"> -->
 								<label><span>Address</span></label>
 								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-								<span class="input-group-btn">
+								<!-- <span class="input-group-btn"> -->
 									<app-localization
 										[id_modal]="'locationOrganization'"
 										[localization]="localization"
@@ -48,8 +48,8 @@
 										(address)="getFullAddress($event)"
 									>
 									</app-localization>
-								</span>
-							</div>
+								<!-- </span> -->
+							<!-- </div> -->
 						</div>
 						<div class="col-md-6">
 							<label for="description"><span>Description</span></label>
