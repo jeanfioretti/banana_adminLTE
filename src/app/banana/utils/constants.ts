@@ -1,3 +1,3 @@
 export enum BananaConstants{
-  urlServer = 'http://127.0.0.1:8000/'
+  urlServer = 'https://bananaservertest.herokuapp.com/'
 }
