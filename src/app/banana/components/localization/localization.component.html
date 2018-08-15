@@ -13,28 +13,28 @@
 					</div>
 					<div class="box-body">
 						<div class="scroll-chevere">
-								<div *ngIf="create_location" class="col-md-12">
-									<div class="input-group no-border" width="80%">
-										<input [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
-											type="search" class="form-control" placeholder="Search..."
-											(keyup.enter)="searchLocation()"
-										>
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-warning btn-flat" (click)="searchLocation()" >Search</button>
-											<button type="button" class="btn btn-danger btn-flat" (click)="search = ''" >Clean</button>
-										</span>
-									</div>								
-									<div *ngIf="searching">
-										<ul (click)="selectLocation(item)" *ngFor="let item of locations_search">
-											<li>
-												<p>{{item.address_1}}</p>
-												<p>{{item.address_2}}</p>
-												<p>{{item.address_3}}</p>
-												<p>{{item.address_4}}</p>
-											</li>
-										</ul>
-									</div>
+							<div *ngIf="create_location" class="col-md-12">
+								<div class="input-group no-border" width="80%">
+									<input [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
+										type="search" class="form-control" placeholder="Search..."
+										(keyup.enter)="searchingLocation()"
+									>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-warning btn-flat" (click)="searchingLocation()" >Search</button>
+										<button type="button" class="btn btn-danger btn-flat" (click)="search = ''; locations_search = []; searching = false;" >Clean</button>
+									</span>
 								</div>
+								<div *ngIf="searching  === true">
+									<ul (click)="selectLocation(item)" *ngFor="let item of locations_search">
+										<li>
+											<p>{{item.address_1}}</p>
+											<p>{{item.address_2}}</p>
+											<p>{{item.address_3}}</p>
+											<p>{{item.address_4}}</p>
+										</li>
+									</ul>
+								</div>
+							</div>
 							<div class="col-md-12">
 								<label><span>Address 1</span></label>
 								<input [(ngModel)]="localization.address_1" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Address 1" >

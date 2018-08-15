@@ -10,10 +10,12 @@ import { OrganizationListComponent } from './modules/organizations/organization-
 import { OrganizationCrudComponent } from './modules/organizations/organization-crud/organization-crud.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { MigrationsComponent } from './modules/migrations/migrations.component';
+import { MigrationsListComponent } from './modules/migrations/migrations-list/migrations-list.component';
 
 const routes: Routes = [
   { path: 'app/dashboard',     component: DashboardComponent },
-  { path: 'app/migration',     component: MigrationsComponent },
+  { path: 'app/migration',     component: MigrationsListComponent },
+  { path: 'app/migration/new',     component: MigrationsComponent },
   { path: 'app/third-parties',     component: ThirdPartiesListComponent },
   { path: 'app/third-parties/new',   component: ThirdPartiesCrudComponent },
   { path: 'app/third-parties/edit/:id',   component: ThirdPartiesCrudComponent },

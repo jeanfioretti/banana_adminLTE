@@ -5,6 +5,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { ReactiveFormsModule, FormsModule } from '../../../../../node_modules/@angular/forms';
 import { LoadingModule } from '../../../../../node_modules/ngx-loading';
 import { HttpClientModule } from '../../../../../node_modules/@angular/common/http';
+import { MigrationsListComponent } from './migrations-list/migrations-list.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { HttpClientModule } from '../../../../../node_modules/@angular/common/ht
     ReactiveFormsModule,
     ComponentsModule
   ],
-  declarations: [MigrationsComponent]
+  declarations: [MigrationsComponent, MigrationsListComponent]
 })
 export class MigrationsModule { }

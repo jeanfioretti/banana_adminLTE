@@ -56,6 +56,7 @@ export class MigrationsComponent implements OnInit {
 
   xlsFile(evt: any) {
     this.jsonImport = [];
+    this.guideMigration = [];
     this.data = [];
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>(evt.target);
@@ -90,8 +91,6 @@ export class MigrationsComponent implements OnInit {
     };
     reader.readAsBinaryString(target.files[0]);
   }
-
-
 
   convertFile(csv: any) {
     this.jsonImport = [];
@@ -159,9 +158,10 @@ export class MigrationsComponent implements OnInit {
     };
 
     let body : any = {};
-    body.guideMigration = this.guideMigration;
-    body.jsonImport = this.jsonImport;
-
+    // body.guideMigration = this.guideMigration;
+    body.guideMigration = this.toSendGuide()
+    // body.jsonImport = this.jsonImport;
+    body.jsonImport = this.toSenData()
     console.log( JSON.stringify(body))
 
     this.http.post(BananaConstants.urlServer+'api/thirds/create', body, options).toPromise().then(
@@ -192,8 +192,9 @@ export class MigrationsComponent implements OnInit {
           column : null
         };
         this.guideMigration.push(obj);
+        // this.guideMigration[item] = obj;
       });
-      // console.log(this.guideMigration);
+      console.log(this.guideMigration);
   }
 
   selectColumn(idColumn){
@@ -218,4 +219,37 @@ export class MigrationsComponent implements OnInit {
     });
 
   }
+
+   toSendGuide(){
+    let result:any = {};
+
+    this.guideMigration.forEach((item, index) => {
+      result[item.columnName] = item ;
+    });
+    console.log(result);
+    return  result;
+   }
+   toSenData(){
+      let auxData:any[]=[];
+      let auxReg:any ={};
+      let is_valid=false;
+
+      for (let i = 1; i < this.data.length; i++) {
+        // const element = this.data[i];
+        auxReg = {}
+        for (let j = 0; j < this.data[i].length; j++) {
+
+          if(this.guideMigration[j].column != null){
+            // console.log(this.guideMigration[j])
+
+            auxReg[this.guideMigration[j].columnName]=this.data[i][j]
+
+          }
+        }
+        auxData.push(auxReg)
+
+      }
+      return auxData;
+
+   }
 }
