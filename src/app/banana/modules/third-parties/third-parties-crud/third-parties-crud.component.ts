@@ -65,8 +65,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	getThird(id): void {
 		this.loading = true;
 		showNotification("Obteniendo tercero", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -101,8 +101,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	getComboSelect(): void {
 		this.loading= true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -128,8 +128,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	createThird(): void {
 		this.loading = true;
 		showNotification("Creando tercero", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -160,8 +160,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	updateThird(): void {
 		const headers = new HttpHeaders()
-			.set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -196,8 +196,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	deleteThird () : void {
 		this.loading = true;
 		showNotification("Eliminando tercero", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -228,8 +228,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	getStates(country_id) {
 	this.loading = true;
-	const headers = new HttpHeaders().set('Authorization', window.location.origin)
-		.append('user_id', sessionStorage.getItem('user_id'))
+	const headers = new HttpHeaders().set('authorization', window.location.origin)
+		.append('user', sessionStorage.getItem('user_id'))
 		.append('token', sessionStorage.getItem('user_token'))
 		.append('app', 'bananaCli');
 	const options = {
@@ -253,8 +253,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	getCities(state_id) {
 	this.loading = true;
-	const headers = new HttpHeaders().set('Authorization', window.location.origin)
-		.append('user_id', sessionStorage.getItem('user_id'))
+	const headers = new HttpHeaders().set('authorization', window.location.origin)
+		.append('user', sessionStorage.getItem('user_id'))
 		.append('token', sessionStorage.getItem('user_token'))
 		.append('app', 'bananaCli');
 	const options = {
