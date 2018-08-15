@@ -91,7 +91,7 @@ export class RolesListComponent implements OnInit {
   }
   goToCreate(){
     this.loading = true;
-    showNotification('Redireccionando.. espere', 3);
+    showNotification('Redireccionando..espere', 3);
     this.router.navigate(['app/roles/new'])
   }
   
