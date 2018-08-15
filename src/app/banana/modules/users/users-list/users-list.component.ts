@@ -27,8 +27,8 @@ export class UsersListComponent implements OnInit {
 
   getUsers(): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
     .append('app', 'bananaCli');
     const options =  {

@@ -59,8 +59,8 @@ export class BranchListComponent implements OnInit {
 		showNotification(msg_info, 2);
 		let body : any = {};
 		const headers = new HttpHeaders()
-			.set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {

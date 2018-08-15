@@ -48,7 +48,7 @@ export class BranchComponent implements OnInit {
 		showNotification("Creando sucursal", 2);
 		let body : any;
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -80,8 +80,8 @@ export class BranchComponent implements OnInit {
 		showNotification("Actualizando sucursal", 2);
 		let body : any;
 		const headers = new HttpHeaders()
-			.set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -110,8 +110,8 @@ export class BranchComponent implements OnInit {
 		this.loading = true;
 		showNotification("Eliminando sucursal", 2);
 		const headers = new HttpHeaders()
-			.set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -139,8 +139,8 @@ export class BranchComponent implements OnInit {
 
 	getStates(country_id) {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options = {
@@ -164,8 +164,8 @@ export class BranchComponent implements OnInit {
 	
 	getCities(state_id) {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options = {

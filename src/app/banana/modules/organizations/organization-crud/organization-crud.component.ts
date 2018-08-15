@@ -59,8 +59,8 @@ export class OrganizationCrudComponent implements OnInit {
 	getOrganization (id) {
 		this.loading = true;
 		showNotification("Obteniendo organizacion", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -92,8 +92,8 @@ export class OrganizationCrudComponent implements OnInit {
 	createOrganization () {
 		this.loading = true;
 		showNotification("Creando organizacion", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -123,8 +123,8 @@ export class OrganizationCrudComponent implements OnInit {
 	updateOrganization () {
 		this.loading = true;
 		showNotification("Actualizando organizacion", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -154,8 +154,8 @@ export class OrganizationCrudComponent implements OnInit {
 	deleteOrganization () : void {
 		this.loading = true;
 		showNotification("Eliminando organizacion", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -186,8 +186,8 @@ export class OrganizationCrudComponent implements OnInit {
 
 	getStates(country_id) {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options = {
@@ -211,8 +211,8 @@ export class OrganizationCrudComponent implements OnInit {
 
 	getCities(state_id) {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options = {

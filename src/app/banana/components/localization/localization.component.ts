@@ -61,7 +61,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 
 	searchLocation () {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -135,8 +135,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 
 	getCountries() {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -163,8 +163,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.loading = true;
 		this.states = [];
 		this.cities = [];
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {
@@ -190,8 +190,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		if (state_id == null) return;
 		this.loading = true;
 		this.cities = [];
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'bananaCli');
 		const options =  {

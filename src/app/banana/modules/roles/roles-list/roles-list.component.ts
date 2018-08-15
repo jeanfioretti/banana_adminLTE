@@ -27,8 +27,8 @@ export class RolesListComponent implements OnInit {
 
   getRols(): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
     .append('app', 'bananaCli');
     const options =  {
@@ -54,8 +54,8 @@ export class RolesListComponent implements OnInit {
 
   archivedRol(rol, archived) : void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-      .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+      .append('user', sessionStorage.getItem('user_id'))
       .append('token', sessionStorage.getItem('user_token'))
       .append('app', 'bananaCli');
 
@@ -91,7 +91,7 @@ export class RolesListComponent implements OnInit {
   }
   goToCreate(){
     this.loading = true;
-    showNotification('Redireccionando.. espere', 3);
+    showNotification('Redireccionando..espere', 3);
     this.router.navigate(['app/roles/new'])
   }
   
@@ -102,8 +102,8 @@ export class RolesListComponent implements OnInit {
     //   return
     // }
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
     .append('app', 'bananaCli');
     const options =  {
