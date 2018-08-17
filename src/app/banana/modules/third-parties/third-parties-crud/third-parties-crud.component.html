@@ -23,6 +23,12 @@
 								(click)="deleteThird()">
 								<i class="fa fa-trash"></i>
 							</button>
+							<button *ngIf="type_view == 1" class="btn btn-warning btn-sm" data-toggle="tooltip" title=""
+								type="button" data-original-title="Clean Data"
+								(click)="cleanData()"
+							>
+								Clean
+							</button>
 						</div>
 					</div>
 					<div class="box-body">
@@ -134,27 +140,25 @@
 							<input name="url" type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
 						</div>
 
-						<div class="col-sm-6">
+						<!-- <div class="col-sm-6">
 							<label for="phone"><span>Phone 1</span></label>
 							<input name="phone" type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
-						</div>
-						<div class="col-sm-6">
-							<!-- <div class="input-group no-border"> -->
+						</div> -->
+						<!-- <div class="col-sm-6">
+							<div class="input-group no-border">
 								<label><span>Address</span></label>
 								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-								<!-- <span class="input-group-btn"> -->
+								<span class="input-group-btn">
 									<app-localization
-									[id_modal]="'locationThird'"
-									[localization]="localization"
-									[countries]="countries"
-									[states]="states"
-									[cities]="cities"
-									(address)="getFullAddress($event)"
+										[localization]="localization"
+										[countries]="countries"
+										[states]="states"
+										[cities]="cities"
 									>
 									</app-localization>
-								<!-- </span> -->
-							<!-- </div> -->
-						</div>
+								</span>
+							</div>
+						</div> -->
 
 						<div class="col-sm-6">
 							<label for="represent_id">Sales representative</label>
@@ -165,10 +169,10 @@
 								</option>
 							</select>
 						</div>
-						<div class="col-sm-6">
+						<!-- <div class="col-sm-6">
 							<label for="phone_2"><span>Phone 2</span></label>
 							<input name="name_2" type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
-						</div>
+						</div> -->
 						
 						<div class="col-md-12">
 							<label for="description">Description</label>

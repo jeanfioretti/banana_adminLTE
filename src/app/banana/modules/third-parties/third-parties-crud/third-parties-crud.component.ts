@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BranchOffice } from '../../../models/branch';
 import { AuthBanana } from '../../../utils/auth';
 import { tokenUtil } from '../../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { Third } from '../../../models/third';
-import { Localization } from '../../../models/localization';
+// import { BranchOffice } from '../../../models/branch';
+// import { Localization } from '../../../models/localization';
 import { BananaConstants } from '../../../utils/constants';
 import { convertDataURIToBinary } from '../../../utils/filesUtils';
 
@@ -23,14 +23,14 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	title_third : string;
 	type_view :number;
 	third : Third = new Third();
-	localization : Localization = new Localization();
+	//localization : Localization = new Localization();
 	countries : any = [];
 	states : any = [];
 	cities : any = [];
-	branch_office : BranchOffice = new BranchOffice();
+	//branch_office : BranchOffice = new BranchOffice();
 	third_contacts : any = [];
 	branch_offices: any = [];
-	full_address : string = '';
+	//full_address : string = '';
 	client : any = {};
 	combo_select: any = [];
 	body: any;
@@ -76,12 +76,12 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			result => {
 				this.body = result;
 				this.third = this.body.third;
-				this.branch_office = this.body.branch_office;
+				//this.branch_office = this.body.branch_office;
 				this.branch_offices = this.body.branch_offices;
-				this.localization = this.body.location;
+				//this.localization = this.body.location;
 				this.third_contacts = this.body.third_contacts;
-				this.getStates(this.localization.country_id);
-				this.getCities(this.localization.state_id);
+				//this.getStates(this.localization.country_id);
+				//this.getCities(this.localization.state_id);
 				this.imageSrc = sessionStorage.getItem('clientStorageUrl')+'thirds/'+this.third.logo;
 				this.loading = false;
 			},
@@ -95,9 +95,9 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		);
 	}
 
-	getFullAddress (full_address) {
+	/* getFullAddress (full_address) {
 		this.full_address = full_address;
-	}
+	} */
 
 	getComboSelect(): void {
 		this.loading= true;
@@ -106,7 +106,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.http.get(BananaConstants.urlServer+'api/thirds/combo-select', options).toPromise().then(
 			result => {
@@ -125,6 +125,10 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		);
 	}
 
+	cleanData () {
+		this.third = new Third();
+	}
+
 	createThird(): void {
 		this.loading = true;
 		showNotification("Creando tercero", 2);
@@ -137,15 +141,15 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		};
 		let body : any;
 		body = this.third;
-		body.branch_office = this.branch_office;
-		body.third_location = this.localization;
-		this.http.post(BananaConstants.urlServer+'api/thirds/create', body, options).toPromise().then(
+		console.log(body);
+		//body.branch_office = this.branch_office;
+		//body.third_location = this.localization;
+		/* this.http.post(BananaConstants.urlServer+'api/thirds/create', body, options).toPromise().then(
 			result => {
 				showNotification('guardado con exito', 1);
-				showNotification('Redireccionando.. espere', 3);
 				this.body = result;
 				this.third = this.body.third;
-				this.router.navigate(['app/third-parties/edit/' + this.third]);
+				this.router.navigate(['app/third-parties/']);
 				this.loading = false;
 			},
 			msg => {
@@ -155,7 +159,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 				this.loading = false;
 				notifyManage(msg);
 			}
-		);
+		); */
 	}
 
 	updateThird(): void {
@@ -171,8 +175,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		showNotification("Actualizando tercero", 2);
 		let body : any;
 		body = this.third;
-		body.branch_office = this.branch_office;
-		body.third_location = this.localization;
+		//body.branch_office = this.branch_office;
+		//body.third_location = this.localization;
 		body.storageNameClient = sessionStorage.getItem('clientStorageName');
 		body.image = this.imageSrc;
 		console.log(body);
@@ -193,7 +197,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		);
 	}
 	
-	deleteThird () : void {
+	/* deleteThird () : void {
 		this.loading = true;
 		showNotification("Eliminando tercero", 2);
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
@@ -224,9 +228,9 @@ export class ThirdPartiesCrudComponent implements OnInit {
 					notifyManage(msg);
 				}
 			);
-	}
+	} */
 
-	getStates(country_id) {
+	/* getStates(country_id) {
 	this.loading = true;
 	const headers = new HttpHeaders().set('authorization', window.location.origin)
 		.append('user', sessionStorage.getItem('user_id'))
@@ -274,7 +278,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			notifyManage(msg);
 		}
 		);
-	}
+	} */
   getEventform(event){
     console.log('controladolr de tercero',event);
   }

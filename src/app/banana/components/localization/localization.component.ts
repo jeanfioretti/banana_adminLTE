@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, /* Output, EventEmitter, */ OnChanges, SimpleChanges} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -22,7 +22,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
-	@Output() address = new EventEmitter<any>();
+	//@Output() address = new EventEmitter<any>();
 	create_location : boolean = false;
 	searching : boolean = false;
 	search : string = '';
@@ -46,7 +46,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		// 	let prev = JSON.stringify(chng.previousValue);
 		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
 		// }
-		setTimeout(() => { this.fullAddress(); }, 0);
+		//setTimeout(() => { this.fullAddress(); }, 0);
 	}
 
 	searchingLocation (): void {
@@ -91,14 +91,14 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.search = '';
 	}
 
-	fullAddress () {
+	/* fullAddress () {
 		let me = this;
 		var full_address = '';
 		var address = '';
 
 		Object.keys(me.localization).forEach(element => {
 			
-			if (element == 'id' || element == 'created_at' || element == 'updated_at')
+			if (element == 'id' || element == 'created_at' || element == 'updated_at' || element == 'archived')
 				return;
 			
 			switch (element) {
@@ -131,7 +131,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 			full_address += ( address != null && address != '' ) ? address + ' '  : '';
 		});
 		this.address.emit( full_address );
-	}
+	} */
 
 	getCountries() {
 		this.loading = true;

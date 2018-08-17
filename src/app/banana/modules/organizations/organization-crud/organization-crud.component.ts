@@ -89,6 +89,11 @@ export class OrganizationCrudComponent implements OnInit {
 		this.full_address = full_address;
 	}
 
+	cleanData () {
+		this.organization = new Organization();
+		this.localization = new Localization();
+	}
+
 	createOrganization () {
 		this.loading = true;
 		showNotification("Creando organizacion", 2);
@@ -107,7 +112,7 @@ export class OrganizationCrudComponent implements OnInit {
 				showNotification('guardado con exito', 1);
 				this.body = result;
 				this.organization = this.body.organization_create;
-				this.router.navigate(['app/organizations/edit/' + this.organization]);
+				this.router.navigate(['app/organizations/']);
 				this.loading = false;
 			},
 			msg => {
@@ -128,7 +133,7 @@ export class OrganizationCrudComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		let body : any;
 		body = this.organization;
