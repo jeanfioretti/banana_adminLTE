@@ -45,10 +45,10 @@ export class RolesCrudComponent implements OnInit {
 
   getRol(id): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
             headers: headers,
         };
@@ -71,10 +71,10 @@ export class RolesCrudComponent implements OnInit {
   }
   getPermissionAvaiable(type,id): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
             headers: headers,
             params:{
@@ -102,10 +102,10 @@ export class RolesCrudComponent implements OnInit {
   }
   createRol(): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
             headers: headers,
         };
@@ -130,10 +130,10 @@ export class RolesCrudComponent implements OnInit {
   }
   updateRol(): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
         headers: headers,
     };

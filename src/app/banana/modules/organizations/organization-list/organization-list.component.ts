@@ -42,10 +42,10 @@ export class OrganizationListComponent implements OnInit {
 
 	getOrganizations(): void {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -70,10 +70,10 @@ export class OrganizationListComponent implements OnInit {
 
 	search() : void {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 				headers: headers,
 				params: { filter: this.keyword}
@@ -98,10 +98,10 @@ export class OrganizationListComponent implements OnInit {
 	archivedOrganization(organization, archived) : void {
 		this.loading = true;
 		showNotification("Archivando organizacion", 2);
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers
 		};

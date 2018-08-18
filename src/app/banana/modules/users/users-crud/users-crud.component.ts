@@ -51,10 +51,10 @@ export class UsersCrudComponent implements OnInit {
 
   getUsers(email): void {
     this.loading = true;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
             headers: headers,
         };
@@ -84,10 +84,10 @@ export class UsersCrudComponent implements OnInit {
       this.loading = true;
       showNotification("Actualizando tercero", 2);
       let body : any;
-      const headers = new HttpHeaders().set('Authorization', window.location.origin)
-      .append('user_id', sessionStorage.getItem('user_id'))
+      const headers = new HttpHeaders().set('authorization', window.location.origin)
+      .append('user', sessionStorage.getItem('user_id'))
       .append('token', sessionStorage.getItem('user_token'))
-      .append('app', 'bananaCli');
+      .append('app', 'BananaCli');
       const options =  {
               headers: headers,
           };
@@ -115,10 +115,10 @@ export class UsersCrudComponent implements OnInit {
     this.loading = true;
     showNotification('Actualizando tercero', 2);
     let body : any;
-    const headers = new HttpHeaders().set('Authorization', window.location.origin)
-    .append('user_id', sessionStorage.getItem('user_id'))
+    const headers = new HttpHeaders().set('authorization', window.location.origin)
+    .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
             headers: headers,
         };
@@ -143,10 +143,10 @@ export class UsersCrudComponent implements OnInit {
 
 getElements(): void {
   this.loading = true;
-  const headers = new HttpHeaders().set('Authorization', window.location.origin)
-  .append('user_id', sessionStorage.getItem('user_id'))
+  const headers = new HttpHeaders().set('authorization', window.location.origin)
+  .append('user', sessionStorage.getItem('user_id'))
   .append('token', sessionStorage.getItem('user_token'))
-  .append('app', 'bananaCli');
+  .append('app', 'BananaCli');
   const options =  {
           headers: headers,
       };
@@ -173,10 +173,10 @@ getElements(): void {
 getPermits(type,id): void {
   this.loading = true;
 
-  const headers = new HttpHeaders().set('Authorization', window.location.origin)
-  .append('user_id', sessionStorage.getItem('user_id'))
+  const headers = new HttpHeaders().set('authorization', window.location.origin)
+  .append('user', sessionStorage.getItem('user_id'))
   .append('token', sessionStorage.getItem('user_token'))
-  .append('app', 'bananaCli');
+  .append('app', 'BananaCli');
   const options =  {
           headers: headers,
           params:{

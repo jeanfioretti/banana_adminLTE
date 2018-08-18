@@ -62,7 +62,7 @@
                       <button  mat-raised-button  class="btn btn-danger pull-right" (click)="clean()" >Clean</button>
                   </div>
                   <div class="col-md-12" >
-                      <div *ngFor="let header of guideMigration" >
+                      <div *ngFor="let header of guideMigration;" >
 
                           <div class="col-md-3">
                               <label><span>{{header.columnName}}</span></label>
@@ -72,7 +72,7 @@
                                             label= {{table}} >
                                       <ng-container *ngFor="let column of selectColumns" >
                                         <option *ngIf="column.table_name === table" [disabled]="column.selected == 1"  [ngValue]="column" >
-                                            {{column.column_name}} <strong *ngIf="column.required == 1" >(Requerido)</strong>
+                                            {{column.column_name}} ({{column.type_data}}) <strong *ngIf="column.required == 1" >(Requerido)</strong>
                                         </option>
                                       </ng-container>
                                   </optgroup>

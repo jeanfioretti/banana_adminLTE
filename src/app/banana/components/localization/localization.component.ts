@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, /* Output, EventEmitter, */ OnChanges, SimpleChanges} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
@@ -22,9 +22,9 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
-	@Output() address = new EventEmitter<any>();
+	//@Output() address = new EventEmitter<any>();
 	create_location : boolean = false;
-	searching : boolean = true;
+	searching : boolean = false;
 	search : string = '';
 	locations_search : Array<any> = [];
 	body: any;
@@ -46,24 +46,24 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		// 	let prev = JSON.stringify(chng.previousValue);
 		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
 		// }
-		setTimeout(() => { this.fullAddress(); }, 0);
+		//setTimeout(() => { this.fullAddress(); }, 0);
 	}
 
 	searchingLocation (): void {
 		if (this.search.length >= 3) {
 		  this.searching = true;
 		  this.searchLocation();
-		} /* else {
+		} else {
 		  this.searching = false;
 		  this.locations_search = [];
-		} */
+		}
 	}
 
 	searchLocation () {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 			params: { search: this.search }
@@ -86,19 +86,19 @@ export class LocalizationComponent implements OnInit, OnChanges {
 
 	selectLocation (localization) {
 		this.localization = localization;
-		/* this.locations_search = [];
-		this.searching = false; */
+		this.locations_search = [];
+		this.searching = false;
 		this.search = '';
 	}
 
-	fullAddress () {
+	/* fullAddress () {
 		let me = this;
 		var full_address = '';
 		var address = '';
 
 		Object.keys(me.localization).forEach(element => {
 			
-			if (element == 'id' || element == 'created_at' || element == 'updated_at')
+			if (element == 'id' || element == 'created_at' || element == 'updated_at' || element == 'archived')
 				return;
 			
 			switch (element) {
@@ -131,14 +131,14 @@ export class LocalizationComponent implements OnInit, OnChanges {
 			full_address += ( address != null && address != '' ) ? address + ' '  : '';
 		});
 		this.address.emit( full_address );
-	}
+	} */
 
 	getCountries() {
 		this.loading = true;
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -163,10 +163,10 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.loading = true;
 		this.states = [];
 		this.cities = [];
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -190,10 +190,10 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		if (state_id == null) return;
 		this.loading = true;
 		this.cities = [];
-		const headers = new HttpHeaders().set('Authorization', window.location.origin)
-			.append('user_id', sessionStorage.getItem('user_id'))
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
