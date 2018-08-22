@@ -3,7 +3,6 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { StarterComponent } from './starter/starter.component';
 import { StarterHeaderComponent } from './starter/starter-header/starter-header.component';
@@ -18,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { LoadingModule } from 'ngx-loading';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SigninModule } from './signin/signin.module';
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     AdminModule,
     BananaModule,
+    SigninModule,
     LoadingModule,
     CommonModule,
     FormsModule,

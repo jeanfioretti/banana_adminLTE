@@ -1,0 +1,86 @@
+<section class="content">
+	<div class="main-content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="box box-info">
+					<div class="box-header">
+						<h3 class="box-title">{{title_client}}</h3>
+						<div class="pull-right box-tools">
+							<button *ngIf="type_view == 3" class="btn btn-danger btn-sm" data-toggle="tooltip" title=""
+								type="button" data-original-title="Delete organization"
+								(click)="deleteOrganization()">
+								<i class="fa fa-trash"></i>
+							</button>
+							<button *ngIf="type_view == 1" class="btn btn-warning btn-sm" data-toggle="tooltip" title=""
+								type="button" data-original-title="Clean Data"
+								(click)="cleanData()"
+							>
+              Clean
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="col-md-6">
+							<label for="name"><span>Name</span></label>
+							<input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-md-6">
+							<label for="dbname"><span>Database Name:</span></label>
+							<input name="dbname" type="text" class="form-control"
+								[(ngModel)]="organization.dbname" [ngModelOptions]="{standalone: true}"
+							>
+						</div>
+						<div class="col-md-6">
+							<label for="description"><span>Description</span></label>
+							<textarea name="description" class="form-control" rows="3"
+								[(ngModel)]="client.description" [ngModelOptions]="{standalone: true}"
+							>
+              </textarea>
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>Host:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="col-md-6">
+              <label for="name"><span>User:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>Password:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>Driver</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>DNS:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>DB conection name:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>Storage URL:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-6">
+              <label for="name"><span>Name storage URL:</span></label>
+              <input name="name" type="text" class="form-control" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            
+					</div>
+					<div class="box-footer">
+						<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateOrganization()" >Update Organization</button>
+						<button *ngIf="type_view == 1" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createOrganization()" >Create Organization</button>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->
+<!-- <ngx-loading [show]="loading"></ngx-loading> -->
