@@ -2,12 +2,12 @@ import { Component, OnInit, Input, /* Output, EventEmitter, */ OnChanges, Simple
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
-import { notifyManage, showNotification } from '../../utils/notifyUtil';
+import { notifyManage } from '../../utils/notifyUtil';
 import { Localization } from '../../models/localization';
 import { BananaConstants } from '../../utils/constants';
 
 
-declare var $: any;
+//declare var $: any;
 
 @Component({
 	selector: 'app-localization',
@@ -213,12 +213,12 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		);
 	}
 
-	openLocalizationModal(){
+	/* openLocalizationModal(){
 		var id_modal = '#'+this.id_modal;
 		setTimeout( function(){
 			$(id_modal).modal('show');
 		},
 		230);
-	}
+	} */
 
 }

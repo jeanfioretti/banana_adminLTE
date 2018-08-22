@@ -24,7 +24,7 @@ export class BranchComponent implements OnInit {
 	countries : any = [];
 	states : any = [];
 	cities : any = [];
-	full_address : string = '';
+	//full_address : string = '';
 	@Output() branchInsert = new EventEmitter<any>();
 	@Output() branchDelete = new EventEmitter<any>();
 	@Output() cleanBranch = new EventEmitter<any>();
@@ -38,9 +38,9 @@ export class BranchComponent implements OnInit {
 		}); */
 	}
 
-	getFullAddress (full_address) {
+	/* getFullAddress (full_address) {
 		this.full_address = full_address;
-	}
+	} */
 
 	createBranchOffice(): void {
 
@@ -61,8 +61,10 @@ export class BranchComponent implements OnInit {
 			result => {
 				this.body = result;
 				showNotification('guardado con exito', 1);
-				this.branchInsert.emit( this.body.branch_office );
+				this.body.localization = this.localization
+				this.branchInsert.emit( this.body );
 				this.branch = new BranchOffice();
+				this.localization = new Localization();
 				this.loading = false;
 			},
 			msg => {
@@ -85,14 +87,14 @@ export class BranchComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		body = this.branch;
 		body.branch_location = this.localization;
 		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/update', body, options).toPromise().then(
 			result => {
 				this.body = result;
-				console.log(this.body);
+				//console.log(this.body);
 				showNotification('Actualizado con exito', 1);
 				this.loading = false;
 			},

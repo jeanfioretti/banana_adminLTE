@@ -37,43 +37,58 @@
 							<label><span>Client</span></label>
 							<input type="text" readonly class="form-control" [(ngModel)]="client.client_name" [ngModelOptions]="{standalone: true}">
 						</div>
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="image-upload">
 								<img [src]="imageSrc" style="max-width:300px;max-height:300px"/>
 								<input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-md-6">
 							<label for="organization"><span>Organization</span></label>
-							<select name="organization" class="form-control" [(ngModel)]="third.organization_id" [ngModelOptions]="{standalone: true}">
-								<option [ngValue]="null">Select organization</option>
-								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
+							<select multiple name="organization" class="form-control" [(ngModel)]="organizations" [ngModelOptions]="{standalone: true}">
+								<!-- <option [ngValue]="null">Select organization</option> -->
+								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization" [selected]="true">
 									{{organization.name}}
 								</option>
 							</select>
+						</div>
+						<div class="col-md-6">
+							<label for="cif"><span>Tax information code</span></label>
+							<input name="cif" type="text" class="form-control" placeholder="CIF" [(ngModel)]="third.cif" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-md-6">
+							<label for="reference_no"><span>Reference Number</span></label>
+							<input name="reference_no" type="text" class="form-control" placeholder="Reference No" [(ngModel)]="third.reference_no" [ngModelOptions]="{standalone: true}">
 						</div>
 						<div class="col-md-6">
 							<label for="name"><span>Business name</span></label>
 							<input name="name" type="text" class="form-control" [(ngModel)]="third.name" [ngModelOptions]="{standalone: true}">
 						</div>
 
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<label for="group_third"><span>Group of thirds</span></label>
 							<select name="group_third" class="form-control">
 								<option value="0"></option>
 							</select>
-						</div>
+						</div> -->
 						<div class="col-md-6">
 							<label for="name_2"><span>Company name</span></label>
 							<input name="name_2" type="text" class="form-control"
 								[(ngModel)]="third.name_2" [ngModelOptions]="{standalone: true}"
 							>
 						</div>
+						
 
-						<div class="col-md-6">
-							<label for="reference_no"><span>Reference Number</span></label>
-							<input name="reference_no" type="text" class="form-control" placeholder="Reference No" [(ngModel)]="third.reference_no" [ngModelOptions]="{standalone: true}">
+						<div class="col-sm-6">
+							<label for="prospect">
+								<input name="prospect" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_prospect == 1 ? true : false"
+									[(ngModel)]="third.is_prospect"
+									[ngModelOptions]="{standalone: true}"
+								>
+								<span>Prospect</span>
+							</label>
 						</div>
 						<div class="col-sm-6">
 							<label for="customer">
@@ -107,34 +122,14 @@
 						</div>
 
 						<div class="col-sm-6">
-							<label for="prospect">
-								<input name="prospect" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_prospect == 1 ? true : false"
-									[(ngModel)]="third.is_prospect"
-									[ngModelOptions]="{standalone: true}"
-								>
-								<span>Prospect</span>
-							</label>
+							<label for="alias"><span>Alias</span></label>
+							<input name="alias" type="text" class="form-control" placeholder="alias" [(ngModel)]="third.alias" [ngModelOptions]="{standalone: true}">
 						</div>
 						<div class="col-sm-6">
-							<label for="tax_exempt">
-								<input name="tax_exempt" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_tax_exempt == 1 ? true : false"
-									[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
-								>
-								<span>Exempt from sales</span>
-							</label>
+							<label for="email"><span>Email</span></label>
+							<input name="email" type="text" class="form-control" placeholder="email@mail.net" [(ngModel)]="third.email" [ngModelOptions]="{standalone: true}">
 						</div>
 
-						<div class="col-sm-6">
-							<label for="po_tax_exempt">
-								<input name="po_tax_exempt" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_po_tax_exempt == 1 ? true : false"
-									[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
-								>
-								<span>Exempt from purchase</span>
-							</label>
-						</div>
 						<div class="col-sm-6">
 							<label for="url"><span>Url</span></label>
 							<input name="url" type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
@@ -180,6 +175,24 @@
 							</textarea>
 						</div>
 						
+						<div class="col-sm-6">
+							<label for="tax_exempt">
+								<input name="tax_exempt" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_tax_exempt == 1 ? true : false"
+									[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
+								>
+								<span>Exempt from sales</span>
+							</label>
+						</div>
+						<div class="col-sm-6">
+							<label for="po_tax_exempt">
+								<input name="po_tax_exempt" class="form-check-input" type="checkbox" value=""
+									[checked]="third.is_po_tax_exempt == 1 ? true : false"
+									[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
+								>
+								<span>Exempt from purchase</span>
+							</label>
+						</div>
 						<div class="col-sm-6">
 							<label>Credit limit</label>
 							<input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">

@@ -23,6 +23,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	title_third : string;
 	type_view :number;
 	third : Third = new Third();
+	organizations : Array<any> = [];
 	//localization : Localization = new Localization();
 	countries : any = [];
 	states : any = [];
@@ -76,10 +77,11 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			result => {
 				this.body = result;
 				this.third = this.body.third;
-				//this.branch_office = this.body.branch_office;
+				this.organizations = this.body.organizations;
 				this.branch_offices = this.body.branch_offices;
-				//this.localization = this.body.location;
 				this.third_contacts = this.body.third_contacts;
+				//this.branch_office = this.body.branch_office;
+				//this.localization = this.body.location;
 				//this.getStates(this.localization.country_id);
 				//this.getCities(this.localization.state_id);
 				this.imageSrc = sessionStorage.getItem('clientStorageUrl')+'thirds/'+this.third.logo;
@@ -127,6 +129,19 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	cleanData () {
 		this.third = new Third();
+		this.organizations = [];
+	}
+
+	compareOrganizations (id) : boolean {
+		let find = false;
+		this.organizations.map( function(organization) {
+			if ( organization.id == id ) {
+				find = true;
+				console.log(organization.id);
+				return;
+			}
+		});
+		return find;
 	}
 
 	createThird(): void {
@@ -141,10 +156,9 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		};
 		let body : any;
 		body = this.third;
-		console.log(body);
-		//body.branch_office = this.branch_office;
-		//body.third_location = this.localization;
-		/* this.http.post(BananaConstants.urlServer+'api/thirds/create', body, options).toPromise().then(
+		body.organizations = this.organizations;
+		//console.log(body);
+		this.http.post(BananaConstants.urlServer+'api/thirds/create', body, options).toPromise().then(
 			result => {
 				showNotification('guardado con exito', 1);
 				this.body = result;
@@ -159,7 +173,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 				this.loading = false;
 				notifyManage(msg);
 			}
-		); */
+		);
 	}
 
 	updateThird(): void {
@@ -171,16 +185,17 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		const options =  {
 			headers: headers,
 		};
-		this.loading = true;
+		//this.loading = true;
 		showNotification("Actualizando tercero", 2);
 		let body : any;
 		body = this.third;
+		body.organizations = this.organizations;
 		//body.branch_office = this.branch_office;
 		//body.third_location = this.localization;
 		body.storageNameClient = sessionStorage.getItem('clientStorageName');
 		body.image = this.imageSrc;
 		console.log(body);
-		this.http.put(BananaConstants.urlServer+'api/thirds/update', body, options).toPromise().then(
+		/* this.http.put(BananaConstants.urlServer+'api/thirds/update', body, options).toPromise().then(
 			result => {
 				showNotification('guardado con exito', 1);
 				this.body = result;
@@ -194,7 +209,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 				this.loading = false;
 				notifyManage(msg);
 			}
-		);
+		); */
 	}
 	
 	/* deleteThird () : void {
