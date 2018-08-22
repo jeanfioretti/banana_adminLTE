@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 .truncate {
   width: 130px !important;
   white-space: nowrap !important;

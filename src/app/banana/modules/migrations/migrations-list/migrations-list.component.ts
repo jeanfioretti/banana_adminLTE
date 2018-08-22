@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '../../../../../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders } from '../../../../../../node_modules/@angular/common/http';
 import { Router, ActivatedRoute } from '../../../../../../node_modules/@angular/router';
+import { BananaConstants } from '../../../utils/constants';
+
 
 
 declare var $: any;
@@ -12,17 +14,44 @@ declare var $: any;
 })
 export class MigrationsListComponent implements OnInit {
   dataTable:any;
-  clients: any[];
+  dtOptions: DataTables.Settings = {};
+  clients: any = [];
   constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
+      const that = this;
 
-      this.http.get('https://5a5a9e00bc6e340012a03796.mockapi.io/clients')
-        .subscribe((data: any[]) => this.clients = data);
+        // this.dtOptions = {
+        //   processing: true,
+        //   ajax: (dataTablesParameters: any, callback) => {
 
-    const table: any = $('table');
-    this.dataTable = table.DataTable();
+        //     const headers = new HttpHeaders().set('authorization', window.location.origin)
+        //     .append('user', sessionStorage.getItem('user_id'))
+        //     .append('token', sessionStorage.getItem('user_token'))
+        //     .append('app', 'bananaCli');
+        //   const options =  {
+        //     headers: headers
+        //   };
+        //     that.http
+        //       .get(
+        //         BananaConstants.urlServer + 'api/migration/list',
+        //         options
+        //       ).subscribe(resp => {
+        //         that.clients = resp.data;
+
+        //         callback({
+        //           recordsTotal: resp.recordsTotal,
+        //           recordsFiltered: resp.recordsFiltered,
+        //           data: []
+        //         });
+        //       });
+        //   }
+
+        // };
+
+    // const table: any = $('table');
+    // // this.dataTable = table.DataTable();
   }
 
 }
