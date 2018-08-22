@@ -1,9 +1,10 @@
 export class Third {
   public id : number = 0;
-  public organization_id : number = null;
+  public cif : string = '';
   public logo : string = '';
   public is_customer : boolean = false;
   public is_vendor : boolean = false;
+  public alias : string = '';
   public name : string = '';
   public name_2 : string = '';
   public is_employee : boolean = false;
@@ -17,6 +18,7 @@ export class Third {
   public is_tax_exempt : boolean = false;
   public is_pot_tax_exempt : boolean = false;
   public url : string = '';
+  public email : string = '';
   public description : string = '';
   public is_summary : boolean = false;
   public price_list_id : number = null;
