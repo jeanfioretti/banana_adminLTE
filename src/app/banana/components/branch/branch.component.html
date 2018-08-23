@@ -20,6 +20,9 @@
 						<h3 *ngIf="type_view == 3">Edit Branch Offices</h3>
 						<h3 *ngIf="type_view == 1">Create Branch Offices</h3>
 						<div class="pull-right box-tools">
+							<button *ngIf="type_view == 3 && !branch.principal" (click)="principalBranch(branch)" class="btn btn-info btn-sm">
+								<i class="fa fa-home"></i>
+							</button>
 							<button *ngIf="type_view == 3" (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
 								<i class="fa fa-trash"></i>
 							</button>
@@ -33,13 +36,14 @@
 							</div>
 							<div class="col-sm-12">
 								<!-- <div class="input-group no-border"> -->
-									<label><span>Address</span></label>
+									<!-- <label><span>Address</span></label> -->
 									<!-- <span class="input-group-btn"> -->
 										<app-localization
 											[localization]="localization"
 											[countries]="countries"
 											[states]="states"
 											[cities]="cities"
+											(location_selected)="getLocation($event)"
 										>
 										</app-localization>
 									<!-- </span> -->

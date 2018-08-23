@@ -176,7 +176,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		const options =  {
 			headers: headers,
 		};
-		//this.loading = true;
+		this.loading = true;
 		showNotification("Actualizando tercero", 2);
 		let body : any;
 		body = this.third;

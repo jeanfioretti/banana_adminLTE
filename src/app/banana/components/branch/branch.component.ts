@@ -38,6 +38,10 @@ export class BranchComponent implements OnInit {
 		}); */
 	}
 
+	getLocation (localization) {
+		this.localization = localization;
+	}
+
 	/* getFullAddress (full_address) {
 		this.full_address = full_address;
 	} */
@@ -67,6 +71,7 @@ export class BranchComponent implements OnInit {
 				this.branch = new BranchOffice();
 				this.localization = new Localization();
 				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -98,6 +103,43 @@ export class BranchComponent implements OnInit {
 				//console.log(this.body);
 				showNotification('Actualizado con exito', 1);
 				this.loading = false;
+				this.closeModal();
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
+	principalBranch (branch) {
+		this.loading = true;
+		showNotification("Estableciendo sucursal como principal", 2);
+		const headers = new HttpHeaders()
+			.set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'BananaCli');
+		const options =  {
+			headers: headers
+		};
+		let body : any;
+		body = branch.id;
+		body.third_id = branch.bpartner_id;
+		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/principal', body, options).toPromise().then(
+			result => {
+				showNotification('Asignada como principal', 1);
+				this.body = result;
+				console.log(body.principal);
+				/* if (this.body.branch_removed)
+					this.branchDelete.emit( branch );
+				else
+					showNotification('Error', 2); */
+				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -118,7 +160,7 @@ export class BranchComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + branch.id, options).toPromise().then(
 			result => {
@@ -129,6 +171,7 @@ export class BranchComponent implements OnInit {
 				else
 					showNotification('Error al eliminar', 2);
 				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -207,6 +250,11 @@ export class BranchComponent implements OnInit {
 			$('#branchModal').modal('show');
 		},
 		230);
+	}
+
+	closeModal () {
+		$('#branchModal').modal('hide');
+		this.closeModalEdit();
 	}
 
 	closeModalEdit () {
