@@ -52,7 +52,7 @@ export class BranchComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		body = this.branch;
 		body.id = this.id;
@@ -61,8 +61,9 @@ export class BranchComponent implements OnInit {
 			result => {
 				this.body = result;
 				showNotification('guardado con exito', 1);
-				this.body.localization = this.localization
-				this.branchInsert.emit( this.body );
+				this.localization.id = this.body.location_id;
+				this.body.branch_office.localization = this.localization
+				this.branchInsert.emit( this.body.branch_office );
 				this.branch = new BranchOffice();
 				this.localization = new Localization();
 				this.loading = false;
