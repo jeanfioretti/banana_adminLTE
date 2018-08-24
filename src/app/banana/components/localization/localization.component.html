@@ -1,11 +1,31 @@
-<div class="col-md-6">
-	<label><span>Address 1</span></label>
-	<input [(ngModel)]="localization.address_1" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Address 1" >
+<!-- <div class="col-md-12">
+	<div class="input-group no-border" width="80%">
+		<input [(ngModel)]="search" [ngModelOptions]="{standalone: true}"
+			type="search" class="form-control" placeholder="Search..."
+			(keyup.enter)="searchingLocation()"
+		>
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-warning btn-flat" (click)="searchingLocation()" >Search</button>
+			<button type="button" class="btn btn-danger btn-flat" (click)="search = ''; locations_search = []; searching = false;" >Clean</button>
+		</span>
+	</div>
+	<div *ngIf="searching  === true">
+		<ul (click)="selectLocation(item)" *ngFor="let item of locations_search">
+			<li>
+				<p>{{item.address_1}}</p>
+				<p>{{item.address_2}}</p>
+			</li>
+		</ul>
+	</div>
+</div> -->
+<div class="col-md-12">
+	<label><span>Address</span></label>
+	<textarea class="form-control" rows="3" [(ngModel)]="localization.address_1" [ngModelOptions]="{standalone: true}"></textarea>
 </div>
-<div class="col-md-6">
+<!-- <div class="col-md-6">
 	<label><span>Address 2</span></label>
 	<input [(ngModel)]="localization.address_2" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Address 2" >
-</div>
+</div> -->
 <!-- <div class="col-md-3">
 	<label><span>Address 3</span></label>
 	<input [(ngModel)]="localization.address_3" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Address 3" >
@@ -14,7 +34,7 @@
 	<label><span>Address 4</span></label>
 	<input [(ngModel)]="localization.address_4" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Address 4" >
 </div> -->
-<div class="col-md-4">
+<div class="col-md-3">
 	<label><span>Country</span></label>
 	<select [(ngModel)]="localization.country_id" [ngModelOptions]="{standalone: true}"
 		(change)="getStates(localization.country_id)" class="form-control">
@@ -22,7 +42,7 @@
 		<option *ngFor="let country of countries" [ngValue]="country.id">{{country.country}}</option>
 	</select>
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
 	<label><span>State</span></label>
 	<select [(ngModel)]="localization.state_id" [ngModelOptions]="{standalone: true}" 
 		(change)="getCities(localization.state_id)" class="form-control">
@@ -30,22 +50,22 @@
 		<option *ngFor="let state of states" [ngValue]="state.id">{{state.state}}</option>
 	</select>
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
 	<label><span>City</span></label>
 	<select [(ngModel)]="localization.city_id" [ngModelOptions]="{standalone: true}" class="form-control">
 		<option [ngValue]="null">Select city</option>
 		<option *ngFor="let city of cities" [ngValue]="city.id">{{city.city}}</option>
 	</select>
 </div>
-<div class="col-md-4">
+<!-- <div class="col-md-3">
 	<label><span>State name</span></label>
 	<input [(ngModel)]="localization.state_name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="State Name" >
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
 	<label><span>City name</span></label>
 	<input [(ngModel)]="localization.city_name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="City Name" >
-</div>
-<div class="col-md-4">
+</div> -->
+<div class="col-md-3">
 	<label><span>Postal</span></label>
 	<input [(ngModel)]="localization.postal" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Postal" >
 </div>
@@ -53,13 +73,13 @@
 	<label><span>Postal add</span></label>
 	<input [(ngModel)]="localization.postal_add" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Postal add" >
 </div> -->
-<div class="col-md-12">
+<!-- <div class="col-md-12">
 	<div class="form-group">
 		<label class="bmd-label-floating">Comments</label>
 		<textarea class="form-control" rows="3" [(ngModel)]="localization.comments" [ngModelOptions]="{standalone: true}">
 		</textarea>
 	</div>
-</div>
+</div> -->
 <!-- <button class="btn btn-warning btn-sm" (click)="openLocalizationModal()" ><i class="fa fa-pencil"></i></button>
 
 <div  class="modal" id={{id_modal}} >

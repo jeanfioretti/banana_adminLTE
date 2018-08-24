@@ -76,7 +76,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 				this.contactInsert.emit( this.body.contact );
 				this.contact = new Contact();
 				this.loading = false;
-
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -149,6 +149,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 				//console.log('result.status', result);
 				showNotification('Actualizado con exito', 1);
 				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -169,7 +170,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.http.delete(BananaConstants.urlServer+'api/' + this.url_delete + this.id + '/' + contact.id, options).toPromise().then(
 			result => {
@@ -180,6 +181,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 				else
 					showNotification('Error al eliminar', 2);
 				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -198,6 +200,12 @@ export class ContactComponent implements OnInit, OnDestroy {
 		},
 		230);
 	}
+
+	closeModal () {
+		$('#contactModal').modal('hide');
+		this.closeModalEdit();
+	}
+
 	openContactModalEmpty () {
 		this.type_view = 1;
 		this.contact = new Contact();

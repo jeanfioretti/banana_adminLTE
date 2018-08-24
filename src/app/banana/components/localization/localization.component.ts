@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, /* Output, EventEmitter, */ OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage } from '../../utils/notifyUtil';
 import { Localization } from '../../models/localization';
 import { BananaConstants } from '../../utils/constants';
-
 
 //declare var $: any;
 
@@ -17,13 +16,13 @@ import { BananaConstants } from '../../utils/constants';
 export class LocalizationComponent implements OnInit, OnChanges {
 	loading = false;
 	localizationTitle : string ='Localizacion';
-	@Input() id_modal : string;
 	@Input() localization : Localization = new Localization();
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
 	//@Output() address = new EventEmitter<any>();
-	create_location : boolean = false;
+	@Output() location_selected = new EventEmitter<any>();
+	// create_location : boolean = false;
 	searching : boolean = false;
 	search : string = '';
 	locations_search : Array<any> = [];
@@ -33,8 +32,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this._activeRoute.url.subscribe(url => {
-			if (url[2].path == 'new')
-				this.create_location = true;
+			// if (url[2].path == 'new')
+			// 	this.create_location = true;
 		});
 		this.getCountries();
 	}
@@ -89,6 +88,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.locations_search = [];
 		this.searching = false;
 		this.search = '';
+		this.location_selected.emit( localization );
 	}
 
 	/* fullAddress () {
@@ -212,13 +212,5 @@ export class LocalizationComponent implements OnInit, OnChanges {
 			}
 		);
 	}
-
-	/* openLocalizationModal(){
-		var id_modal = '#'+this.id_modal;
-		setTimeout( function(){
-			$(id_modal).modal('show');
-		},
-		230);
-	} */
 
 }

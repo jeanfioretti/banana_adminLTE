@@ -53,11 +53,11 @@
 											(click)="goToEditOrganization(organization.id)" >
 											<i class="fa fa-pencil"></i>
 										</button>
-										<button *ngIf="!organization.archived" (click)="archivedOrganization(organization, 1)" 
+										<button *ngIf="organization.archived == 0" (click)="archivedOrganization(organization, 1)" 
 											mat-raised-button class="btn btn-warning btn-sm">
 											<i class="fa fa-folder"></i>
 										</button>
-										<button *ngIf="organization.archived"  (click)="archivedOrganization(organization, 0)" 
+										<button *ngIf="organization.archived == 1"  (click)="archivedOrganization(organization, 0)" 
 											mat-raised-button class="btn btn-info btn-sm">
 											<i class="fa fa-folder-open"></i>
 										</button>
@@ -93,10 +93,10 @@
 												<button class="btn btn-success btn-sm" (click)="goToEditOrganization(organization.id)">
 													<i class="fa fa-pencil"></i>
 												</button>
-												<button *ngIf="!organization.archived" (click)="archivedOrganization(organization, 1)" class="btn btn-warning btn-sm">
+												<button *ngIf="organization.archived == 0" (click)="archivedOrganization(organization, 1)" class="btn btn-warning btn-sm">
 													<i class="fa fa-folder"></i>
 												</button>
-												<button *ngIf="organization.archived" (click)="archivedOrganization(organization, 0)" class="btn btn-info btn-sm">
+												<button *ngIf="organization.archived == 1" (click)="archivedOrganization(organization, 0)" class="btn btn-info btn-sm">
 													<i class="fa fa-folder-open"></i>
 												</button>
 											</td>

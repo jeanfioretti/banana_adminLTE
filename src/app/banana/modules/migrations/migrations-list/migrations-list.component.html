@@ -81,19 +81,30 @@
               </div>
               <div class="box-body">
                 <div class="table-responsive">
-                    <table class="table table-hover" cellspacing="0">
+                    <table    class="table table-hover" >
                         <thead>
                           <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Company</th>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Registrer</th>
+                            <th>Table</th>
+                            <th>Aprove</th>
+                            <th>Active</th>
+
+
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let client of clients">
-                            <td>{{client.firstName}}</td>
-                            <td>{{client.lastName}}</td>
-                            <td>{{client.company}}</td>
+                            <td>{{ client.id }}</td>
+                            <td>{{ client.date }}</td>
+                            <td>{{ client.registrer }}</td>
+                            <td>{{ client.description }}</td>
+                            <td>{{ client.aprove }}</td>
+                            <td>{{ client.active }}</td>
+                          </tr>
+                          <tr *ngIf="clients?.length == 0">
+                            <td colspan="6" class="no-data-available">No data!</td>
                           </tr>
                         </tbody>
                       </table>
