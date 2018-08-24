@@ -170,7 +170,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.http.delete(BananaConstants.urlServer+'api/' + this.url_delete + this.id + '/' + contact.id, options).toPromise().then(
 			result => {
@@ -202,7 +202,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 	}
 
 	closeModal () {
-		$('#branchModal').modal('hide');
+		$('#contactModal').modal('hide');
 		this.closeModalEdit();
 	}
 
