@@ -162,7 +162,7 @@ export class BranchComponent implements OnInit {
 		const options =  {
 			headers: headers
 		};
-		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + branch.id, options).toPromise().then(
+		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + branch.id + '/' + branch.location_id, options).toPromise().then(
 			result => {
 				showNotification('Eliminado con exito', 1);
 				this.body = result;
