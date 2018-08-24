@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '../../../../../../node_modules/@angular/common/http';
-import { Router, ActivatedRoute } from '../../../../../../node_modules/@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 declare var $: any;

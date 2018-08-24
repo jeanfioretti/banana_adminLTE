@@ -1,4 +1,4 @@
-import { StarterComponent } from './../starter/starter.component';
+import { StarterComponent } from '../starter/starter.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BananaComponent } from '../banana/banana.component';
