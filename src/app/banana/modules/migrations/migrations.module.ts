@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '../../../../../node_modules/@a
 import { LoadingModule } from '../../../../../node_modules/ngx-loading';
 import { HttpClientModule } from '../../../../../node_modules/@angular/common/http';
 import { MigrationsListComponent } from './migrations-list/migrations-list.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MigrationsListComponent } from './migrations-list/migrations-list.compo
     HttpClientModule,
     LoadingModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    DataTablesModule
   ],
   declarations: [MigrationsComponent, MigrationsListComponent]
 })
