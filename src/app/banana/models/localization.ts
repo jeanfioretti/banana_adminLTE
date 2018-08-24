@@ -12,4 +12,5 @@ export class Localization {
   public state_name : string = '';
   public country_id : number = null;
   public comments : string = '';
+  public archived : number = 0;
 }

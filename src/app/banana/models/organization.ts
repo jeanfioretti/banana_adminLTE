@@ -3,5 +3,5 @@ export class Organization {
     public reference_no : string = '';
     public name : string = '';
     public description : string = '';    
-    public archived : boolean = false;
+    public archived : number = 0;
   }

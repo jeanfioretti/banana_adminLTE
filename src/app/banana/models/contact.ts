@@ -3,7 +3,7 @@ export class Contact {
   public name : string = '';
   public description : string = '';
   public comments : string = '';
-  public archived : boolean = false;
+  public archived : number = 0;
   public email : string = '';
   public phone : string = '';
   public phone_2 : string = '';
