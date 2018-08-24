@@ -21,7 +21,6 @@ import { SigninModule } from './signin/signin.module';
 import { LandingModule } from './landing/landing.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +30,6 @@ import { LandingModule } from './landing/landing.module';
     StarterContentComponent,
     StarterFooterComponent,
     StarterControlSidebarComponent,
-    LandingComponent,
   ],
   imports: [
     HttpClientModule,
@@ -43,6 +41,7 @@ import { LandingModule } from './landing/landing.module';
     LoadingModule,
     CommonModule,
     FormsModule,
+    LandingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

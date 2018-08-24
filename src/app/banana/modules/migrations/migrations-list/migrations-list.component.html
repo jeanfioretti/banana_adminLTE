@@ -16,16 +16,7 @@
         </span>
       </div>
     </div>
-    <div class="col-md-2">
-      <div class="btn-group pull-right">
-        <button *ngIf="!kanban" type="button" class="btn btn-default btn-flat" (click)="viewKanban()" >
-          <i class="fa fa-lg fa-th-large"></i>
-        </button>
-        <button *ngIf="kanban" type="button" class="btn  btn-default btn-flat" (click)="viewKanban()" >
-          <i class="fa fa-list"></i>
-        </button>
-      </div>
-    </div>
+
   </section>
   <!-- Main content -->
   <section class="content">
@@ -60,7 +51,7 @@
             </div>
           </div>
         </div>
-        <div class="row" *ngIf="!kanban">
+        <div class="row" >
           <div class="col-md-12">
             <div class="box box-info ">
               <div class="box-header ">

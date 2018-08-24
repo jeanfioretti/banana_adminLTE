@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LandingComponent } from './landing.component';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingModule } from 'ngx-loading';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    LoadingModule,
+    LoadingModule
   ],
-  declarations: [LandingComponent, LoginComponent]
+  // declarations: [LoginComponent]
 })
-export class LandingModule { }
+export class LoginModule { }
+
