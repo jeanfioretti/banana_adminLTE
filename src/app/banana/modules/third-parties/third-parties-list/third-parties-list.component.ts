@@ -42,7 +42,7 @@ export class ThirdPartiesListComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 			params: { type_third: type_third }
@@ -73,7 +73,7 @@ export class ThirdPartiesListComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 			params: { filter: this.keyword}
@@ -101,7 +101,7 @@ export class ThirdPartiesListComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers
 		};

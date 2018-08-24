@@ -2,12 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
-import { notifyManage, showNotification } from '../../utils/notifyUtil';
+import { notifyManage } from '../../utils/notifyUtil';
 import { Localization } from '../../models/localization';
 import { BananaConstants } from '../../utils/constants';
 
-
-declare var $: any;
+//declare var $: any;
 
 @Component({
 	selector: 'app-localization',
@@ -17,13 +16,13 @@ declare var $: any;
 export class LocalizationComponent implements OnInit, OnChanges {
 	loading = false;
 	localizationTitle : string ='Localizacion';
-	@Input() id_modal : string;
 	@Input() localization : Localization = new Localization();
 	@Input() countries : any = [];
 	@Input() states : any = [];
 	@Input() cities : any = [];
-	@Output() address = new EventEmitter<any>();
-	create_location : boolean = false;
+	//@Output() address = new EventEmitter<any>();
+	@Output() location_selected = new EventEmitter<any>();
+	// create_location : boolean = false;
 	searching : boolean = false;
 	search : string = '';
 	locations_search : Array<any> = [];
@@ -33,8 +32,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this._activeRoute.url.subscribe(url => {
-			if (url[2].path == 'new')
-				this.create_location = true;
+			// if (url[2].path == 'new')
+			// 	this.create_location = true;
 		});
 		this.getCountries();
 	}
@@ -46,7 +45,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		// 	let prev = JSON.stringify(chng.previousValue);
 		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
 		// }
-		setTimeout(() => { this.fullAddress(); }, 0);
+		//setTimeout(() => { this.fullAddress(); }, 0);
 	}
 
 	searchingLocation (): void {
@@ -63,7 +62,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 			params: { search: this.search }
@@ -89,16 +88,17 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.locations_search = [];
 		this.searching = false;
 		this.search = '';
+		this.location_selected.emit( localization );
 	}
 
-	fullAddress () {
+	/* fullAddress () {
 		let me = this;
 		var full_address = '';
 		var address = '';
 
 		Object.keys(me.localization).forEach(element => {
 			
-			if (element == 'id' || element == 'created_at' || element == 'updated_at')
+			if (element == 'id' || element == 'created_at' || element == 'updated_at' || element == 'archived')
 				return;
 			
 			switch (element) {
@@ -131,14 +131,14 @@ export class LocalizationComponent implements OnInit, OnChanges {
 			full_address += ( address != null && address != '' ) ? address + ' '  : '';
 		});
 		this.address.emit( full_address );
-	}
+	} */
 
 	getCountries() {
 		this.loading = true;
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -166,7 +166,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -193,7 +193,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -211,14 +211,6 @@ export class LocalizationComponent implements OnInit, OnChanges {
 				notifyManage(msg);
 			}
 		);
-	}
-
-	openLocalizationModal(){
-		var id_modal = '#'+this.id_modal;
-		setTimeout( function(){
-			$(id_modal).modal('show');
-		},
-		230);
 	}
 
 }

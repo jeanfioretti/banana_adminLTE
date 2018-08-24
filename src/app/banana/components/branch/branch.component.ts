@@ -24,7 +24,7 @@ export class BranchComponent implements OnInit {
 	countries : any = [];
 	states : any = [];
 	cities : any = [];
-	full_address : string = '';
+	//full_address : string = '';
 	@Output() branchInsert = new EventEmitter<any>();
 	@Output() branchDelete = new EventEmitter<any>();
 	@Output() cleanBranch = new EventEmitter<any>();
@@ -38,9 +38,13 @@ export class BranchComponent implements OnInit {
 		}); */
 	}
 
-	getFullAddress (full_address) {
-		this.full_address = full_address;
+	getLocation (localization) {
+		this.localization = localization;
 	}
+
+	/* getFullAddress (full_address) {
+		this.full_address = full_address;
+	} */
 
 	createBranchOffice(): void {
 
@@ -50,9 +54,9 @@ export class BranchComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		body = this.branch;
 		body.id = this.id;
@@ -61,9 +65,13 @@ export class BranchComponent implements OnInit {
 			result => {
 				this.body = result;
 				showNotification('guardado con exito', 1);
+				this.localization.id = this.body.location_id;
+				this.body.branch_office.localization = this.localization
 				this.branchInsert.emit( this.body.branch_office );
 				this.branch = new BranchOffice();
+				this.localization = new Localization();
 				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -83,18 +91,55 @@ export class BranchComponent implements OnInit {
 			.set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		body = this.branch;
 		body.branch_location = this.localization;
 		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/update', body, options).toPromise().then(
 			result => {
 				this.body = result;
-				console.log(this.body);
+				//console.log(this.body);
 				showNotification('Actualizado con exito', 1);
 				this.loading = false;
+				this.closeModal();
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+
+	principalBranch (branch) {
+		this.loading = true;
+		showNotification("Estableciendo sucursal como principal", 2);
+		const headers = new HttpHeaders()
+			.set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'BananaCli');
+		const options =  {
+			headers: headers
+		};
+		let body : any;
+		body = branch.id;
+		body.third_id = branch.bpartner_id;
+		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/principal', body, options).toPromise().then(
+			result => {
+				showNotification('Asignada como principal', 1);
+				this.body = result;
+				console.log(body.principal);
+				/* if (this.body.branch_removed)
+					this.branchDelete.emit( branch );
+				else
+					showNotification('Error', 2); */
+				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -113,9 +158,9 @@ export class BranchComponent implements OnInit {
 			.set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + branch.id, options).toPromise().then(
 			result => {
@@ -126,6 +171,7 @@ export class BranchComponent implements OnInit {
 				else
 					showNotification('Error al eliminar', 2);
 				this.loading = false;
+				this.closeModal();
 			},
 			msg => {
 				if (msg.status == 406) {
@@ -142,7 +188,7 @@ export class BranchComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options = {
 			headers: headers,
 		};
@@ -167,7 +213,7 @@ export class BranchComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options = {
 			headers: headers,
 		};
@@ -204,6 +250,11 @@ export class BranchComponent implements OnInit {
 			$('#branchModal').modal('show');
 		},
 		230);
+	}
+
+	closeModal () {
+		$('#branchModal').modal('hide');
+		this.closeModalEdit();
 	}
 
 	closeModalEdit () {

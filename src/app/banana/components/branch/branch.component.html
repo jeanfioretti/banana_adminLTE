@@ -20,6 +20,9 @@
 						<h3 *ngIf="type_view == 3">Edit Branch Offices</h3>
 						<h3 *ngIf="type_view == 1">Create Branch Offices</h3>
 						<div class="pull-right box-tools">
+							<button *ngIf="type_view == 3 && branch.principal == 1" (click)="principalBranch(branch)" class="btn btn-info btn-sm">
+								<i class="fa fa-home"></i>
+							</button>
 							<button *ngIf="type_view == 3" (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
 								<i class="fa fa-trash"></i>
 							</button>
@@ -31,22 +34,16 @@
 								<label><span>Name</span></label>
 								<input [(ngModel)]="branch.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch name" >
 							</div>
-							<div class="col-md-12">
-								<label><span>Title</span></label>
-								<input [(ngModel)]="branch.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Branch title" >
-							</div>
 							<div class="col-sm-12">
 								<!-- <div class="input-group no-border"> -->
-									<label><span>Address</span></label>
-									<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
+									<!-- <label><span>Address</span></label> -->
 									<!-- <span class="input-group-btn"> -->
 										<app-localization
-											[id_modal]="'locationBranch'"
 											[localization]="localization"
 											[countries]="countries"
 											[states]="states"
 											[cities]="cities"
-											(address)="getFullAddress($event)"
+											(location_selected)="getLocation($event)"
 										>
 										</app-localization>
 									<!-- </span> -->

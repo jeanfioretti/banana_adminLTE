@@ -37,7 +37,7 @@ export class CustomColumnsComponent implements OnInit {
     const headers = new HttpHeaders().set('authorization', window.location.origin)
     .append('user', sessionStorage.getItem('user_id'))
     .append('token', sessionStorage.getItem('user_token'))
-    .append('app', 'bananaCli');
+    .append('app', 'BananaCli');
     const options =  {
             headers: headers,
         };

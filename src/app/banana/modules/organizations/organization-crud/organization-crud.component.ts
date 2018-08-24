@@ -62,7 +62,7 @@ export class OrganizationCrudComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers,
 		};
@@ -89,13 +89,18 @@ export class OrganizationCrudComponent implements OnInit {
 		this.full_address = full_address;
 	}
 
+	cleanData () {
+		this.organization = new Organization();
+		this.localization = new Localization();
+	}
+
 	createOrganization () {
 		this.loading = true;
 		showNotification("Creando organizacion", 2);
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers
 		};
@@ -107,7 +112,7 @@ export class OrganizationCrudComponent implements OnInit {
 				showNotification('guardado con exito', 1);
 				this.body = result;
 				this.organization = this.body.organization_create;
-				this.router.navigate(['app/organizations/edit/' + this.organization]);
+				this.router.navigate(['app/organizations/']);
 				this.loading = false;
 			},
 			msg => {
@@ -126,9 +131,9 @@ export class OrganizationCrudComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		let body : any;
 		body = this.organization;
@@ -157,7 +162,7 @@ export class OrganizationCrudComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options =  {
 			headers: headers
 		};
@@ -189,7 +194,7 @@ export class OrganizationCrudComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options = {
 			headers: headers,
 		};
@@ -214,7 +219,7 @@ export class OrganizationCrudComponent implements OnInit {
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'bananaCli');
+			.append('app', 'BananaCli');
 		const options = {
 			headers: headers,
 		};

@@ -14,6 +14,7 @@ declare var $: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   user: any = {};
   public loading = false;
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
       // authorization: window.location.origin,
       // app:"BananaCli",
       email : userEmail,
-      password: md5.appendStr(userPass).end(),
+      password: md5.appendStr(userPass).end()
     };
     console.log(body);
     const options =  {

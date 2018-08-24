@@ -27,7 +27,12 @@
 					<thead class="">
 						<th>Options</th>
 						<th>ID</th>
+						<th>Principal</th>
 						<th>Name</th>
+						<th>Ship</th>
+						<th>Bill</th>
+						<th>Pay</th>
+						<th>Remit</th>
 						<th>Phone 1</th>
 						<th>Phone 2</th>
 					</thead>
@@ -37,15 +42,32 @@
 								<button class="btn btn-success btn-sm" (click)="gotToEditBranch(branch)">
 									<i class="fa fa-pencil"></i>
 								</button>
-								<button *ngIf="!branch.archived" (click)="archivedBranch(branch, 1)" class="btn btn-warning btn-sm">
+								<button *ngIf="branch.archived == 0" (click)="archivedBranch(branch, 1)" class="btn btn-warning btn-sm">
 									<i class="fa fa-folder"></i>
 								</button>
-								<button *ngIf="branch.archived" (click)="archivedBranch(branch, 0)" class="btn btn-info btn-sm">
+								<button *ngIf="branch.archived == 1" (click)="archivedBranch(branch, 0)" class="btn btn-info btn-sm">
 									<i class="fa fa-folder-open"></i>
-								</button>
+								</button>								
 							</td>
 							<td>{{branch.id}}</td>
+							<td><i *ngIf="branch.principal == 1" class="btn-default btn-sm fa fa-home"></i></td>
 							<td>{{branch.name}}</td>
+							<td>
+								<i *ngIf="branch.is_ship_to == 1" class="fa fa-check"></i>
+								<i *ngIf="branch.is_ship_to == 0" class="fa fa-times-circle"></i>
+							</td>
+							<td>
+								<i *ngIf="branch.is_bill_to == 1" class="fa fa-check"></i>
+								<i *ngIf="branch.is_bill_to == 0" class="fa fa-times-circle"></i>
+							</td>
+							<td>
+								<i *ngIf="branch.is_pay_from == 1" class="fa fa-check"></i>
+								<i *ngIf="branch.is_pay_from == 0" class="fa fa-times-circle"></i>
+							</td>
+							<td>
+								<i *ngIf="branch.is_remit_to == 1" class="fa fa-check"></i>
+								<i *ngIf="branch.is_remit_to == 0" class="fa fa-times-circle"></i>
+							</td>
 							<td>{{branch.phone}}</td>
 							<td>{{branch.phone_2}}</td>
 						</tr>

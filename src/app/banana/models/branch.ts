@@ -1,6 +1,7 @@
 export class BranchOffice {
 	public id : number = 0;
-	public organization_id : number = null;
+	public principal : boolean = false;
+	public bpartner_id : number = null;
 	public location_id : number = null;
 	public name : string = '';
 	public is_ship_to : boolean = false;
