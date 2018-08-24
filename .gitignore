@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Constants
-/src/app/banana/constants.ts
+/src/app/banana/utils/constants.ts
