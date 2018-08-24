@@ -17,7 +17,7 @@ declare var $: any;
   styleUrls: ['./organization-crud.component.css']
 })
 export class OrganizationCrudComponent implements OnInit {
-	id: string;
+	id : string;
 	title_organization : string;
 	type_view :number;
 	organization : Organization = new Organization();
