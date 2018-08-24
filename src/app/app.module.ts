@@ -18,6 +18,7 @@ import { LoadingModule } from 'ngx-loading';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SigninModule } from './signin/signin.module';
+import { LandingModule } from './landing/landing.module';
 
 
 @NgModule({
@@ -29,8 +30,6 @@ import { SigninModule } from './signin/signin.module';
     StarterContentComponent,
     StarterFooterComponent,
     StarterControlSidebarComponent,
-    LandingComponent,
-    LoginComponent
   ],
   imports: [
     HttpClientModule,
@@ -42,7 +41,7 @@ import { SigninModule } from './signin/signin.module';
     LoadingModule,
     CommonModule,
     FormsModule,
-
+    LandingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

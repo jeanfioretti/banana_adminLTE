@@ -16,6 +16,8 @@ export class MigrationsListComponent implements OnInit {
   dataTable:any;
   dtOptions: DataTables.Settings = {};
   clients: any = [];
+  keyword: string;
+  titleTable: string = "Migraciones";
   constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -52,6 +54,9 @@ export class MigrationsListComponent implements OnInit {
 
     // const table: any = $('table');
     // // this.dataTable = table.DataTable();
+  }
+  search(){
+
   }
 
 }
