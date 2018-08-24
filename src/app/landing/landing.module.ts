@@ -13,6 +13,6 @@ import { LoadingModule } from 'ngx-loading';
     HttpClientModule,
     LoadingModule,
   ],
-  declarations: [LandingComponent, LoginComponent]
+  declarations: [LoginComponent]
 })
 export class LandingModule { }
