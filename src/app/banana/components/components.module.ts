@@ -25,7 +25,8 @@ import {Select2Component} from 'angular-select2-component';
     EditFormComponent,
     LocalizationComponent,
     BranchListComponent,
-    BranchComponent
+    BranchComponent,
+    Select2Component
   ],
   exports: [
     ContactComponent,
