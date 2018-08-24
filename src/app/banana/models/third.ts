@@ -16,7 +16,7 @@ export class Third {
   public credit_limit : number = 0;
   public tax_id : number = null;
   public is_tax_exempt : boolean = false;
-  public is_pot_tax_exempt : boolean = false;
+  public is_po_tax_exempt : boolean = false;
   public url : string = '';
   public email : string = '';
   public description : string = '';
