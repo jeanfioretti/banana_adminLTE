@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Signin} from '../banana/models/signin';
 import { BananaConstants } from '../banana/utils/constants';
 //import { router, ActivatedRoute } from '../../../node_modules/@angular/router';
-
 import { HttpClient } from '../../../node_modules/@angular/common/http/http';
 import { monthsShort } from '../../../node_modules/moment';
 import { tokenUtil } from '../banana/utils/tokenUtil';
