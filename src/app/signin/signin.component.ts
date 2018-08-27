@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Signin} from '../banana/models/signin';
 import { BananaConstants } from '../banana/utils/constants';
-import { router, ActivatedRoute } from '../../../node_modules/@angular/router';
-
+//import { router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { HttpClient } from '../../../node_modules/@angular/common/http/http';
 import { monthsShort } from '../../../node_modules/moment';
 import { tokenUtil } from '../banana/utils/tokenUtil';
@@ -21,13 +20,13 @@ export class SigninComponent implements OnInit {
   body: any;
 
 
-  constructor(public http:HttpClient, public router:router, private  _activateroute:ActivatedRoute ) { }
+  constructor(/*public http:HttpClient, public router:router, private  _activateroute:ActivatedRoute*/ ) { }
 
   ngOnInit() {
 
   }
 
-  createCliente (){
+  /*createCliente (){
     let loading =true;
     let body: any;
 
@@ -53,5 +52,5 @@ export class SigninComponent implements OnInit {
 
 
 
-  }
+  }*/
 }
