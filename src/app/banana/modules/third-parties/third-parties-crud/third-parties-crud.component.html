@@ -46,9 +46,9 @@
 
 						<div class="col-md-6">
 							<label for="organization"><span>Organization</span></label>
-							<select multiple name="organization" class="form-control" [(ngModel)]="organizations" [ngModelOptions]="{standalone: true}">
+							<select multiple name="organization" class="form-control" [(ngModel)]="organizations">
 								<!-- <option [ngValue]="null">Select organization</option> -->
-								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization">
+								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
 									{{organization.name}}
 								</option>
 							</select>
@@ -81,44 +81,52 @@
 						
 
 						<div class="col-sm-6">
-							<label for="prospect">
-								<input name="prospect" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_prospect == 1 ? true : false"
-									[(ngModel)]="third.is_prospect"
-									[ngModelOptions]="{standalone: true}"
-								>
-								<span>Prospect</span>
-							</label>
+							<input type="hidden" name="prospect" [(ngModel)]="third.is_prospect">
+							<div>
+								<label>
+									<input type="checkbox"
+										[checked]="third.is_prospect == 1" 
+										(change)="$event.target.checked? (third.is_prospect =  1) : (third.is_prospect = 0)">
+									<span>Prospect</span>
+								</label>
+							</div>
 						</div>
 						<div class="col-sm-6">
-							<label for="customer">
-								<input name="customer" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_customer == 1 ? true : false"
-									[(ngModel)]="third.is_customer"
-									[ngModelOptions]="{standalone: true}"
-								>
-								<span>Customer</span>
-							</label>
+							<input type="hidden" name="customer" [(ngModel)]="third.is_customer">
+							<div>
+								<label for="customer">
+									<input type="checkbox"
+										[checked]="third.is_customer == 1"
+										(change)="$event.target.checked? (third.is_customer =  1) : (third.is_customer = 0)"
+									>
+									<span>Customer</span>
+								</label>
+							</div>
 						</div>
 
 						<div class="col-sm-6">
-							<label for="vendor">
-								<input name="vendor" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_vendor == 1 ? true : false"
-									[(ngModel)]="third.is_vendor" [ngModelOptions]="{standalone: true}"
-								>
-								<span>Vendor</span>
-							</label>
+							<input type="hidden" name="vendor" [(ngModel)]="third.is_vendor">
+							<div>
+								<label for="vendor">
+									<input type="checkbox"
+										[checked]="third.is_vendor == 1"
+										(change)="$event.target.checked? (third.is_vendor =  1) : (third.is_vendor = 0)"
+									>
+									<span>Vendor</span>
+								</label>
+							</div>
 						</div>
 						<div class="col-sm-6">
-							<label for="sales_rep">
-								<input name="sales_rep" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_sales_rep == 1 ? true : false"
-									[(ngModel)]="third.is_sales_rep"
-									[ngModelOptions]="{standalone: true}"
-								>
-								<span>Sales representative</span>
-							</label>
+							<input type="hidden" name="sales_rep" [(ngModel)]="third.is_sales_rep">
+							<div>
+								<label for="sales_rep">
+									<input type="checkbox"
+										[checked]="third.is_sales_rep == 1"
+										(change)="$event.target.checked? (third.is_sales_rep =  1) : (third.is_sales_rep = 0)"
+									>
+									<span>Sales representative</span>
+								</label>
+							</div>
 						</div>
 
 						<div class="col-sm-6">
@@ -176,23 +184,30 @@
 						</div>
 						
 						<div class="col-sm-6">
-							<label for="tax_exempt">
-								<input name="tax_exempt" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_tax_exempt == 1 ? true : false"
-									[(ngModel)]="third.is_tax_exempt" [ngModelOptions]="{standalone: true}"
-								>
-								<span>Exempt from sales</span>
-							</label>
+							<input type="hidden" name="tax_exempt" [(ngModel)]="third.is_tax_exempt">
+							<div>
+								<label for="tax_exempt">
+									<input type="checkbox"
+										[checked]="third.is_tax_exempt == 1"
+										(change)="$event.target.checked? (third.is_tax_exempt =  1) : (third.is_tax_exempt = 0)"
+									>
+									<span>Exempt from sales</span>
+								</label>
+							</div>
 						</div>
 						<div class="col-sm-6">
-							<label for="po_tax_exempt">
-								<input name="po_tax_exempt" class="form-check-input" type="checkbox" value=""
-									[checked]="third.is_po_tax_exempt == 1 ? true : false"
-									[(ngModel)]="third.is_po_tax_exempt" [ngModelOptions]="{standalone: true}"
-								>
-								<span>Exempt from purchase</span>
-							</label>
+							<input type="hidden" name="po_tax_exempt" [(ngModel)]="third.is_po_tax_exempt">
+							<div>
+								<label for="po_tax_exempt">
+									<input type="checkbox"
+										[checked]="third.is_po_tax_exempt == 1"
+										(change)="$event.target.checked? (third.is_po_tax_exempt =  1) : (third.is_po_tax_exempt = 0)"
+									>
+									<span>Exempt from purchase</span>
+								</label>
+							</div>
 						</div>
+
 						<div class="col-sm-6">
 							<label>Credit limit</label>
 							<input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
@@ -270,8 +285,8 @@
 							  <div class="col-md-3">
 								  <div class="form-check">
 									  <label class="form-check-label">
-										  <input class="form-check-input"
-										  type="checkbox" value="" [checked]="third.is_summary == 1 ? true : false"
+										  <input
+										  type="checkbox" [checked]="third.is_summary == 1"
 										  [(ngModel)]="third.is_summary" [ngModelOptions]="{standalone: true}">
 										  Summary
 										  <span class="form-check-sign">

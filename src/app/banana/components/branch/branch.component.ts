@@ -24,7 +24,7 @@ export class BranchComponent implements OnInit {
 	countries : any = [];
 	states : any = [];
 	cities : any = [];
-	//full_address : string = '';
+	@Output() branchChangePrincipal = new EventEmitter<any>();
 	@Output() branchInsert = new EventEmitter<any>();
 	@Output() branchDelete = new EventEmitter<any>();
 	@Output() cleanBranch = new EventEmitter<any>();
@@ -115,9 +115,8 @@ export class BranchComponent implements OnInit {
 		);
 	}
 
-	principalBranch (branch) {
+	principalBranch () {
 		this.loading = true;
-		showNotification("Estableciendo sucursal como principal", 2);
 		const headers = new HttpHeaders()
 			.set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
@@ -127,17 +126,13 @@ export class BranchComponent implements OnInit {
 			headers: headers
 		};
 		let body : any;
-		body = branch.id;
-		body.third_id = branch.bpartner_id;
+		body = this.branch;
 		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/principal', body, options).toPromise().then(
 			result => {
 				showNotification('Asignada como principal', 1);
-				this.body = result;
-				console.log(body.principal);
-				/* if (this.body.branch_removed)
-					this.branchDelete.emit( branch );
-				else
-					showNotification('Error', 2); */
+				//this.body = result;
+				this.branch.principal = 1;
+				this.branchChangePrincipal.emit( this.branch );
 				this.loading = false;
 				this.closeModal();
 			},
@@ -151,7 +146,7 @@ export class BranchComponent implements OnInit {
 		);
 	}
 
-	deleteBranch (branch) {
+	deleteBranch () {
 		this.loading = true;
 		showNotification("Eliminando sucursal", 2);
 		const headers = new HttpHeaders()
@@ -162,12 +157,12 @@ export class BranchComponent implements OnInit {
 		const options =  {
 			headers: headers
 		};
-		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + branch.id + '/' + branch.location_id, options).toPromise().then(
+		this.http.delete(BananaConstants.urlServer+'api/thirds/branch/delete/' + this.branch.id + '/' + this.branch.location_id, options).toPromise().then(
 			result => {
 				showNotification('Eliminado con exito', 1);
 				this.body = result;
 				if (this.body.branch_removed)
-					this.branchDelete.emit( branch );
+					this.branchDelete.emit( this.branch );
 				else
 					showNotification('Error al eliminar', 2);
 				this.loading = false;

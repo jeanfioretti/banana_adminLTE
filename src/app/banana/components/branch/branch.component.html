@@ -20,10 +20,10 @@
 						<h3 *ngIf="type_view == 3">Edit Branch Offices</h3>
 						<h3 *ngIf="type_view == 1">Create Branch Offices</h3>
 						<div class="pull-right box-tools">
-							<button *ngIf="type_view == 3 && branch.principal == 0" (click)="principalBranch(branch)" class="btn btn-info btn-sm">
+							<button *ngIf="type_view == 3 && branch.principal == 0" (click)="principalBranch()" class="btn btn-info btn-sm">
 								<i class="fa fa-home"></i>
 							</button>
-							<button *ngIf="type_view == 3" (click)="deleteBranch(branch)" class="btn btn-danger btn-sm">
+							<button *ngIf="type_view == 3" (click)="deleteBranch()" class="btn btn-danger btn-sm">
 								<i class="fa fa-trash"></i>
 							</button>
 						</div>

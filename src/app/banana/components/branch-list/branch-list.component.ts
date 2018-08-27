@@ -31,6 +31,17 @@ export class BranchListComponent implements OnInit {
 		this.branch_offices.splice(0, 0, branch);
 	}
 
+	changePrincipal (branch) {
+		for (var i = 0; i < this.branch_offices.length; ++i) {
+			if ( this.branch_offices[i].id == branch.id ) {
+				this.branch_offices[i].principal = 1;
+				break;
+			} else {
+				this.branch_offices[i].principal = 0;
+			}
+		}
+	}
+
 	gotToEditBranch(branch) {
 		this.branch_list = branch;
 		this.localization = branch.localization;
