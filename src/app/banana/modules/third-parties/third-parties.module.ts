@@ -12,6 +12,7 @@ import { DynamicFormQuestionComponent } from '../../form/dynamic-form-question.c
 import { ContactComponent } from '../../components/contact/contact.component';
 import { ContactListComponent } from '../../components/contact-list/contact-list.component';
 import { ComponentsModule } from '../../components/components.module';
+// import {Select2Component} from 'angular-select2-component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ComponentsModule } from '../../components/components.module';
     ThirdPartiesComponent,
     ThirdPartiesCrudComponent,
     ThirdPartiesListComponent,
+    // Select2Component,
     //LocalizationComponent,
     DynamicFormComponent,
     DynamicFormQuestionComponent,

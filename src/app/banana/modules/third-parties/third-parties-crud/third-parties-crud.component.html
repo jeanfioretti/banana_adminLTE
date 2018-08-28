@@ -45,13 +45,14 @@
 						</div> -->
 
 						<div class="col-md-6">
-							<label for="organization"><span>Organization</span></label>
+							<!--
 							<select multiple name="organization" class="form-control" [(ngModel)]="organizations">
-								<!-- <option [ngValue]="null">Select organization</option> -->
 								<option *ngFor="let organization of combo_select.organizations" [ngValue]="organization.id">
 									{{organization.name}}
 								</option>
-							</select>
+							</select> -->
+							<label for="organization"><span>Organization</span></label>
+							<select2 [options]="combo_select.organizations" [settings]="{multiple:true}" [(ngModel)]="organizations" ></select2>
 						</div>
 						<div class="col-md-6">
 							<label for="cif"><span>Tax information code</span></label>
@@ -66,12 +67,6 @@
 							<input name="name" type="text" class="form-control" [(ngModel)]="third.name" [ngModelOptions]="{standalone: true}">
 						</div>
 
-						<!-- <div class="col-md-6">
-							<label for="group_third"><span>Group of thirds</span></label>
-							<select name="group_third" class="form-control">
-								<option value="0"></option>
-							</select>
-						</div> -->
 						<div class="col-md-6">
 							<label for="name_2"><span>Company name</span></label>
 							<input name="name_2" type="text" class="form-control"
@@ -143,26 +138,6 @@
 							<input name="url" type="text" class="form-control" placeholder="www.url.web" [(ngModel)]="third.url" [ngModelOptions]="{standalone: true}">
 						</div>
 
-						<!-- <div class="col-sm-6">
-							<label for="phone"><span>Phone 1</span></label>
-							<input name="phone" type="text" class="form-control" placeholder="phone" [(ngModel)]="branch_office.phone" [ngModelOptions]="{standalone: true}">
-						</div> -->
-						<!-- <div class="col-sm-6">
-							<div class="input-group no-border">
-								<label><span>Address</span></label>
-								<input [(ngModel)]="full_address" [ngModelOptions]="{standalone: true}" type="text" readonly class="form-control" placeholder="Location">
-								<span class="input-group-btn">
-									<app-localization
-										[localization]="localization"
-										[countries]="countries"
-										[states]="states"
-										[cities]="cities"
-									>
-									</app-localization>
-								</span>
-							</div>
-						</div> -->
-
 						<div class="col-sm-6">
 							<label for="represent_id">Sales representative</label>
 							<select name="represent_id" class="form-control" [(ngModel)]="third.sales_rep_id" [ngModelOptions]="{standalone: true}">
@@ -172,17 +147,22 @@
 								</option>
 							</select>
 						</div>
-						<!-- <div class="col-sm-6">
-							<label for="phone_2"><span>Phone 2</span></label>
-							<input name="name_2" type="text" class="form-control" placeholder="phone_2" [(ngModel)]="branch_office.phone_2" [ngModelOptions]="{standalone: true}">
-						</div> -->
 						
 						<div class="col-md-12">
 							<label for="description">Description</label>
 							<textarea name="description" class="form-control" rows="3" [(ngModel)]="third.description" [ngModelOptions]="{standalone: true}">
 							</textarea>
 						</div>
-						
+					</div>
+					<div class="box-body">
+						<div class="col-sm-6">
+							<label>Credit limit</label>
+							<input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-6">
+							<label>Flat discount</label>
+							<input type="text" class="form-control" placeholder="Flat Discount" [(ngModel)]="third.flat_discount" [ngModelOptions]="{standalone: true}">
+						</div>
 						<div class="col-sm-6">
 							<input type="hidden" name="tax_exempt" [(ngModel)]="third.is_tax_exempt">
 							<div>
@@ -207,16 +187,8 @@
 								</label>
 							</div>
 						</div>
-
-						<div class="col-sm-6">
-							<label>Credit limit</label>
-							<input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="third.credit_limit" [ngModelOptions]="{standalone: true}">
-						</div>
-						<div class="col-sm-6">
-							<label>Flat discount</label>
-							<input type="text" class="form-control" placeholder="Flat Discount" [(ngModel)]="third.flat_discount" [ngModelOptions]="{standalone: true}">
-						</div>
-						
+					</div>
+					<div class="box-body">
 						<div class="col-sm-6">
 							<label>Language</label>
 							<select class="form-control" [(ngModel)]="third.language_id" [ngModelOptions]="{standalone: true}">
@@ -226,7 +198,6 @@
 								</option>
 							</select>
 						</div>
-
 					</div>
 					<div class="box-footer">
 						<button *ngIf="type_view == 3" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="updateThird()" >Update Third</button>
@@ -250,76 +221,78 @@
 		</div>
 	</div>
 </section>
-<!-- /.content -->
+
 <ngx-loading [show]="loading"></ngx-loading>
 
 <!--
 
+	<div class="col-md-6">
+		<label for="group_third"><span>Group of thirds</span></label>
+		<select name="group_third" class="form-control">
+			<option value="0"></option>
+		</select>
+	</div>
+		<div class="col-md-2">
+			<select class="form-control" [(ngModel)]="third.credit_status" [ngModelOptions]="{standalone: true}">
+				<option value="A">Credit Status A</option>
+				<option value="B">Credit Status B</option>
+				<option value="C">Credit Status C</option>
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<input type="number" readonly class="form-control" placeholder="Total Open Balance" [(ngModel)]="third.total_open_balance" [ngModelOptions]="{standalone: true}">
+		</div>
+
+		<div class="col-md-2">
+			<select class="form-control" [(ngModel)]="third.greeting_id" [ngModelOptions]="{standalone: true}">
+				<option value="0">greeting id</option>
+			</select>
+		</div>
 
 
-								<div class="col-md-2">
-									<select class="form-control" [(ngModel)]="third.credit_status" [ngModelOptions]="{standalone: true}">
-										<option value="A">Credit Status A</option>
-										<option value="B">Credit Status B</option>
-										<option value="C">Credit Status C</option>
-									</select>
-								</div>
+		<div class="col-md-3">
+			<select class="form-control" [(ngModel)]="third.tax_id" [ngModelOptions]="{standalone: true}">
+			<option>Tax id</option>
+			</select>
+		</div>
 
-								<div class="col-md-2">
-									<input type="number" readonly class="form-control" placeholder="Total Open Balance" [(ngModel)]="third.total_open_balance" [ngModelOptions]="{standalone: true}">
-								</div>
+		<div class="col-md-3">
+			<div class="form-check">
+				<label class="form-check-label">
+					<input
+					type="checkbox" [checked]="third.is_summary == 1"
+					[(ngModel)]="third.is_summary" [ngModelOptions]="{standalone: true}">
+					Summary
+					<span class="form-check-sign">
+						<span class="check"></span>
+					</span>
+				</label>
+			</div>
+		</div>
 
-								<div class="col-md-2">
-									<select class="form-control" [(ngModel)]="third.greeting_id" [ngModelOptions]="{standalone: true}">
-										<option value="0">greeting id</option>
-									</select>
-								</div>
+		<div class="col-md-3">
+			<select class="form-control" [(ngModel)]="third.price_list_id" [ngModelOptions]="{standalone: true}">
+			<option>price list id</option>
+			</select>
+		</div>
 
+		<div class="col-md-3">
+			<select class="form-control" [(ngModel)]="third.po_price_list_id" [ngModelOptions]="{standalone: true}">
+				<option>po price list id</option>
+			</select>
+		</div>
 
-							  <div class="col-md-3">
-								  <select class="form-control" [(ngModel)]="third.tax_id" [ngModelOptions]="{standalone: true}">
-									<option>Tax id</option>
-								  </select>
-							  </div>
+		<div class="col-md-3">
+			<select class="form-control" [(ngModel)]="third.delivery_rule" [ngModelOptions]="{standalone: true}">
+				<option>delivery rule char</option>
+			</select>
+		</div>
 
-							  <div class="col-md-3">
-								  <div class="form-check">
-									  <label class="form-check-label">
-										  <input
-										  type="checkbox" [checked]="third.is_summary == 1"
-										  [(ngModel)]="third.is_summary" [ngModelOptions]="{standalone: true}">
-										  Summary
-										  <span class="form-check-sign">
-											  <span class="check"></span>
-										  </span>
-									  </label>
-									</div>
-							  </div>
-
-							  <div class="col-md-3">
-								  <select class="form-control" [(ngModel)]="third.price_list_id" [ngModelOptions]="{standalone: true}">
-									<option>price list id</option>
-								  </select>
-							  </div>
-
-							  <div class="col-md-3">
-								  <select class="form-control" [(ngModel)]="third.po_price_list_id" [ngModelOptions]="{standalone: true}">
-									  <option>po price list id</option>
-								  </select>
-							  </div>
-
-							  <div class="col-md-3">
-								  <select class="form-control" [(ngModel)]="third.delivery_rule" [ngModelOptions]="{standalone: true}">
-									  <option>delivery rule char</option>
-								  </select>
-							  </div>
-
-							  <div class="col-md-3">
-								  <select class="form-control" [(ngModel)]="third.delivery_via_rule" [ngModelOptions]="{standalone: true}">
-									  <option>delivery via rule char</option>
-								  </select>
-							  </div>
-
-							</div>
-						   -->
-							<!-- <div class="clearfix"></div> -->
+		<div class="col-md-3">
+			<select class="form-control" [(ngModel)]="third.delivery_via_rule" [ngModelOptions]="{standalone: true}">
+				<option>delivery via rule char</option>
+			</select>
+		</div>
+-->
+<!-- <div class="clearfix"></div> -->
