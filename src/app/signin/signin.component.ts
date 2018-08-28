@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Signin} from '../banana/models/signin';
 import { BananaConstants } from '../banana/utils/constants';
-//import { router, ActivatedRoute } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { HttpClient } from '../../../node_modules/@angular/common/http/http';
 import { monthsShort } from '../../../node_modules/moment';
 import { tokenUtil } from '../banana/utils/tokenUtil';
@@ -20,13 +20,13 @@ export class SigninComponent implements OnInit {
   body: any;
 
 
-  constructor(/*public http:HttpClient, public router:router, private  _activateroute:ActivatedRoute*/ ) { }
+  constructor(public http:HttpClient, public router:Router, private  _activateroute:ActivatedRoute ) { }
 
   ngOnInit() {
 
   }
 
-  /*createCliente (){
+  createCliente (){
     let loading =true;
     let body: any;
 
@@ -38,8 +38,8 @@ export class SigninComponent implements OnInit {
         this.body = result;
         this.client= this.body.client;
       
-  
-				this.loading = false;
+        this.loading = false;
+        
       },msg=>{
         if(msg.status ==406){
             tokenUtil(this.router);
@@ -48,9 +48,31 @@ export class SigninComponent implements OnInit {
         notifyManage(msg);
       }
     );
+  
+  }
+
+  updateCliente(){
+    let loading= true;
+    let body: any;
+
+    body= this.client;
 
 
+    this.http.get(BananaConstants.urlServer+'api/signin/create', body).toPromise().then(
+      result=>{
+        showNotification('Registro actualizado con exito',2);
+        this.body = result;
+        this.client= this.body.client;
+      
+        this.loading = false;
+      }, msg=>{
+        if(msg.status ==406){
+          tokenUtil(this.router);
+        }
+        this.loading=false;
+         notifyManage(msg);
+      }
+    );
+  }
 
-
-  }*/
 }
