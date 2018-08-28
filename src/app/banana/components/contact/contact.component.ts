@@ -48,7 +48,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 		switch (url) {
 
 			case 'third-parties':
-				this.url_create = 'thirds/contact/create/';
+				this.url_create = 'thirds/contact/create';
 				this.url_delete = 'thirds/contact/delete/';
 			break;
 		}

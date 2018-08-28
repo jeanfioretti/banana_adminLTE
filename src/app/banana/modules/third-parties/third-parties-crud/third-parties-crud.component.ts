@@ -60,7 +60,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	getThird(id): void {
 		this.loading = true;
-		showNotification("Obteniendo tercero", 2);
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
@@ -75,10 +74,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 				this.organizations = this.body.organizations;
 				this.branch_offices = this.body.branch_offices;
 				this.third_contacts = this.body.third_contacts;
-				//this.branch_office = this.body.branch_office;
-				//this.localization = this.body.location;
-				//this.getStates(this.localization.country_id);
-				//this.getCities(this.localization.state_id);
 				this.imageSrc = sessionStorage.getItem('clientStorageUrl')+'thirds/'+this.third.logo;
 				this.loading = false;
 			},
@@ -137,7 +132,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 
 	createThird(): void {
 		this.loading = true;
-		showNotification("Creando tercero", 2);
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
@@ -177,7 +171,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			headers: headers,
 		};
 		this.loading = true;
-		showNotification("Actualizando tercero", 2);
 		let body : any;
 		body = this.third;
 		body.organizations = this.organizations;
@@ -203,9 +196,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		); 
 	}
 	
-	/* deleteThird () : void {
+	deleteThird () : void {
 		this.loading = true;
-		showNotification("Eliminando tercero", 2);
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
 			.append('token', sessionStorage.getItem('user_token'))
@@ -214,7 +206,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			headers: headers
 		};
 
-		this.http.delete(BananaConstants.urlServer + 'api/thirds/delete/' + this.id + '/' + this.localization.id, options).toPromise()
+		this.http.delete(BananaConstants.urlServer + 'api/thirds/delete/' + this.id, options).toPromise()
 			.then(
 				result => {
 					this.loading = false;
@@ -234,7 +226,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 					notifyManage(msg);
 				}
 			);
-	} */
+	}
 	
   getEventform(event){
     console.log('controladolr de tercero',event);
