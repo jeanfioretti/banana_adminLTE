@@ -75,9 +75,9 @@ export class OrganizationListComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-				headers: headers,
-				params: { filter: this.keyword}
-			};
+			headers: headers,
+			params: { filter: this.keyword}
+		};
 		this.http.get(BananaConstants.urlServer+'api/organizations/filter', options).toPromise()
 			.then(
 				result => {
