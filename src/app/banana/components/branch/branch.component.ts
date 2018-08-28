@@ -130,9 +130,7 @@ export class BranchComponent implements OnInit {
 		this.http.put(BananaConstants.urlServer + 'api/thirds/branch/principal', body, options).toPromise().then(
 			result => {
 				showNotification('Asignada como principal', 1);
-				//this.body = result;
-				this.branch.principal = 1;
-				this.branchChangePrincipal.emit( this.branch );
+				this.branchChangePrincipal.emit( this.branch.id );
 				this.loading = false;
 				this.closeModal();
 			},

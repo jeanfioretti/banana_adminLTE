@@ -49,41 +49,63 @@
 									<!-- </span> -->
 								<!-- </div> -->
 							</div>
-							<div class="col-md-3">
-								<label for="ship_to">
-									<input name="ship_to" class="form-check-input" type="checkbox"
-										[checked]="branch.is_ship_to == 1 ? true : false"
-										[(ngModel)]="branch.is_ship_to" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Ship to</span>
+							<!--
+							<input type="hidden" name="prospect" [(ngModel)]="third.is_prospect">
+							<div>
+								<label>
+									<input type="checkbox"
+										[checked]="third.is_prospect == 1" 
+										(change)="$event.target.checked? (third.is_prospect =  1) : (third.is_prospect = 0)">
+									<span>Prospect</span>
 								</label>
+							</div>-->
+							<div class="col-md-3">
+								<input type="hidden" name="ship_to" [(ngModel)]="branch.is_ship_to">
+								<div>
+									<label for="ship_to">
+										<input name="ship_to" class="form-check-input" type="checkbox"
+											[checked]="branch.is_ship_to == 1"
+											(change)="$event.target.checked? (branch.is_ship_to = 1) : (branch.is_ship_to = 0)"
+										>
+										<span>Ship to</span>
+									</label>
+								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="bill_to">
-									<input name="bill_to" class="form-check-input" type="checkbox"
-										[checked]="branch.is_bill_to == 1 ? true : false"
-										[(ngModel)]="branch.is_bill_to" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Bill to</span>
-								</label>
+								<input type="hidden" name="bill_to" [(ngModel)]="branch.is_bill_to">
+								<div>
+									<label for="bill_to">
+										<input name="bill_to" class="form-check-input" type="checkbox"
+											[checked]="branch.is_bill_to == 1"
+											(change)="$event.target.checked? (branch.is_bill_to = 1) : (branch.is_bill_to = 0)"
+										>
+										<span>Bill to</span>
+									</label>
+								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="pay_from">
-									<input name="pay_from" class="form-check-input" type="checkbox"
-										[checked]="branch.is_pay_from == 1 ? true : false"
-										[(ngModel)]="branch.is_pay_from" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Pay From</span>
-								</label>
+								<input type="hidden" name="pay_from" [(ngModel)]="branch.is_pay_from">
+								<div>
+									<label for="pay_from">
+										<input name="pay_from" class="form-check-input" type="checkbox"
+											[checked]="branch.is_pay_from == 1"
+											(change)="$event.target.checked? (branch.is_pay_from = 1) : (branch.is_pay_from = 0)"
+										>
+										<span>Pay From</span>
+									</label>
+								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="remit_to">
-									<input name="remit_to" class="form-check-input" type="checkbox"
-										[checked]="branch.is_remit_to == 1 ? true : false"
-										[(ngModel)]="branch.is_remit_to" [ngModelOptions]="{standalone: true}"
-									>
-									<span>Remit to</span>
-								</label>
+								<input type="hidden" name="remit_to" [(ngModel)]="branch.is_remit_to">
+								<div>
+									<label for="remit_to">
+										<input name="remit_to" class="form-check-input" type="checkbox"
+											[checked]="branch.is_remit_to == 1"
+											(change)="$event.target.checked? (branch.is_remit_to = 1) : (branch.is_remit_to = 0)"
+										>
+										<span>Remit to</span>
+									</label>
+								</div>
 							</div>
 							<div class="col-md-6">
 								<label><span>Phone</span></label>
