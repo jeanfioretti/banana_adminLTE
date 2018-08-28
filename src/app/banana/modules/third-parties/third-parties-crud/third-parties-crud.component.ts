@@ -130,6 +130,10 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		return find;
 	}
 
+	selected(option) {
+		console.log( option );
+	}
+
 	createThird(): void {
 		this.loading = true;
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
@@ -176,8 +180,8 @@ export class ThirdPartiesCrudComponent implements OnInit {
 		body.organizations = this.organizations;
 		//body.branch_office = this.branch_office;
 		//body.third_location = this.localization;
-		body.storageNameClient = sessionStorage.getItem('clientStorageName');
-		body.image = this.imageSrc;
+		//body.storageNameClient = sessionStorage.getItem('clientStorageName');
+		//body.image = this.imageSrc;
 		//console.log(body);
 		this.http.put(BananaConstants.urlServer+'api/thirds/update', body, options).toPromise().then(
 			result => {

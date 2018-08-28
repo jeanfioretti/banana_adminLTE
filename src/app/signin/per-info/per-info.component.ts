@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Info} from '../../banana/models/info';
-import { HttpClient } from '../../../../node_modules/@angular/common/http/http';
-import { monthsShort } from '../../../../node_modules/moment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tokenUtil } from '../../banana/utils/tokenUtil';
 import { notifyManage, showNotification } from '../../banana/utils/notifyUtil';
-import { shallowEqual } from '../../../../node_modules/@angular/router/src/utils/collection';
-import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { BananaConstants } from '../../banana/utils/constants';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-per-info',
