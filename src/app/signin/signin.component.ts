@@ -57,14 +57,14 @@ export class SigninComponent implements OnInit {
 
     body= this.client;
 
-
-    this.http.get(BananaConstants.urlServer+'api/signin/create', body).toPromise().then(
+    this.http.get(BananaConstants.urlServer+'api/signin/update', body).toPromise().then(
       result=>{
         showNotification('Registro actualizado con exito',2);
+
         this.body = result;
         this.client= this.body.client;
-      
         this.loading = false;
+
       }, msg=>{
         if(msg.status ==406){
           tokenUtil(this.router);

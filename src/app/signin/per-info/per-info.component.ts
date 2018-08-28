@@ -18,7 +18,6 @@ import { BananaConstants } from '../../banana/utils/constants';
 export class PerInfoComponent implements OnInit {
 
    client: Info = new Info();
-
    loading: boolean;
    body: any;
 
@@ -45,6 +44,26 @@ export class PerInfoComponent implements OnInit {
         }
         this.loading=false;
         notifyManage(msg);
+      }
+    );
+  }
+
+  update_info(){
+    let body:any;
+    body:this.client;
+    let loading:boolean;
+
+    this.http.get(BananaConstants.urlServer+"api/personal/update",body).toPromise().then(
+      result =>{
+        showNotification('Modificacion personal hecha con exito',2);
+        this.body=result;
+        this.client= this.body.client;
+        this.loading=false;
+      },msg =>{
+        if(msg.status==406){
+          tokenUtil(this.router);
+        }
+        this.loading=false;
       }
     );
 
