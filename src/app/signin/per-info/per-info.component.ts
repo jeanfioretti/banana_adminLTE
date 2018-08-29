@@ -27,9 +27,9 @@ export class PerInfoComponent implements OnInit {
 
   create_info(){
     let body: any;
-    body:this.client;
+    //body : this.client;
 
-    let loading: boolean;
+    //let loading: boolean;
     
     this.http.get(BananaConstants.urlServer+'api/personal/create', body).toPromise().then(
       result =>{
