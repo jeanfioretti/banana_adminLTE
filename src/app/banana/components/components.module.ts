@@ -10,6 +10,7 @@ import { LoadingModule } from '../../../../node_modules/ngx-loading';
 import { BranchListComponent } from './branch-list/branch-list.component';
 import { BranchComponent } from './branch/branch.component';
 import {Select2Component} from 'angular-select2-component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {Select2Component} from 'angular-select2-component';
     FormsModule,
     ReactiveFormsModule,
     LoadingModule,
+    TextMaskModule
   ],
   declarations: [
     ContactComponent,

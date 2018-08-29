@@ -28,6 +28,7 @@ export class BranchComponent implements OnInit {
 	@Output() branchInsert = new EventEmitter<any>();
 	@Output() branchDelete = new EventEmitter<any>();
 	@Output() cleanBranch = new EventEmitter<any>();
+	mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
