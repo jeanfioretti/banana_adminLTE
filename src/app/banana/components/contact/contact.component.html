@@ -61,11 +61,11 @@
 							</div>
 							<div class="col-md-6">
 								<label><span>Phone</span></label>
-								<input [(ngModel)]="contact.phone" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone" >
+								<input [textMask]="{mask: mask, guide: guide}" [(ngModel)]="contact.phone" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone" >
 							</div>
 							<div class="col-md-6">
 								<label><span>Phone 2</span></label>
-								<input [(ngModel)]="contact.phone_2" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone 2" >
+								<input [textMask]="{mask: mask, guide: guide}" [(ngModel)]="contact.phone_2" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Contact phone 2" >
 							</div>
 							<div class="col-md-6">
 								<label><span>Fax</span></label>

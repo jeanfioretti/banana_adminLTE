@@ -29,14 +29,20 @@ export class BranchComponent implements OnInit {
 	@Output() branchDelete = new EventEmitter<any>();
 	@Output() cleanBranch = new EventEmitter<any>();
 	mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+	guide = true;
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
-		this.id = this._activeRoute.snapshot.params['id'];
-		/* this._activeRoute.url.subscribe(url => {
-			
-		}); */
+		//this.id = this._activeRoute.snapshot.params['id'];
+		this._activeRoute.url.subscribe(url => {
+			if ( this._activeRoute.snapshot.params['id'] === undefined ) {
+				var id = window.location.pathname.split('/');
+				this.id = parseInt( id[4] );
+			} else {
+				this.id = this._activeRoute.snapshot.params['id'];				
+			}
+		});
 	}
 
 	getLocation (localization) {
