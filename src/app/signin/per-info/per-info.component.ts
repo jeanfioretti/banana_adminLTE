@@ -26,7 +26,7 @@ export class PerInfoComponent implements OnInit {
 
   create_info(){
     let body: any;
-    body:this.client;
+    body=this.client;
 
     let loading: boolean;
     
@@ -48,7 +48,7 @@ export class PerInfoComponent implements OnInit {
 
   update_info(){
     let body:any;
-    body:this.client;
+    body=this.client;
     let loading:boolean;
 
     this.http.get(BananaConstants.urlServer+"api/personal/update",body).toPromise().then(
