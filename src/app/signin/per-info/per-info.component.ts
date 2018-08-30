@@ -16,7 +16,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PerInfoComponent implements OnInit {
 
    client: Info = new Info();
-
    loading: boolean;
    body: any;
 
@@ -27,7 +26,11 @@ export class PerInfoComponent implements OnInit {
 
   create_info(){
     let body: any;
+<<<<<<< HEAD
+    body=this.client;
+=======
     //body : this.client;
+>>>>>>> 3d4c9a3476cfdaa3c8a3ff22ed4e52e61178c359
 
     //let loading: boolean;
     
@@ -43,6 +46,26 @@ export class PerInfoComponent implements OnInit {
         }
         this.loading=false;
         notifyManage(msg);
+      }
+    );
+  }
+
+  update_info(){
+    let body:any;
+    body=this.client;
+    let loading:boolean;
+
+    this.http.get(BananaConstants.urlServer+"api/personal/update",body).toPromise().then(
+      result =>{
+        showNotification('Modificacion personal hecha con exito',2);
+        this.body=result;
+        this.client= this.body.client;
+        this.loading=false;
+      },msg =>{
+        if(msg.status==406){
+          tokenUtil(this.router);
+        }
+        this.loading=false;
       }
     );
 
