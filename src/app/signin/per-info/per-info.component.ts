@@ -28,11 +28,6 @@ export class PerInfoComponent implements OnInit {
     let body: any;
 
     body=this.client;
-<<<<<<< HEAD
-
-    //body : this.client;
-=======
->>>>>>> 3cc957daa191ee89a48367a889df4a1f4165d0ff
 
     //let loading: boolean;
     
