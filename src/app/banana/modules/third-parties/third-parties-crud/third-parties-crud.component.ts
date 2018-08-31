@@ -65,7 +65,7 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.http.get(BananaConstants.urlServer+'api/third/' + id, options).toPromise().then(
 			result => {
@@ -152,7 +152,15 @@ export class ThirdPartiesCrudComponent implements OnInit {
 				showNotification('guardado con exito', 1);
 				this.body = result;
 				this.third = this.body.third;
-				this.router.navigate(['app/third-parties/']);
+				this.id = this.body.third.id;
+				this.organizations = this.body.organizations;
+				this.branch_offices = this.body.branch_offices;
+				this.third_contacts = this.body.third_contacts;
+				this.imageSrc = sessionStorage.getItem('clientStorageUrl')+'thirds/'+this.third.logo;
+				//this.third = this.body.third;
+				//this.router.navigate(['app/third-parties/']);
+				this.type_view = 3;
+				window.history.pushState(null, '', 'app/third-parties/edit/'+this.id);
 				this.loading = false;
 			},
 			msg => {
@@ -172,14 +180,12 @@ export class ThirdPartiesCrudComponent implements OnInit {
 			.append('token', sessionStorage.getItem('user_token'))
 			.append('app', 'BananaCli');
 		const options =  {
-			headers: headers,
+			headers: headers
 		};
 		this.loading = true;
 		let body : any;
 		body = this.third;
 		body.organizations = this.organizations;
-		//body.branch_office = this.branch_office;
-		//body.third_location = this.localization;
 		//body.storageNameClient = sessionStorage.getItem('clientStorageName');
 		//body.image = this.imageSrc;
 		//console.log(body);

@@ -28,13 +28,21 @@ export class ContactComponent implements OnInit, OnDestroy {
 	@Output() contactInsert = new EventEmitter<any>();
 	@Output() contactDelete = new EventEmitter<any>();
 	@Output() cleanContact = new EventEmitter<any>();
+	mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+	guide = true;
 
 	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
 
 	ngOnInit() {
-		this.id = this._activeRoute.snapshot.params['id'];
+		//this.id = this._activeRoute.snapshot.params['id'];
 		this._activeRoute.url.subscribe(url => {
 			this.getRouteContact(url[1].path);
+			if ( this._activeRoute.snapshot.params['id'] === undefined ) {
+				var id = window.location.pathname.split('/');
+				this.id = parseInt( id[4] );
+			} else {
+				this.id = this._activeRoute.snapshot.params['id'];
+			}
 		});
 		//console.log(this.contact);
 	}
