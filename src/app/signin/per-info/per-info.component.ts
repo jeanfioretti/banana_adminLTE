@@ -7,7 +7,7 @@ import { BananaConstants } from '../../banana/utils/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-per-info',
+  selector: 'app-ppper-info',
   templateUrl: './per-info.component.html',
   styleUrls: ['./per-info.component.css']
 })
@@ -26,11 +26,10 @@ export class PerInfoComponent implements OnInit {
 
   create_info(){
     let body: any;
-<<<<<<< HEAD
+
     body=this.client;
-=======
+
     //body : this.client;
->>>>>>> 3d4c9a3476cfdaa3c8a3ff22ed4e52e61178c359
 
     //let loading: boolean;
     

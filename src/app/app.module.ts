@@ -19,6 +19,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SigninModule } from './signin/signin.module';
 import { LandingModule } from './landing/landing.module';
+import { CountryComponent } from './country/country.component';
+import { SettingsCountriesComponent } from './modules/settings-countries/settings-countries.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { LandingModule } from './landing/landing.module';
     StarterContentComponent,
     StarterFooterComponent,
     StarterControlSidebarComponent,
+    CountryComponent,
+    SettingsCountriesComponent,
   ],
   imports: [
     HttpClientModule,
