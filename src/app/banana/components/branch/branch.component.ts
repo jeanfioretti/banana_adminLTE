@@ -45,9 +45,9 @@ export class BranchComponent implements OnInit {
 		});
 	}
 
-	getLocation (localization) {
+	/* getLocation (localization) {
 		this.localization = localization;
-	}
+	} */
 
 	/* getFullAddress (full_address) {
 		this.full_address = full_address;
@@ -183,58 +183,9 @@ export class BranchComponent implements OnInit {
 		);
 	}
 
-	getStates(country_id) {
-		this.loading = true;
-		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'BananaCli');
-		const options = {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer +'api/location/states?country_id='+country_id, options).toPromise().then(
-			result => {
-			this.loading = false;
-			this.body = result;
-			this.states = this.body.states;
-			},
-			msg => {
-			if (msg.status == 406) {
-				tokenUtil(this.router);
-			}
-			this.loading = false;
-			notifyManage(msg);
-			}
-		);
-	}
 	
-	getCities(state_id) {
-		this.loading = true;
-		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'BananaCli');
-		const options = {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer +'api/location/cities?state_id='+state_id, options).toPromise().then(
-			result => {
-			this.loading = false;
-			this.body = result;
-			this.cities = this.body.cities;
-			},
-			msg => {
-			if (msg.status == 406) {
-				tokenUtil(this.router);
-			}
-			this.loading = false;
-				notifyManage(msg);
-			}
-		);
-	}
-
 	openBranchModal () {
-
+		
 		setTimeout( function(){
 			$('#branchModal').modal('show');
 		},
@@ -245,13 +196,13 @@ export class BranchComponent implements OnInit {
 		this.type_view = 1;
 		this.branch = new BranchOffice();
 		this.localization = new Localization();
-
+		
 		setTimeout( function(){
 			$('#branchModal').modal('show');
 		},
 		230);
 	}
-
+	
 	closeModal () {
 		$('#branchModal').modal('hide');
 		this.closeModalEdit();
@@ -262,5 +213,4 @@ export class BranchComponent implements OnInit {
 		this.type_view = 3;
 		this.cleanBranch.emit(clean_branch);
 	}
-
 }

@@ -36,26 +36,43 @@
 </div> -->
 <div class="col-md-3">
 	<label><span>Country</span></label>
-	<select [(ngModel)]="localization.country_id" [ngModelOptions]="{standalone: true}"
+	<!-- <select [(ngModel)]="localization.country_id" [ngModelOptions]="{standalone: true}"
 		(change)="getStates(localization.country_id)" class="form-control">
 		<option [ngValue]="null">Select country</option>
 		<option *ngFor="let country of countries" [ngValue]="country.id">{{country.country}}</option>
-	</select>
+	</select> -->
+	<select2
+		[options]="countries"
+		[(ngModel)]="localization.country_id"
+		(onSelect)="onSelect($event, 'states')"
+	>
+	</select2>
 </div>
 <div class="col-md-3">
 	<label><span>State</span></label>
-	<select [(ngModel)]="localization.state_id" [ngModelOptions]="{standalone: true}" 
+	<!-- <select [(ngModel)]="localization.state_id" [ngModelOptions]="{standalone: true}" 
 		(change)="getCities(localization.state_id)" class="form-control">
 		<option [ngValue]="null">Select state</option>
 		<option *ngFor="let state of states" [ngValue]="state.id">{{state.state}}</option>
-	</select>
+	</select> -->
+	<select2
+		[options]="states"
+		[(ngModel)]="localization.state_id"
+		(onSelect)="onSelect($event, 'cities')"
+	>
+	</select2>
 </div>
 <div class="col-md-3">
 	<label><span>City</span></label>
-	<select [(ngModel)]="localization.city_id" [ngModelOptions]="{standalone: true}" class="form-control">
+	<!-- <select [(ngModel)]="localization.city_id" [ngModelOptions]="{standalone: true}" class="form-control">
 		<option [ngValue]="null">Select city</option>
 		<option *ngFor="let city of cities" [ngValue]="city.id">{{city.city}}</option>
-	</select>
+	</select> -->
+	<select2
+		[options]="cities"
+		[(ngModel)]="localization.city_id"
+	>
+	</select2>
 </div>
 <!-- <div class="col-md-3">
 	<label><span>State name</span></label>

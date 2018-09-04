@@ -5,7 +5,7 @@ import { AuthBanana } from '../../../utils/auth';
 import { tokenUtil } from '../../../utils/tokenUtil';
 import { notifyManage, showNotification } from '../../../utils/notifyUtil';
 import { Localization } from '../../../models/localization';
-import { Contact } from '../../../models/contact';
+//import { Contact } from '../../../models/contact';
 import { BananaConstants } from '../../../utils/constants';
 import { Organization } from '../../../models/organization';
 
@@ -22,9 +22,6 @@ export class OrganizationCrudComponent implements OnInit {
 	type_view :number;
 	organization : Organization = new Organization();
 	localization : Localization = new Localization();
-	countries : any = [];
-	states : any = [];
-	cities : any = [];
 	organization_contacts : any = [];
 	full_address : string = '';
 	client : any = {};
@@ -71,9 +68,7 @@ export class OrganizationCrudComponent implements OnInit {
 			result => {
 				this.body = result;
 				this.organization = this.body.organization;
-				this.localization = this.body.localization;					
-				this.getStates(this.localization.country_id);
-				this.getCities(this.localization.state_id);
+				if ( this.body.localization != null ) this.localization = this.body.localization;
 				this.loading = false;
 			},
 			msg => {
@@ -190,7 +185,7 @@ export class OrganizationCrudComponent implements OnInit {
 			);
 	}
 
-	getStates(country_id) {
+	/* getStates(country_id) {
 		this.loading = true;
 		const headers = new HttpHeaders().set('authorization', window.location.origin)
 			.append('user', sessionStorage.getItem('user_id'))
@@ -238,6 +233,6 @@ export class OrganizationCrudComponent implements OnInit {
 			  	notifyManage(msg);
 			}
 	  	);
-	}
+	} */
 
 }

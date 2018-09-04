@@ -16,7 +16,8 @@ import { ComponentsModule } from './components/components.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { MigrationsModule } from './modules/migrations/migrations.module';
-import { SettingsNameComponent } from './modules/settings-name/settings-name.component';
+import { SettingsComponent } from './modules/settings/settings.component';
+import { LocationService } from './services/locations/location.service';
 
 
 @NgModule({
@@ -41,11 +42,14 @@ import { SettingsNameComponent } from './modules/settings-name/settings-name.com
     BananaLeftSideComponent,
     BananaContentComponent,
     BananaControlSidebarComponent,
-    SettingsNameComponent,
+    SettingsComponent,
  //   CustomColumnsComponent,
    // ContactComponent,
    // EditFormComponent,
 
+  ],
+  providers: [
+    LocationService
   ]
 })
 export class BananaModule { }
