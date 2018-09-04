@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tokenUtil } from '../../utils/tokenUtil';
 import { notifyManage } from '../../utils/notifyUtil';
 import { Localization } from '../../models/localization';
 import { BananaConstants } from '../../utils/constants';
+import { LocationService } from '../../services/locations/location.service';
 
 //declare var $: any;
 
@@ -21,24 +22,28 @@ export class LocalizationComponent implements OnInit, OnChanges {
 	@Input() states : any = [];
 	@Input() cities : any = [];
 	//@Output() address = new EventEmitter<any>();
-	@Output() location_selected = new EventEmitter<any>();
+	//@Output() location_selected = new EventEmitter<any>();
 	// create_location : boolean = false;
 	searching : boolean = false;
 	search : string = '';
 	locations_search : Array<any> = [];
 	body: any;
 
-	constructor(public http: HttpClient, public router: Router, private _activeRoute: ActivatedRoute) { }
+	constructor(
+		public http: HttpClient,
+		public router: Router,
+		private _activeRoute: ActivatedRoute,
+		private location_service : LocationService
+	) { }
 
 	ngOnInit() {
-		this._activeRoute.url.subscribe(url => {
-			// if (url[2].path == 'new')
-			// 	this.create_location = true;
-		});
 		this.getCountries();
+		/* this._activeRoute.url.subscribe(url => {
+
+		}); */
 	}
 
-	ngOnChanges (changes : SimpleChanges) {
+	ngOnChanges (/* changes : SimpleChanges */) {
 		// for (let propName in changes) {
 		// 	let chng = changes[propName];
 		// 	let cur  = JSON.stringify(chng.currentValue);
@@ -46,9 +51,162 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		// 	console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
 		// }
 		//setTimeout(() => { this.fullAddress(); }, 0);
+		if ( this.localization.state_id != null ) this.getStates( this.localization.country_id );
+		if ( this.localization.city_id != null ) this.getCities( this.localization.state_id );
 	}
 
-	searchingLocation (): void {
+	
+	onSelect(select, opcion) {
+		switch (opcion) {
+			case 'states':
+				this.getStates(select.id);
+				break;
+		
+			case 'cities':
+				this.getCities(select.id);
+			break;
+		}
+	}
+
+	getCountries() {
+		/*
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+			.append('user', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'BananaCli');
+			const options =  {
+				headers: headers,
+		};
+		this.http.get(BananaConstants.urlServer+'api/location/countries', options).toPromise().then(
+			result => {
+				this.loading = false;
+				this.body = result;
+				this.countries = this.body.countries;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false
+				notifyManage(msg);
+			}
+		); */
+		this.loading = true;
+		this.location_service.getCountries().toPromise().then(
+				result => {
+					this.loading = false;
+					this.body = result;
+					this.countries = this.body.countries;
+				},
+				msg => {
+					if (msg.status == 406) {
+						tokenUtil(this.router);
+					}
+					this.loading = false
+					notifyManage(msg);
+				}
+			);
+			
+			/* .subscribe(
+			data => {
+				this.countries = data['countries'];
+				console.log( data );
+			},
+			error => {
+				console.log(error);
+			} *//* ,
+			() => {
+				console.log('pasa siemrpe');
+			} */
+		);
+	}
+	
+	getStates(country_id) {
+		/* if (country_id == null) return;
+		this.loading = true;
+		this.states = [];
+		this.cities = [];
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+		.append('user', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'BananaCli');
+		const options =  {
+			headers: headers,
+		};
+		this.http.get(BananaConstants.urlServer+'api/location/states?country_id='+country_id, options).toPromise().then(
+			result => {
+				this.loading = false;
+				this.body = result;
+				this.states = this.body.states;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		); */
+		this.loading = true;
+		this.location_service.getStates(country_id).toPromise().then(
+			result => {
+				this.loading = false;
+				this.body = result;
+				this.states = this.body.states;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+	
+	getCities(state_id) {
+		/* if (state_id == null) return;
+		this.loading = true;
+		this.cities = [];
+		const headers = new HttpHeaders().set('authorization', window.location.origin)
+		.append('user', sessionStorage.getItem('user_id'))
+			.append('token', sessionStorage.getItem('user_token'))
+			.append('app', 'BananaCli');
+			const options =  {
+				headers: headers,
+			};
+			this.http.get(BananaConstants.urlServer+'api/location/cities?state_id='+state_id, options).toPromise().then(
+				result => {
+					this.loading = false;
+					this.body = result;
+				this.cities = this.body.cities;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		); */
+		this.loading = true;
+		this.location_service.getCities(state_id).toPromise().then(
+			result => {
+				this.loading = false;
+				this.body = result;
+				this.cities = this.body.cities;
+			},
+			msg => {
+				if (msg.status == 406) {
+					tokenUtil(this.router);
+				}
+				this.loading = false;
+				notifyManage(msg);
+			}
+		);
+	}
+	
+	/* searchingLocation (): void {
 		if (this.search.length >= 3) {
 		  this.searching = true;
 		  this.searchLocation();
@@ -89,8 +247,7 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.searching = false;
 		this.search = '';
 		this.location_selected.emit( localization );
-	}
-
+	} */
 	/* fullAddress () {
 		let me = this;
 		var full_address = '';
@@ -133,84 +290,5 @@ export class LocalizationComponent implements OnInit, OnChanges {
 		this.address.emit( full_address );
 	} */
 
-	getCountries() {
-		this.loading = true;
-		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'BananaCli');
-		const options =  {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer+'api/location/countries', options).toPromise().then(
-			result => {
-				this.loading = false;
-				this.body = result;
-				this.countries = this.body.countries;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false
-				notifyManage(msg);
-			}
-		);
-	}
-
-	getStates(country_id) {
-		if (country_id == null) return;
-		this.loading = true;
-		this.states = [];
-		this.cities = [];
-		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'BananaCli');
-		const options =  {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer+'api/location/states?country_id='+country_id, options).toPromise().then(
-			result => {
-				this.loading = false;
-				this.body = result;
-				this.states = this.body.states;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false;
-				notifyManage(msg);
-			}
-		);
-	}
-
-	getCities(state_id) {
-		if (state_id == null) return;
-		this.loading = true;
-		this.cities = [];
-		const headers = new HttpHeaders().set('authorization', window.location.origin)
-			.append('user', sessionStorage.getItem('user_id'))
-			.append('token', sessionStorage.getItem('user_token'))
-			.append('app', 'BananaCli');
-		const options =  {
-			headers: headers,
-		};
-		this.http.get(BananaConstants.urlServer+'api/location/cities?state_id='+state_id, options).toPromise().then(
-			result => {
-				this.loading = false;
-				this.body = result;
-				this.cities = this.body.cities;
-			},
-			msg => {
-				if (msg.status == 406) {
-					tokenUtil(this.router);
-				}
-				this.loading = false;
-				notifyManage(msg);
-			}
-		);
-	}
 
 }

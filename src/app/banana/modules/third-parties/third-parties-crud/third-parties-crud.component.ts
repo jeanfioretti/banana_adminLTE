@@ -22,9 +22,6 @@ export class ThirdPartiesCrudComponent implements OnInit {
 	type_view :number;
 	third : Third = new Third();
 	organizations : Array<any> = [];
-	countries : any = [];
-	states : any = [];
-	cities : any = [];
 	third_contacts : any = [];
 	branch_offices: any = [];
 	client : any = {};

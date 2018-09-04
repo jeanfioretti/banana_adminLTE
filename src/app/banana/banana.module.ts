@@ -16,6 +16,7 @@ import { ComponentsModule } from './components/components.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { MigrationsModule } from './modules/migrations/migrations.module';
+import { LocationService } from './services/locations/location.service';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MigrationsModule } from './modules/migrations/migrations.module';
    // ContactComponent,
    // EditFormComponent,
 
-  ]
+  ],
+  providers: [LocationService]
 })
 export class BananaModule { }
