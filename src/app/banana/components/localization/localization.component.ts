@@ -117,8 +117,8 @@ export class LocalizationComponent implements OnInit, OnChanges {
 			} *//* ,
 			() => {
 				console.log('pasa siemrpe');
-			} */
-		);
+			} 
+		); */
 	}
 	
 	getStates(country_id) {
