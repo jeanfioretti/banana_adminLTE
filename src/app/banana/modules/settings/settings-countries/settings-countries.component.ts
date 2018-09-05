@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '../../../../../../node_modules/@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-settings-countries',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsCountriesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public http:HttpClient, public router:Router, private _activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
+  getcountry(id){
+
+  }
 }
