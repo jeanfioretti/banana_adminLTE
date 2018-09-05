@@ -11,6 +11,7 @@ import { OrganizationCrudComponent } from './modules/organizations/organization-
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { MigrationsComponent } from './modules/migrations/migrations.component';
 import { MigrationsListComponent } from './modules/migrations/migrations-list/migrations-list.component';
+import {SettingsCountriesComponent} from './modules/settings/settings-countries/settings-countries.component';
 
 const routes: Routes = [
   { path: 'app/dashboard',     component: DashboardComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'app/organizations',   component: OrganizationListComponent },
   { path: 'app/organizations/new',   component: OrganizationCrudComponent },
   { path: 'app/organizations/edit/:id',   component: OrganizationCrudComponent },
+  { path: 'app/countries',              component:SettingsCountriesComponent},
 
 ];
 

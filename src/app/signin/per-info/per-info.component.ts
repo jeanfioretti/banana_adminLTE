@@ -7,7 +7,7 @@ import { BananaConstants } from '../../banana/utils/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-ppper-info',
+  selector: 'app-per-info',
   templateUrl: './per-info.component.html',
   styleUrls: ['./per-info.component.css']
 })

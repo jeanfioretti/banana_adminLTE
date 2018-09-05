@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '../../../../../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Country } from '../../../models/country';
+
 
 @Component({
   selector: 'app-settings-countries',
@@ -9,6 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SettingsCountriesComponent implements OnInit {
 
+ country: Country = new Country();
+
+ 
+
   constructor(public http:HttpClient, public router:Router, private _activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -16,5 +22,17 @@ export class SettingsCountriesComponent implements OnInit {
 
   getcountry(id){
 
+  }
+
+  createCountry(){
+
+  }
+
+  updateCountry(){
+
+  }
+
+  archivedCuntry(){
+    
   }
 }

@@ -16,7 +16,7 @@ import { ComponentsModule } from './components/components.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { MigrationsModule } from './modules/migrations/migrations.module';
-import { SettingsComponent } from './modules/settings/settings.component';
+import { SettingsModule } from './modules/settings/settings.module';
 import { LocationService } from './services/locations/location.service';
 
 
@@ -28,6 +28,7 @@ import { LocationService } from './services/locations/location.service';
     ThirdPartiesModule,
     RolesModule,
     UsersModule,
+    SettingsModule,
     MigrationsModule,
     OrganizationsModule,
     LoadingModule,
@@ -42,7 +43,6 @@ import { LocationService } from './services/locations/location.service';
     BananaLeftSideComponent,
     BananaContentComponent,
     BananaControlSidebarComponent,
-    SettingsComponent,
  //   CustomColumnsComponent,
    // ContactComponent,
    // EditFormComponent,

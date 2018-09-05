@@ -1,3 +1,122 @@
-<p>
-  settings-countries works!
-</p>
+<section class="content-header">
+	<div class="col-md-4">
+		<h1>
+			Countries
+			<!-- <small>Optional description</small> -->
+		</h1>
+	</div>
+	<div class="col-md-6">
+		<div class="input-group no-border" width="80%">
+			<input type="text" value="" class="form-control" placeholder="Search..."
+			[(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" (keyup.enter)="search()">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-warning btn-flat" (click)="search()" >Search</button>
+				<button type="button" class="btn btn-danger btn-flat" (click)="keyword = ''" >Clean</button>
+				<button type="button" class="btn btn-info btn-flat" (click)="getOrganizations()" >All</button>
+			</span>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="btn-group pull-right">
+			<button *ngIf="!kanban" type="button" class="btn btn-default btn-flat" (click)="viewKanban()" >
+				<i class="fa fa-lg fa-th-large"></i>
+			</button>
+			<button *ngIf="kanban" type="button" class="btn  btn-default btn-flat" (click)="viewKanban()" >
+				<i class="fa fa-list"></i>
+			</button>
+		</div>
+	</div>
+</section>
+<!-- Main content -->
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<div class="row" *ngIf="kanban">
+				<div class="col-md-12">				
+					<div *ngFor="let organization of organizations">
+						<div class="col-md-3">
+						<!-- Widget: user widget style 1 -->
+							<div class="box box-widget widget-user-2" >
+								<!-- Add the bg color to the header using any of the bg-* classes -->
+								<div class="widget-user-header bg-aqua" style="height: 100px;">
+								<div class="widget-user-image">
+									<img class="img-circle" src="assets\img\user1-128x128.jpg" alt="User Avatar">
+								</div>
+								<!-- /.widget-user-image -->
+								<h6 class="widget-user-username truncate">{{organization.reference_no}}</h6>
+								<h6 class="widget-user-desc"> {{organization.name}}</h6>
+								</div>
+								<div class="box-footer" >
+									<div class="pull-right" >
+										<button mat-raised-button class="btn btn-success btn-sm"
+											(click)="goToEditOrganization(organization.id)" >
+											<i class="fa fa-pencil"></i>
+										</button>
+										<button *ngIf="organization.archived == 0" (click)="archivedOrganization(organization, 1)" 
+											mat-raised-button class="btn btn-warning btn-sm">
+											<i class="fa fa-folder"></i>
+										</button>
+										<button *ngIf="organization.archived == 1"  (click)="archivedOrganization(organization, 0)" 
+											mat-raised-button class="btn btn-info btn-sm">
+											<i class="fa fa-folder-open"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+							<!-- /.widget-user -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" *ngIf="!kanban">
+				<div class="col-md-12">
+					<div class="box box-info" [ngClass]="{'collapsed-box': collapsed, '': !collapsed}">
+						<div class="box-header ">
+							<button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="goToCreateOrganization()">
+								Add Country
+							</button>
+						</div>
+						<div class="box-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead class="">
+										<th>Option</th>
+										<th>ISO</th>
+										<th>Country</th>
+										<th>archived</th>
+									</thead>
+									<tbody>
+										<tr *ngFor="let organization of organizations">
+											<td>
+												<button class="btn btn-success btn-sm" (click)="goToEditOrganization(organization.id)">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button *ngIf="organization.archived == 0" (click)="archivedOrganization(organization, 1)" class="btn btn-warning btn-sm">
+													<i class="fa fa-folder"></i>
+												</button>
+												<button *ngIf="organization.archived == 1" (click)="archivedOrganization(organization, 0)" class="btn btn-info btn-sm">
+													<i class="fa fa-folder-open"></i>
+												</button>
+											</td>
+											<td>{{country.id}}</td>
+											<td>{{country.reference_no}}</td>
+											<td>{{country.name}}</td>
+											<td>{{country.description}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->
+
+
+
+
+<ngx-loading [show]="loading"></ngx-loading>
